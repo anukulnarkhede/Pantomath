@@ -4,12 +4,13 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/blue</item>
         <item name="android:statusBarColor">@color/white</item>
-        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
 
-
-        <item name="android:windowTranslucentNavigation">true</item>
+        
     </style>
 
 </resources>

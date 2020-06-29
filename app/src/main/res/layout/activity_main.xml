@@ -4,17 +4,171 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".Login"
+    android:background="@color/white"
+    >
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:id="@+id/login_vector"
+        android:layout_width="235.4dp"
+        android:layout_height="266.2dp"
+        android:layout_marginTop="17.6dp"
         android:src="@drawable/login_vector"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/existingAccText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15.4dp"
+        android:text="Login to an Existing Account"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_vector"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/loginEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17.6dp"
+        android:background="@drawable/text_view_bg"
+        android:ems="10"
+        android:foregroundTint="@color/white"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="16dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey_muted_hint"
+        android:textSize="15.4sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/existingAccText"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/loginPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:background="@drawable/text_view_bg"
+        android:layout_marginTop="26.6dp"
+        android:hint="Password"
+        android:padding="16dp"
+        android:textSize="15.4sp"
+        android:textColorHint="@color/grey_muted_hint"
+        android:textColor="@color/black"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginEmail"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/forgetPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forget Password?"
+        android:textSize="10sp"
+        android:layout_marginTop="5dp"
+        android:padding="6dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginStart="286dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginPassword"
+        tools:ignore="HardcodedText,SmallSp" />
+
+    <Button
+        android:id="@+id/LoginButt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Login"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        android:textAlignment="center"
+
+        android:textSize="17sp"
+        android:fontFamily="sans-serif-black"
+
+        android:background="@drawable/login_butt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        android:elevation="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/loginPassword"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/continue_with_GText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17.6dp"
+        android:text="OR Continue With"
+        android:textColor="@color/grey_muted_hint"
+        android:textSize="11sp"
+        android:layout_marginBottom="17.2dp"
+        app:layout_constraintBottom_toTopOf="@+id/googleLogin_butt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LoginButt"
+        tools:ignore="HardcodedText,SmallSp" />
+
+    <Button
+        android:id="@+id/googleLogin_butt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_with_google_butt"
+        android:fontFamily="sans-serif-black"
+        android:text="Google"
+        android:textAllCaps="false"
+        android:textColor="@color/red"
+        android:textSize="17sp"
+
+        android:layout_marginTop="48.4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LoginButt"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/CreatAccLoginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="8dp"
+        android:text="Create an Account"
+        android:textColor="@color/blue"
+        android:textSize="15.4sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/googleLogin_butt"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/errorTextLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:text="All fields are required"
+        android:textSize="10sp"
+        android:textColor="@color/red"
+        android:layout_marginStart="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/forgetPassword"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
