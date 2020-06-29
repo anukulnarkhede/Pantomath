@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
+
 
 import java.util.regex.Pattern;
 
@@ -20,7 +20,7 @@ public class Login extends AppCompatActivity {
     TextView CreateAccount, ForgetPassword, ErrorText;
     String EmailString, PasswordString;
     Button Login, LoginWithGoogle;
-    private FirebaseAuth firebaseAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +113,7 @@ public class Login extends AppCompatActivity {
         }
         else
         {
-            Authentication();
+            Authentication(EmailString, PasswordString);
 
         }
         /*else if (!PASSWORD_PATTERN.matcher(PasswordString).matches()){
@@ -131,7 +131,9 @@ public class Login extends AppCompatActivity {
 
     }
 
-    private void Authentication() {
+    private void Authentication(String Email, String Password) {
+
+
 
     }
 
