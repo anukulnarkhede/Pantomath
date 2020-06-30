@@ -2,6 +2,7 @@ package com.cproz.pantomath;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
 
@@ -20,6 +23,8 @@ public class Login extends AppCompatActivity {
     TextView CreateAccount, ForgetPassword, ErrorText;
     String EmailString, PasswordString;
     Button Login, LoginWithGoogle;
+    private FirebaseAuth firebaseAuth;
+
 
 
     @Override
@@ -28,8 +33,12 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
+
         //Initialization of variables
         Initialization();
+
+        firebaseAuth = FirebaseAuth.getInstance();
         //Initialization of variables
         Login.setEnabled(true);
         ErrorText.setVisibility(View.GONE);
@@ -80,6 +89,7 @@ public class Login extends AppCompatActivity {
         LoginWithGoogle = findViewById(R.id.googleLogin_butt);
         ErrorText = findViewById(R.id.errorTextLogin);
     }
+    @SuppressLint("SetTextI18n")
     public void validation(){
 
 
@@ -101,13 +111,14 @@ public class Login extends AppCompatActivity {
         }
         else if (!Patterns.EMAIL_ADDRESS.matcher(EmailString).matches()){
             ErrorText.setVisibility(View.VISIBLE);
-            ErrorText.setText("Invalid Format of email");
+            ErrorText.setText("Make sure your email is correct.");
             Email.setBackgroundResource(R.drawable.error_text_field_bg);
             Email.requestFocus();
 
         }
         else if (PasswordString.isEmpty()){
             ErrorText.setVisibility(View.VISIBLE);
+            ErrorText.setText("Please enter the password");
             Password.setBackgroundResource(R.drawable.error_text_field_bg);
             Password.requestFocus();
         }
