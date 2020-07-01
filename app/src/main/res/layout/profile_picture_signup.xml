@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Signup.ProfilePictureSignup"
+    android:background="@color/white"
+    >
+
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        app:elevation="0dp"
+
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/ProfilePictureToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="0dp"
+            app:elevation="0dp"
+            android:background="@color/white">
+
+            <TextView
+
+                android:id="@+id/toolbar_titleProfilePicture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-medium"
+                android:text="Profile Picture"
+                android:textColor="@color/blue"
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+
+
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ProfilePicSelection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/defprofileimage"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        android:layout_marginTop="9dp"
+        />
+
+
+    <TextView
+        android:id="@+id/ProfilePicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19.8dp"
+        android:text="Set a Profile Picture for your Account"
+        android:textAlignment="center"
+        android:textSize="14.4sp"
+        android:textColor="@color/grey_muted_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePicSelection"
+        tools:ignore="HardcodedText" />
+
+    <RelativeLayout
+        android:id="@+id/ProfilePicSelectButt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:background="@drawable/select_photo_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePicText">
+
+
+        <TextView
+            android:layout_toEndOf="@+id/iconPPselector"
+            android:id="@+id/buttTextPPselector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="14.5dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Select Photo"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iconPPselector"
+            android:src="@drawable/camera"
+            android:layout_marginStart="21dp"
+            android:layout_centerVertical="true"
+            />
+
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/Continue_Butt_ProfilePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_butt"
+        android:elevation="0dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Continue"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        android:textSize="17sp"
+        android:layout_marginTop="490.5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        tools:ignore="HardcodedText" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="I will do it later"
+        android:textColor="@color/blue"
+        android:padding="4dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/passwordbaseLineVector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Continue_Butt_ProfilePicture"
+        tools:ignore="HardcodedText" />
+
+
+
+    <ImageView
+        android:id="@+id/passwordbaseLineVector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="67dp"
+        android:src="@drawable/profile_picture_baseline_vector"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Continue_Butt_ProfilePicture" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

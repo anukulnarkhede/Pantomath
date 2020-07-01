@@ -3,6 +3,7 @@ package com.cproz.pantomath;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -11,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-import com.google.firebase.FirebaseApp;
+import com.cproz.pantomath.Signup.NewAccount;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
@@ -30,7 +31,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login);
 
 
 
@@ -68,6 +69,13 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 validation();
+            }
+        });
+
+        CreateAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login.this, NewAccount.class) );
             }
         });
 

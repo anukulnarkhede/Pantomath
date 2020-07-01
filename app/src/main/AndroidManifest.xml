@@ -2,9 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.cproz.pantomath">
-
-<!--Permissions used-->
-
+    <!-- Permissions used -->
     <uses-permission
         android:name="android.permission.INTERNET"
         tools:ignore="ManifestOrder" />
@@ -15,11 +13,6 @@
         android:name="android.permission.MEDIA_CONTENT_CONTROL"
         tools:ignore="ProtectedPermissions" />
 
-<!--Permissions used-->
-
-<!--application activities-->
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -29,8 +22,24 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
 
-        <!--activity login-->
 
+        <!-- activity ProfilePicture -->
+        <activity android:name=".Signup.ProfilePictureSignup"
+            android:parentActivityName=".Signup.Password"
+            />
+
+
+        <!-- activity passwordSignup -->
+        <activity
+            android:name=".Signup.Password"
+            android:parentActivityName=".Signup.NewAccount" />
+
+        <!-- activity new Acc -->
+        <activity
+            android:name=".Signup.NewAccount"
+            android:parentActivityName=".Login" />
+
+        <!-- activity login -->
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,12 +47,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!--activity login-->
-
-
     </application>
-
-<!--application activities-->
 
 </manifest>
