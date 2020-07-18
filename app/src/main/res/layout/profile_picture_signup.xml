@@ -9,15 +9,14 @@
     >
 
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="0dp"
-        app:elevation="0dp"
-
         android:background="@color/white"
+        android:elevation="0dp"
+
+        app:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,9 +26,9 @@
             android:id="@+id/ProfilePictureToolBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
             android:elevation="0dp"
-            app:elevation="0dp"
-            android:background="@color/white">
+            app:elevation="0dp">
 
             <TextView
 
@@ -46,16 +45,12 @@
         </androidx.appcompat.widget.Toolbar>
 
 
-
-
-
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ProfilePicSelection"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="176dp"
+        android:layout_height="176dp"
         android:src="@drawable/defprofileimage"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,6 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
         android:background="@drawable/select_photo_button"
+        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ProfilePicText">
@@ -111,7 +107,8 @@
             android:src="@drawable/camera"
             android:layout_marginStart="21dp"
             android:layout_centerVertical="true"
-            />
+            android:contentDescription="Camera"
+            tools:ignore="HardcodedText" />
 
     </RelativeLayout>
 
@@ -148,6 +145,8 @@
         app:layout_constraintBottom_toTopOf="@+id/passwordbaseLineVector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground"
         app:layout_constraintTop_toBottomOf="@+id/Continue_Butt_ProfilePicture"
         tools:ignore="HardcodedText" />
 
@@ -162,8 +161,21 @@
         android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Continue_Butt_ProfilePicture" />
+        app:layout_constraintTop_toBottomOf="@+id/Continue_Butt_ProfilePicture"
+        tools:ignore="ContentDescription" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="194dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintVertical_bias="0.197" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

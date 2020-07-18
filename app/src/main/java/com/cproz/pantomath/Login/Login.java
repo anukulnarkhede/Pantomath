@@ -1,5 +1,6 @@
-package com.cproz.pantomath;
+package com.cproz.pantomath.Login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -10,9 +11,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import com.cproz.pantomath.Home.Home;
+import com.cproz.pantomath.R;
 import com.cproz.pantomath.Signup.NewAccount;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
@@ -86,6 +93,10 @@ public class Login extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        
+    }
 
     //Initialization of variables
     public void Initialization(){
@@ -102,8 +113,9 @@ public class Login extends AppCompatActivity {
 
 
 
+
         EmailString = Email.getText().toString().trim();
-        PasswordString = Password.getText().toString().trim();
+        PasswordString = Password.getText().toString();
 
         if (EmailString.isEmpty()&&PasswordString.isEmpty()){
                 ErrorText.setVisibility(View.VISIBLE);
@@ -116,9 +128,11 @@ public class Login extends AppCompatActivity {
             ErrorText.setVisibility(View.VISIBLE);
             Email.setBackgroundResource(R.drawable.error_text_field_bg);
             Email.requestFocus();
+            Password.setBackgroundResource(R.drawable.text_view_bg);
         }
         else if (!Patterns.EMAIL_ADDRESS.matcher(EmailString).matches()){
             ErrorText.setVisibility(View.VISIBLE);
+            Password.setBackgroundResource(R.drawable.text_view_bg);
             ErrorText.setText("Make sure your email is correct.");
             Email.setBackgroundResource(R.drawable.error_text_field_bg);
             Email.requestFocus();
@@ -127,11 +141,13 @@ public class Login extends AppCompatActivity {
         else if (PasswordString.isEmpty()){
             ErrorText.setVisibility(View.VISIBLE);
             ErrorText.setText("Please enter the password");
+            Email.setBackgroundResource(R.drawable.text_view_bg);
             Password.setBackgroundResource(R.drawable.error_text_field_bg);
             Password.requestFocus();
         }
         else
         {
+            Login.setEnabled(false);
             Authentication(EmailString, PasswordString);
 
         }
@@ -153,6 +169,24 @@ public class Login extends AppCompatActivity {
     private void Authentication(String Email, String Password) {
 
 
+
+
+
+
+        firebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+
+                    startActivity(new Intent(Login.this, Home.class));//new intent for change activity
+
+                }
+                else{
+                    Login.setEnabled(true);
+                    Toast.makeText(Login.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();//toast for invalid entries;;
+                }
+            }
+        });//login_Student_auth function end
 
     }
 

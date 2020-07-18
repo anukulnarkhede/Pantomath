@@ -14,6 +14,8 @@
         tools:ignore="ProtectedPermissions" />
 
     <application
+
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,26 +23,30 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
+        <activity android:name=".Home.Home"/>
 
+
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Theme.AppCompat" />
 
         <!-- activity ProfilePicture -->
-        <activity android:name=".Signup.ProfilePictureSignup"
-            android:parentActivityName=".Signup.Password"
-            />
-
-
-        <!-- activity passwordSignup -->
+        <activity
+            android:name=".Signup.ProfilePictureSignup"
+            android:parentActivityName=".Signup.Password" /> <!-- activity passwordSignup -->
         <activity
             android:name=".Signup.Password"
-            android:parentActivityName=".Signup.NewAccount" />
-
-        <!-- activity new Acc -->
+            android:parentActivityName=".Signup.NewAccount" /> <!-- activity new Acc -->
         <activity
             android:name=".Signup.NewAccount"
-            android:parentActivityName=".Login" />
+            android:parentActivityName=".Login.Login" /> <!-- activity login -->
+        <activity android:name=".Login.Login">
 
-        <!-- activity login -->
-        <activity android:name=".Login">
+        </activity>
+
+        <activity android:name=".SplashScreen.SplashScreen"
+            android:theme="@style/SplashScreen"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
