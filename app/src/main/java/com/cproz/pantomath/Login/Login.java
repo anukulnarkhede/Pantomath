@@ -1,15 +1,18 @@
 package com.cproz.pantomath.Login;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +35,7 @@ public class Login extends AppCompatActivity {
     String EmailString, PasswordString;
     Button Login, LoginWithGoogle;
     private FirebaseAuth firebaseAuth;
+    ProgressBar progressBar;
 
 
 
@@ -46,6 +50,7 @@ public class Login extends AppCompatActivity {
         //Initialization of variables
         Initialization();
 
+        progressBar.setVisibility(View.GONE);
         firebaseAuth = FirebaseAuth.getInstance();
         //Initialization of variables
         Login.setEnabled(true);
@@ -73,8 +78,10 @@ public class Login extends AppCompatActivity {
 
 
         Login.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
+
                 validation();
             }
         });
@@ -107,12 +114,16 @@ public class Login extends AppCompatActivity {
         Login = findViewById(R.id.LoginButt);
         LoginWithGoogle = findViewById(R.id.googleLogin_butt);
         ErrorText = findViewById(R.id.errorTextLogin);
+        progressBar = findViewById(R.id.progressBarLogin);
     }
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
     public void validation(){
 
 
 
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setProgress(100, true);
 
         EmailString = Email.getText().toString().trim();
         PasswordString = Password.getText().toString();

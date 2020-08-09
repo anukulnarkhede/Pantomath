@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+       >
+
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/searchBarHome"
+                android:layout_width="match_parent"
+                android:layout_height="48.4dp"
+                android:layout_marginStart="17.6dp"
+                android:layout_marginTop="17.6dp"
+                android:layout_marginEnd="17.6dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/search_bar_bg"
+                android:elevation="8dp"
+                app:cardCornerRadius="11dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:cardElevation="4dp"
+
+                >
+
+
+                <ImageView
+                    android:id="@+id/searchIcon"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16.5dp"
+                    app:srcCompat="@drawable/ic_round_search_24"
+
+
+                    />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ProfilePictureHome"
+                    android:layout_width="30.8dp"
+                    android:layout_height="30.8dp"
+                    android:scaleType="centerCrop"
+
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginEnd="17.6dp"
+                    android:src="@drawable/defprofileimage"
+
+                    />
+
+                <EditText
+                    android:id="@+id/SearchEditText"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_vertical|center"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="52dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:textColor="@color/blue"
+                    android:cursorVisible="true"
+                    android:inputType="text"
+                    android:hint="Search “Quadratic Equations”"
+                    android:textSize="15.4sp"
+                    android:backgroundTint="#fff"
+
+                    tools:ignore="HardcodedText" />
+            </androidx.cardview.widget.CardView>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/searchBarHome"
+            android:layout_marginTop="-7dp">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/RecyclerViewHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/searchBarHome"
+                android:layout_marginTop="-24dp"
+                android:background="#fff"
+                android:clipToPadding="false"
+                android:elevation="0dp"
+                android:overScrollMode="never"
+                android:paddingTop="22dp"
+                android:paddingBottom="17.6dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

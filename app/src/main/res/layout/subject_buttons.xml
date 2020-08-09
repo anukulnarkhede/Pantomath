@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    tools:ignore="HardcodedText"
+    >
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/AlgebraFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="17.6dp"
+        android:layout_marginStart="17.6dp"
+        >
+
+        <ImageView
+            android:id="@+id/algebra_butt"
+            android:layout_width="70.4dp"
+            android:layout_height="70.4dp"
+            android:stateListAnimator="@null"
+            android:background="@drawable/ic_algebra_filter"
+
+
+            />
+
+        <TextView
+            android:id="@+id/algebra_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Algebra"
+            android:layout_marginTop="5dp"
+            android:textAlignment="center"
+            android:textColor="#121212"
+            android:textSize="13sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/GeometryFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/AlgebraFilter"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="17.6dp"
+        android:layout_marginStart="17.6dp"
+        >
+
+        <ImageView
+            android:id="@+id/InviteFriends"
+            android:layout_width="70.4dp"
+            android:layout_height="70.4dp"
+            android:stateListAnimator="@null"
+            android:background="@drawable/ic_geometry_filter" />
+
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Geometry"
+            android:textAlignment="center"
+            android:textColor="#121212"
+            android:textSize="13sp"
+            android:layout_marginTop="5dp"
+            />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/PhysicsFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/GeometryFilter"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="17.6dp"
+        android:layout_marginStart="17.6dp"
+        >
+
+
+        <ImageView
+            android:id="@+id/feedback"
+            android:layout_width="70.4dp"
+            android:layout_height="70.4dp"
+            android:stateListAnimator="@null"
+            android:background="@drawable/ic_physics_filter" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Physics"
+            android:textAlignment="center"
+            android:textColor="#121212"
+            android:textSize="13sp"
+            android:layout_marginTop="5dp"
+            />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ChemistryFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17.6dp"
+        android:layout_marginTop="17.6dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/PhysicsFilter"
+        android:layout_marginEnd="19dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/Help"
+            android:layout_width="70.4dp"
+            android:layout_height="70.4dp"
+            android:stateListAnimator="@null"
+            android:background="@drawable/ic_chemistry_filter" />
+
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="Chemistry"
+            android:textAlignment="center"
+            android:textColor="#121212"
+            android:textSize="13sp" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/BiologyFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17.6dp"
+        android:layout_marginTop="17.6dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AlgebraFilter"
+
+        >
+
+
+        <ImageView
+            android:id="@+id/about"
+            android:layout_width="70.4dp"
+            android:layout_height="70.4dp"
+            android:stateListAnimator="@null"
+            android:background="@drawable/ic_biology_filter" />
+
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="Biology"
+            android:textAlignment="center"
+            android:textColor="#121212"
+            android:textSize="13sp" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/HistoryFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17.6dp"
+        android:layout_marginTop="17.6dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/BiologyFilter"
+        app:layout_constraintTop_toBottomOf="@+id/GeometryFilter"
+
+        >
+
+
+        <ImageView
+            android:id="@+id/logout"
+            android:layout_width="70.4dp"
+            android:layout_height="70.4dp"
+            android:stateListAnimator="@null"
+            android:background="@drawable/ic_history_filter" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="History"
+            android:textAlignment="center"
+            android:textColor="#121212"
+            android:textSize="13sp" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/GeographyFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17.6dp"
+        android:layout_marginTop="17.6dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/HistoryFilter"
+        app:layout_constraintTop_toBottomOf="@+id/PhysicsFilter"
+
+        >
+
+
+        <ImageView
+            android:id="@+id/button7"
+            android:layout_width="70.4dp"
+            android:layout_height="70.4dp"
+            android:stateListAnimator="@null"
+            android:background="@drawable/ic_geography_filter" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="Geography"
+            android:textAlignment="center"
+            android:textColor="#121212"
+            android:textSize="13sp" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/LanguagesFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17.6dp"
+        android:layout_marginTop="17.6dp"
+        android:layout_marginEnd="19dp"
+
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/GeographyFilter"
+        app:layout_constraintTop_toBottomOf="@+id/ChemistryFilter">
+
+
+        <ImageView
+            android:id="@+id/button8"
+            android:layout_width="70.4dp"
+            android:layout_height="70.4dp"
+            android:stateListAnimator="@null"
+            android:background="@drawable/ic_languages_filter" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="Languages"
+            android:textAlignment="center"
+            android:textColor="#121212"
+            android:textSize="13sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

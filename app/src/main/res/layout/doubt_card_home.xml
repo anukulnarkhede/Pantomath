@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardHome"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="17.6dp"
+    android:layout_marginEnd="17.6dp"
+
+    android:layout_marginBottom="13dp"
+    android:background="@drawable/doubt_card_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+
+
+    <ImageView
+        android:id="@+id/solvedDCHome"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="17.6dp"
+        android:layout_marginBottom="17.6dp"
+
+        android:background="@drawable/square_small_bg_alg"
+        android:padding="6dp"
+        android:layout_marginTop="17.6dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/QuestionTextDCHome"
+        app:srcCompat="@drawable/ic_round_check_circle_24_alg" />
+
+    <ImageView
+        android:id="@+id/saved_DCHome"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="17.6dp"
+        android:layout_marginBottom="17.6dp"
+        android:background="@drawable/square_small_bg_alg"
+        android:padding="6dp"
+        android:alpha="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_bookmark_24_alg" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ProfilePictureDCHome"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="19dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/defprofileimage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/imageSliderCardHome"
+        android:layout_width="match_parent"
+        android:layout_height="209dp"
+        android:layout_marginTop="17.6dp"
+        android:layout_marginStart="17.6dp"
+        android:layout_marginEnd="17.6dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePictureDCHome"/>
+
+
+    <Button
+        android:id="@+id/subjectTagDChome"
+        android:layout_width="wrap_content"
+        android:layout_height="35.2dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="17.6dp"
+        android:background="@drawable/subject_button_bg"
+        android:stateListAnimator="@null"
+        android:clickable="false"
+        android:fontFamily="sans-serif-medium"
+        android:text="Algebra"
+        android:textAllCaps="false"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayout_dotsIndicator"
+        android:layout_width="17.6dp"
+        android:layout_height="6.6dp"
+        android:layout_marginTop="7.7dp"
+        android:background="@drawable/ic_dot_first_photo"
+        android:orientation="horizontal"
+        android:padding="6.6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageSliderCardHome">
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        android:id="@+id/QuestionTextDCHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView TextView TextView TextView TextView TextView TextView TextView"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="16sp"
+        android:textColor="#121212"
+        android:layout_marginTop="17.6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_dotsIndicator"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/solvedTextDCHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8.8dp"
+        android:layout_marginBottom="27.5dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Solved"
+        android:textColor="@color/red"
+        android:textSize="13.2sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/solvedDCHome"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/NameHolderDCHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User"
+        android:textColor="@color/red"
+        android:textSize="16sp"
+        android:layout_marginTop="21dp"
+        android:layout_marginStart="8.8dp"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintStart_toEndOf="@+id/ProfilePictureDCHome"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/timeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8.8dp"
+        android:layout_marginTop="38dp"
+        android:text="2 hours ago"
+        android:textColor="#121212"
+        android:textSize="10sp"
+        app:layout_constraintStart_toEndOf="@+id/ProfilePictureDCHome"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText,SmallSp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

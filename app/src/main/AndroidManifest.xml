@@ -15,38 +15,58 @@
 
     <application
 
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:screenOrientation="portrait"
         tools:ignore="AllowBackup">
-        <activity android:name=".Home.Home"/>
+        <activity android:name=".Home.DoubtDetails"
+            android:parentActivityName=".Home.Home"
+            />
 
 
+        <activity
+            android:name=".StudentProfile.Settings"
+            android:parentActivityName=".StudentProfile.StudentProfile"
+            android:theme="@style/uploadFragment" />
+        <activity
+            android:name=".StudentProfile.StudentProfile"
+            android:parentActivityName=".Home.Home"
+            android:theme="@style/uploadFragment" />
+
+
+        <activity android:name=".Upload.UploadImagePage" />
+        <activity
+            android:name=".Home.Home"
+            android:screenOrientation="portrait"
+            android:theme="@style/uploadFragment"
+            android:windowSoftInputMode="adjustPan"
+            />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Theme.AppCompat" />
-
-        <!-- activity ProfilePicture -->
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat" /> <!-- activity ProfilePicture -->
         <activity
             android:name=".Signup.ProfilePictureSignup"
-            android:parentActivityName=".Signup.Password" /> <!-- activity passwordSignup -->
+            android:parentActivityName=".Signup.Password"
+            android:screenOrientation="portrait" /> <!-- activity passwordSignup -->
         <activity
             android:name=".Signup.Password"
-            android:parentActivityName=".Signup.NewAccount" /> <!-- activity new Acc -->
+            android:parentActivityName=".Signup.NewAccount"
+            android:screenOrientation="portrait" /> <!-- activity new Acc -->
         <activity
             android:name=".Signup.NewAccount"
             android:parentActivityName=".Login.Login" /> <!-- activity login -->
-        <activity android:name=".Login.Login">
-
-        </activity>
-
-        <activity android:name=".SplashScreen.SplashScreen"
-            android:theme="@style/SplashScreen"
-            >
+        <activity
+            android:name=".Login.Login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SplashScreen.SplashScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
