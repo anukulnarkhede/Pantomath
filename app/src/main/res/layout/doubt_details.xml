@@ -157,6 +157,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:textSize="16sp"
+            android:autoLink="web|email"
             android:textColor="#121212"
             android:layout_marginTop="17.6dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -292,7 +293,7 @@
             app:layout_constraintBottom_toTopOf="@id/AnsimageSliderDD"
             android:layout_marginBottom="18.7dp"
             tools:ignore="HardcodedText"
-            android:autoLink="web"
+            android:autoLink="web|email"
 
             />
 
