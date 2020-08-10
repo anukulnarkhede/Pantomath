@@ -237,9 +237,9 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_marginTop="24.3dp"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
         android:src="@drawable/feedback"
         android:layout_marginStart="18.7dp"
         app:layout_constraintStart_toStartOf="parent"
