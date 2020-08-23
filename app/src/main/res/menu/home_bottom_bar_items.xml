@@ -12,7 +12,7 @@
 
     <item android:id="@+id/upload"
 
-        android:title="Upload"
+        android:title="Add Doubt"
         android:icon="@drawable/upload"
 
         tools:ignore="HardcodedText">
@@ -22,8 +22,8 @@
 
 
     <item android:id="@+id/saved"
-        android:icon="@drawable/ic_bookmark_24"
-        android:title="Saved"
+        android:icon="@drawable/notification"
+        android:title="Notification"
         tools:ignore="HardcodedText">
 
     </item>

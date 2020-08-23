@@ -6,13 +6,17 @@ public class HomeDoubtData {
 
 
         String AnsPhotoUrl1, AnsPhotoUrl2, AnsText, AudioUrl, Board, Chapter,Email, FileUrl, Link, Name, Photo1url, Photo2url, ProfileImageURL, QText, STD, Status, Subject, Teacher, Uid, TeacherImageUrl ;
-        Date DateTime;
+        Date DateTime, QuestionDate;
 
         public String getTeacherImageUrl() {
                 return TeacherImageUrl;
         }
 
-        public HomeDoubtData(String ansPhotoUrl1, String ansPhotoUrl2, String ansText, String audioUrl, String board, String chapter, String email, String fileUrl, String link, String name, String photo1url, String photo2url, String profileImageURL, String QText, String STD, String status, String subject, String teacher, String uid, Date dateTime, String TeacherImageUrl) {
+        public Date getQuestionDate() {
+                return QuestionDate;
+        }
+
+        public HomeDoubtData(String ansPhotoUrl1, String ansPhotoUrl2, String ansText, String audioUrl, String board, String chapter, String email, String fileUrl, String link, String name, String photo1url, String photo2url, String profileImageURL, String QText, String STD, String status, String subject, String teacher, String uid, Date dateTime, String TeacherImageUrl, Date QuestionDate) {
                 AnsPhotoUrl1 = ansPhotoUrl1;
                 AnsPhotoUrl2 = ansPhotoUrl2;
                 AnsText = ansText;
@@ -34,6 +38,7 @@ public class HomeDoubtData {
                 Uid = uid;
                 DateTime = dateTime;
                 this.TeacherImageUrl = TeacherImageUrl;
+                this.QuestionDate = QuestionDate;
         }
 
         public String getAnsPhotoUrl1() {

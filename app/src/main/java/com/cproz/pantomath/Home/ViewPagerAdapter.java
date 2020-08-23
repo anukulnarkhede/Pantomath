@@ -36,7 +36,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         RoundedImage roundedImage = new RoundedImage(mContext);
-        roundedImage.setRoundedRadius(32);
+        roundedImage.setRoundedRadius(20);
         Picasso.get()
                 .load(imageUrls[position])
                 .fit()
@@ -46,6 +46,8 @@ public class ViewPagerAdapter extends PagerAdapter {
 
         return roundedImage;
     }
+
+
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {

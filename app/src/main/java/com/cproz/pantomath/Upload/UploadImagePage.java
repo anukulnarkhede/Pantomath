@@ -1,9 +1,9 @@
 package com.cproz.pantomath.Upload;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.Manifest;
@@ -12,8 +12,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ShapeDrawable;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,12 +20,10 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cproz.pantomath.Home.Home;
 import com.cproz.pantomath.Home.HomeFragment;
 import com.cproz.pantomath.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -58,7 +55,7 @@ public class UploadImagePage extends AppCompatActivity {
     int fl1 = 0, fl2 = 0;
     View root;
     ConstraintLayout constraintLayout;
-
+    Toolbar toolbar;
     ProgressBar progressBar;
 
     public String Name, Email, AnsPhotoUrl1 = "", AnsPhotoUrl2 = "", AnsText = "", AudioUrl = "", Chapter, FileUrl = "", Link = "",
@@ -98,7 +95,12 @@ public class UploadImagePage extends AppCompatActivity {
         });
 
 
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.blue), PorterDuff.Mode.SRC_ATOP);
 
         SubjTag.setText(UploadFragment.SUBJECT);
 
@@ -261,10 +263,11 @@ public class UploadImagePage extends AppCompatActivity {
         AddPhoto1 = findViewById(R.id.addPhoto1);
         AddPhoto2 = findViewById(R.id.addPhoto2);
         QuestionText = findViewById(R.id.QuestionUploadText);
-        Image1 = findViewById(R.id.DoubtUploadImage1);
+        Image1 = findViewById(R.id.FeedbackImage);
         Image2 = findViewById(R.id.DoubtUploadImage2);
         constraintLayout = findViewById(R.id.UploadImageCard);
         progressBar = findViewById(R.id.progressBarUpload);
+        toolbar = findViewById(R.id.AddDoubtToolBar);
 
     }
 
@@ -415,6 +418,8 @@ public class UploadImagePage extends AppCompatActivity {
             Photo1url = "";
             Photo2url = "";
             UploadToFirestore(Uid);
+            DoubtUploadedPopUp doubtUploadedPopUp = new DoubtUploadedPopUp();
+            doubtUploadedPopUp.show(getSupportFragmentManager(), "fra");
 
 
         }
@@ -457,10 +462,12 @@ public class UploadImagePage extends AppCompatActivity {
                                         public void onSuccess(Uri urix) {
                                             Photo2url = urix.toString();
                                             UploadToFirestore(Uid);
+                                            DoubtUploadedPopUp doubtUploadedPopUp = new DoubtUploadedPopUp();
+                                            doubtUploadedPopUp.show(getSupportFragmentManager(), "fra");
                                         }
                                     });
 
-                                    Toast.makeText(UploadImagePage.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(UploadImagePage.this, "Uploaded", Toast.LENGTH_SHORT).show();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -517,10 +524,12 @@ public class UploadImagePage extends AppCompatActivity {
                             Photo2url = "";
                             Photo1url = uri.toString();
                             UploadToFirestore(Uid);
+                            DoubtUploadedPopUp doubtUploadedPopUp = new DoubtUploadedPopUp();
+                            doubtUploadedPopUp.show(getSupportFragmentManager(), "fra");
                         }
                     });
 
-                    Toast.makeText(UploadImagePage.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(UploadImagePage.this, "Uploaded", Toast.LENGTH_SHORT).show();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -547,7 +556,7 @@ public class UploadImagePage extends AppCompatActivity {
         progressBar.setProgress(100, true);
 
         if (text.isEmpty()){
-            QuestionText.setError("Question in mandatory");
+            QuestionText.setError("Question is mandatory");
             QuestionText.requestFocus();
             ConfirmDoubt.setEnabled(true);
             progressBar.setVisibility(View.GONE);
@@ -555,7 +564,9 @@ public class UploadImagePage extends AppCompatActivity {
         else{
             try {
                 UploadToFirebase();
-                startActivity(new Intent(UploadImagePage.this,Home.class ));
+                //DoubtUploadedPopUp doubtUploadedPopUp = new DoubtUploadedPopUp();
+                //doubtUploadedPopUp.show(getSupportFragmentManager(), "fra");
+                //startActivity(new Intent(UploadImagePage.this,Home.class ));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -591,7 +602,7 @@ public class UploadImagePage extends AppCompatActivity {
 
                 Name, Email, AnsPhotoUrl1, AnsPhotoUrl2, AnsText, AudioUrl,Chapter, FileUrl,Link,
                 Photo1url, Photo2url, ProfileImageURL, "Unsolved", Text, Board, STD, Uid,Subject,Teacher, "True", date,
-                ""
+                "",date
 
 
 
@@ -601,7 +612,7 @@ public class UploadImagePage extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(UploadImagePage.this, "Document Uploaded successfully", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(UploadImagePage.this, "Document Uploaded successfully", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -619,6 +630,11 @@ public class UploadImagePage extends AppCompatActivity {
     public void onBackPressed() {
         FLAG = 1;
         super.onBackPressed();
+    }
+
+
+    public void NotificationUpload(){
+
     }
 
 

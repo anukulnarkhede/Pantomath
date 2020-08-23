@@ -19,12 +19,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.cproz.pantomath.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.type.DateTime;
 import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -65,14 +71,15 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
 
         holder.questionText.setText(DoubtList.get(position).getQText());
 
-        Date dateTime = DoubtList.get(position).getDateTime();
 
-        assert dateTime != null;
-        long mili = dateTime.getTime();
 
-        final String datex = DateUtils.getRelativeTimeSpanString(mili).toString();
 
-        holder.DateText.setText(datex);
+
+
+
+
+
+
 
 
         String AnsText = DoubtList.get(position).getAnsText();
@@ -88,7 +95,7 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
         }
         else if (DoubtList.get(position).getProfileImageURL().equals(""))
         {
-            holder.profilePictureDC.setImageResource(R.drawable.defprofileimage);
+            holder.profilePictureDC.setImageResource(R.drawable.personal_info);
 
         }
 
@@ -160,7 +167,7 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
                     holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_grey);
                     holder.solvedText.setText("Unsolved");
                     holder.solved.setBackgroundResource(R.drawable.square_small_bg_grey);
-                    holder.solvedText.setTextColor(Color.parseColor("#232323"));
+                    holder.solvedText.setTextColor(Color.parseColor("#999999"));
 
                 }
                 else if (DoubtList.get(position).getStatus().equals("Solved")){
@@ -181,7 +188,7 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
                 if (DoubtList.get(position).getStatus().equals("Unsolved")){
                     holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_grey);
                     holder.solvedText.setText("Unsolved");
-                    holder.solvedText.setTextColor(Color.parseColor("#232323"));
+                    holder.solvedText.setTextColor(Color.parseColor("#999999"));
                     holder.solved.setBackgroundResource(R.drawable.square_small_bg_grey);
                 }
                 else if (DoubtList.get(position).getStatus().equals("Solved")){
@@ -199,7 +206,7 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
                 holder.solved.setBackgroundResource(R.drawable.square_small_bg);
                 if (DoubtList.get(position).getStatus().equals("Unsolved")){
                     holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_grey);
-                    holder.solvedText.setTextColor(Color.parseColor("#232323"));
+                    holder.solvedText.setTextColor(Color.parseColor("#999999"));
                     holder.solvedText.setText("Unsolved");
                     holder.solved.setBackgroundResource(R.drawable.square_small_bg_grey);
                 }
@@ -218,7 +225,7 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
                 holder.solved.setBackgroundResource(R.drawable.small_square_bg_chem);
                 if (DoubtList.get(position).getStatus().equals("Unsolved")){
                     holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_grey);
-                    holder.solvedText.setTextColor(Color.parseColor("#232323"));
+                    holder.solvedText.setTextColor(Color.parseColor("#999999"));
                     holder.solvedText.setText("Unsolved");
                     holder.solved.setBackgroundResource(R.drawable.square_small_bg_grey);
                 }
@@ -238,7 +245,7 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
                 if (DoubtList.get(position).getStatus().equals("Unsolved")){
                     holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_grey);
                     holder.solvedText.setText("Unsolved");
-                    holder.solvedText.setTextColor(Color.parseColor("#232323"));
+                    holder.solvedText.setTextColor(Color.parseColor("#999999"));
                     holder.solved.setBackgroundResource(R.drawable.square_small_bg_grey);
                 }
                 else if (DoubtList.get(position).getStatus().equals("Solved")){
@@ -258,7 +265,7 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
                 if (DoubtList.get(position).getStatus().equals("Unsolved")){
                     holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_grey);
                     holder.solvedText.setText("Unsolved");
-                    holder.solvedText.setTextColor(Color.parseColor("#232323"));
+                    holder.solvedText.setTextColor(Color.parseColor("#999999"));
                     holder.solved.setBackgroundResource(R.drawable.square_small_bg_grey);
                 }
                 else if (DoubtList.get(position).getStatus().equals("Solved")){
@@ -277,7 +284,7 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
                 if (DoubtList.get(position).getStatus().equals("Unsolved")){
                     holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_grey);
                     holder.solvedText.setText("Unsolved");
-                    holder.solvedText.setTextColor(Color.parseColor("#232323"));
+                    holder.solvedText.setTextColor(Color.parseColor("#999999"));
                     holder.solved.setBackgroundResource(R.drawable.square_small_bg_grey);
                 }
                 else if (DoubtList.get(position).getStatus().equals("Solved")){
@@ -295,7 +302,7 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
                 holder.solved.setBackgroundResource(R.drawable.small_squar_bg_lang);
                 if (DoubtList.get(position).getStatus().equals("Unsolved")){
                     holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_grey);
-                    holder.solvedText.setTextColor(Color.parseColor("#232323"));
+                    holder.solvedText.setTextColor(Color.parseColor("#999999"));
                     holder.solvedText.setText("Unsolved");
                     holder.solved.setBackgroundResource(R.drawable.square_small_bg_grey);
                 }
@@ -312,6 +319,22 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
 
         }
 
+        Date dateTime = DoubtList.get(position).getQuestionDate();
+        assert dateTime != null;
+        long mili = dateTime.getTime();
+        final String QuestionDate = DateUtils.getRelativeTimeSpanString(mili).toString();
+        holder.DateText.setText(QuestionDate);
+
+
+
+
+        /*Date dateTimex = DoubtList.get(position).getDateTime();
+
+        assert dateTimex != null;
+        long milix = dateTimex.getTime();
+
+        final String DateTime = DateUtils.getRelativeTimeSpanString(milix).toString();*/
+
 
 
         holder.CardBg.setOnClickListener(new View.OnClickListener() {
@@ -327,7 +350,7 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
                 intent.putExtra("QuestionText", DoubtList.get(holder.getAdapterPosition()).getQText());
                 intent.putExtra("Board", DoubtList.get(holder.getAdapterPosition()).getBoard());
                 intent.putExtra("Chapter", DoubtList.get(holder.getAdapterPosition()).getChapter());
-                intent.putExtra("DateTime", datex);
+                intent.putExtra("DateTime", DoubtList.get(holder.getAdapterPosition()).getDateTime());
                 intent.putExtra("Email", DoubtList.get(holder.getAdapterPosition()).getEmailHome());
                 intent.putExtra("FileUrl", DoubtList.get(holder.getAdapterPosition()).getFileUrl());
                 intent.putExtra("Link", DoubtList.get(holder.getAdapterPosition()).getLink());
@@ -338,10 +361,13 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
                 intent.putExtra("Subject", DoubtList.get(holder.getAdapterPosition()).getSubject());
                 intent.putExtra("Teacher", DoubtList.get(holder.getAdapterPosition()).getTeacher());
                 intent.putExtra("TeacherImage", DoubtList.get(holder.getAdapterPosition()).getTeacherImageUrl());
+                intent.putExtra("QuestionDate", QuestionDate);
+
 
                 mContext.startActivity(intent);
             }
         });
+
 
 
 
@@ -413,6 +439,8 @@ class HomeDoubtViewHolder extends RecyclerView.ViewHolder {
         solvedText = itemView.findViewById(R.id.solvedTextDCHome);
         linearLayout = itemView.findViewById(R.id.linearLayout_dotsIndicator);
         CardBg = itemView.findViewById(R.id.cardHome);
+
+
 
     }
 }

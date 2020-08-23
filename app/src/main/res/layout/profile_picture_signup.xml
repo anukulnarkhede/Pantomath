@@ -35,11 +35,11 @@
                 android:id="@+id/toolbar_titleProfilePicture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="start"
                 android:fontFamily="sans-serif-medium"
                 android:text="Profile Picture"
                 android:textColor="@color/blue"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 tools:ignore="HardcodedText" />
 
         </androidx.appcompat.widget.Toolbar>
@@ -56,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="16dp"
         />
 
 
@@ -64,10 +64,10 @@
         android:id="@+id/ProfilePicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19.8dp"
+        android:layout_marginTop="16dp"
         android:text="Set a Profile Picture for your Account"
         android:textAlignment="center"
-        android:textSize="14.4sp"
+        android:textSize="14sp"
         android:textColor="@color/grey_muted_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,9 +78,10 @@
         android:id="@+id/ProfilePicSelectButt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/select_photo_button"
         android:clickable="true"
+        android:stateListAnimator="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ProfilePicText">
@@ -120,16 +121,17 @@
         android:background="@drawable/login_butt"
         android:elevation="0dp"
         android:fontFamily="sans-serif-medium"
+        android:stateListAnimator="@null"
         android:text="Continue"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/blue"
-        android:textSize="17sp"
-        android:layout_marginTop="490.5dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         tools:ignore="HardcodedText" />
 
 
@@ -137,31 +139,30 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:layout_marginBottom="48dp"
+        android:textSize="16sp"
         android:fontFamily="sans-serif-medium"
+        android:padding="4dp"
         android:text="I will do it later"
         android:textColor="@color/blue"
-        android:padding="4dp"
-        android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toTopOf="@+id/passwordbaseLineVector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:clickable="true"
-        android:background="?attr/selectableItemBackground"
-        app:layout_constraintTop_toBottomOf="@+id/Continue_Butt_ProfilePicture"
         tools:ignore="HardcodedText" />
-
 
 
     <ImageView
         android:id="@+id/passwordbaseLineVector"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="67dp"
+
         android:src="@drawable/profile_picture_baseline_vector"
-        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Continue_Butt_ProfilePicture"
+        android:layout_marginBottom="24dp"
         tools:ignore="ContentDescription" />
 
     <ProgressBar

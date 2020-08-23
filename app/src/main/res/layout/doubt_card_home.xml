@@ -5,10 +5,10 @@
     android:id="@+id/cardHome"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="17.6dp"
-    android:layout_marginEnd="17.6dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
 
-    android:layout_marginBottom="13dp"
+    android:layout_marginBottom="16dp"
     android:background="@drawable/doubt_card_bg"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
@@ -17,14 +17,14 @@
 
     <ImageView
         android:id="@+id/solvedDCHome"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="17.6dp"
-        android:layout_marginBottom="17.6dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
 
         android:background="@drawable/square_small_bg_alg"
         android:padding="6dp"
-        android:layout_marginTop="17.6dp"
+        android:layout_marginTop="16dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,10 +33,10 @@
 
     <ImageView
         android:id="@+id/saved_DCHome"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginEnd="17.6dp"
-        android:layout_marginBottom="17.6dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/square_small_bg_alg"
         android:padding="6dp"
         android:alpha="0"
@@ -49,19 +49,19 @@
         android:layout_width="38dp"
         android:layout_height="38dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="16dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/defprofileimage"
+        android:src="@drawable/personal_info"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/imageSliderCardHome"
         android:layout_width="match_parent"
-        android:layout_height="209dp"
-        android:layout_marginTop="17.6dp"
-        android:layout_marginStart="17.6dp"
-        android:layout_marginEnd="17.6dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,9 +71,10 @@
     <Button
         android:id="@+id/subjectTagDChome"
         android:layout_width="wrap_content"
-        android:layout_height="35.2dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="17.6dp"
+        android:layout_height="38dp"
+        android:paddingHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/subject_button_bg"
         android:stateListAnimator="@null"
         android:clickable="false"
@@ -88,9 +89,9 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/linearLayout_dotsIndicator"
-        android:layout_width="17.6dp"
+        android:layout_width="16dp"
         android:layout_height="6.6dp"
-        android:layout_marginTop="7.7dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/ic_dot_first_photo"
         android:orientation="horizontal"
         android:padding="6.6dp"
@@ -111,24 +112,27 @@
         android:layout_marginEnd="20dp"
         android:textSize="16sp"
         android:textColor="#121212"
-        android:layout_marginTop="17.6dp"
+        android:maxLines="4"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout_dotsIndicator"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        />
 
     <TextView
         android:id="@+id/solvedTextDCHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8.8dp"
-        android:layout_marginBottom="27.5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="2dp"
         android:fontFamily="sans-serif-medium"
         android:text="Solved"
         android:textColor="@color/red"
-        android:textSize="13.2sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/solvedDCHome"
+        app:layout_constraintTop_toBottomOf="@+id/QuestionTextDCHome"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -138,8 +142,8 @@
         android:text="User"
         android:textColor="@color/red"
         android:textSize="16sp"
-        android:layout_marginTop="21dp"
-        android:layout_marginStart="8.8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
         android:fontFamily="sans-serif-medium"
         app:layout_constraintStart_toEndOf="@+id/ProfilePictureDCHome"
         app:layout_constraintTop_toTopOf="parent"
@@ -149,11 +153,11 @@
         android:id="@+id/timeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8.8dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
         android:text="2 hours ago"
-        android:textColor="#121212"
-        android:textSize="10sp"
+        android:textColor="#999999"
+        android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/ProfilePictureDCHome"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText,SmallSp" />

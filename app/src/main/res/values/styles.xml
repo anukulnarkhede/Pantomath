@@ -8,19 +8,24 @@
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
         <item name="android:navigationBarColor">@android:color/white</item>
+
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
 
         
     </style>
 
     <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar"
-
         >
 
-        <item name="android:windowBackground">@color/blue</item>
-        <item name="android:statusBarColor">@color/blue</item>
+        <item name="android:windowBackground"
+            >@drawable/splash_screen
+
+
+        </item>
+
+        <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
-        <item name="android:navigationBarColor">@color/blue</item>
+        <item name="android:navigationBarColor">@color/white</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
 
@@ -28,10 +33,27 @@
 
     <style name="uploadFragment" parent="Theme.AppCompat.Light.NoActionBar">
 
-        <item name="android:statusBarColor">#1EF5F5F5</item>
+        <item name="android:statusBarColor">#fff</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
         <item name="colorPrimary">@color/blue</item>
         <item name="colorAccent">@color/blue</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+
+
+    </style>
+
+
+    <style name="imageView" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:statusBarColor">#fff</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorAccent">@color/blue</item>
+        <item name="android:navigationBarColor">#000000</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
+        <item name="android:windowFullscreen">true</item>
 
 
     </style>

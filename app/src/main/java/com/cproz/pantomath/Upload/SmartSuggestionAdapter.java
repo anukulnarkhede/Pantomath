@@ -22,9 +22,11 @@ import com.cproz.pantomath.R;
 import com.jackandphantom.circularimageview.RoundedImage;
 import com.squareup.picasso.Picasso;
 
+import java.nio.DoubleBuffer;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class SmartSuggestionAdapter extends RecyclerView.Adapter<SmartSuggestionViewHolder> {
 
@@ -51,8 +53,9 @@ public class SmartSuggestionAdapter extends RecyclerView.Adapter<SmartSuggestion
     public void onBindViewHolder(@NonNull final SmartSuggestionViewHolder holder, int position) {
 
 
+
         if ( DoubtList.get(position).getPhoto1url().equals("")){
-            holder.roundedImage.setImageResource(R.drawable.ic_question);
+            holder.roundedImage.setVisibility(View.GONE);
 
         }
         else{

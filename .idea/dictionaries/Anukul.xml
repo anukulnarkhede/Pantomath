@@ -2,6 +2,7 @@
   <dictionary name="Anukul">
     <words>
       <w>baos</w>
+      <w>basline</w>
       <w>cbse</w>
       <w>confirmpassword</w>
       <w>datex</w>
@@ -10,12 +11,16 @@
       <w>exogenetic</w>
       <w>firestore</w>
       <w>mili</w>
+      <w>noti</w>
       <w>pantomath</w>
       <w>profileurl</w>
       <w>pselector</w>
+      <w>selectboard</w>
+      <w>selectclass</w>
       <w>signup</w>
       <w>subjectx</w>
       <w>textx</w>
+      <w>verifiedx</w>
       <w>visiblity</w>
     </words>
   </dictionary>

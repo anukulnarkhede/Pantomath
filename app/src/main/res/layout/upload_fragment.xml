@@ -15,8 +15,9 @@
         android:id="@+id/appBarLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="4dp"
-        app:elevation="4dp"
+
+        android:elevation="2dp"
+        android:translationZ="0dp"
         android:background="#fff"
 
         >
@@ -26,20 +27,20 @@
             android:id="@+id/UploadToolBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:elevation="4dp"
-            app:elevation="4dp"
-            android:background="#1EF5F5F5">
+
+            android:background="#fff">
 
             <TextView
 
                 android:id="@+id/toolbar_titleUpload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="start"
                 android:fontFamily="sans-serif-medium"
                 android:text="Add Doubt"
+
                 android:textColor="@color/blue"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 tools:ignore="HardcodedText" />
 
         </androidx.appcompat.widget.Toolbar>
@@ -50,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="#999999"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"/>
 
     <ScrollView
@@ -70,12 +72,12 @@
         android:id="@+id/selectSubject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="sans-serif"
-        android:text="SELECT SUBJECT"
+        android:text="Select Subject"
         android:textColor="#121212"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.014"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,10 +88,11 @@
         android:id="@+id/buttonPlaceHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="17.6dp"
-        android:layout_marginStart="17.6dp"
-        android:paddingBottom="17.6dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:gravity="center"
+        android:paddingBottom="16dp"
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -111,12 +114,12 @@
         android:id="@+id/smartSuggestions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="sans-serif"
-        android:text="SMART SUGGESTIONS"
+        android:text="Smart Suggestion"
         android:textColor="#121212"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.017"
         app:layout_constraintStart_toStartOf="parent"
@@ -127,8 +130,8 @@
         android:id="@+id/smartSuggestionRecyclerView"
         android:background="#FFFFFF"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:layout_marginTop="7dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/smartSuggestions"/>

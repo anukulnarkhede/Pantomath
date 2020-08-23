@@ -1,6 +1,7 @@
 package com.cproz.pantomath.Upload;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -47,10 +48,14 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class UploadFragment extends Fragment {
 
@@ -96,11 +101,7 @@ public class UploadFragment extends Fragment {
         DoubtList1 = new ArrayList<>();
 
 
-
-
-
-        subjectFilter(root);
-
+        //Timer timer = new Timer();
 
         ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -110,7 +111,10 @@ public class UploadFragment extends Fragment {
                     StudentBoard = documentSnapshot.getString("Board");
                     UploadFragment.NAME = documentSnapshot.getString("Name");
                     UploadFragment.EMAIL = documentSnapshot.getString("Email");
+                    email = documentSnapshot.getString("Email");
                     loadDataFromFirebase();
+
+
 
                 }
                 else{
@@ -120,11 +124,26 @@ public class UploadFragment extends Fragment {
         });
 
 
-        StudentBoard = HomeFragment.BOARD;
-        StudentClass = HomeFragment.CLASS;
 
 
 
+
+        //mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+        //loadDataFromFirebase();
+
+
+        subjectFilter(root);
+
+
+        //loadDataFromFirebase();
+        //loadDataFromFirebase();
+
+
+
+
+
+        //loadDataFromFirebase();
 
 
 
@@ -139,7 +158,7 @@ public class UploadFragment extends Fragment {
 
         relativeLayout.removeAllViews();
         View subjectButtns = LayoutInflater.from(getContext()).inflate(LayID, relativeLayout, false);
-        RelativeLayout.LayoutParams ch9c = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+        RelativeLayout.LayoutParams ch9c = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         subjectButtns.setLayoutParams(ch9c);
         relativeLayout.addView(subjectButtns);
@@ -148,9 +167,9 @@ public class UploadFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     public void subjectFilter(final View root){
-        selectSubject.setText("SELECT SUBJECT");
+        selectSubject.setText("Select Subject");
         layoutInflat(R.layout.subject_buttons);
-        LinearLayoutCompat algebraFilter, geometryFilter, physicsFilter, chemistryFilter, biologyFilter, historyFilter, geographyFilter, languagesFilter;
+        final LinearLayoutCompat algebraFilter, geometryFilter, physicsFilter, chemistryFilter, biologyFilter, historyFilter, geographyFilter, languagesFilter;
         algebraFilter = root.findViewById(R.id.AlgebraFilter);
         geometryFilter = root.findViewById(R.id.GeometryFilter);
         physicsFilter = root.findViewById(R.id.PhysicsFilter);
@@ -434,11 +453,11 @@ public class UploadFragment extends Fragment {
                         System.out.println("Class does not exist");
                     }
                     else if (StudentClass.equals("9th")){
-                        chapterFilters(root,"Classification of Plants","Energy Flow in an Ecosystem ","Useful and Harmful Microbes","Useful and Harmful Microbes",
-                                "Life Processes in Living Organisms","Heredity and Variation","Introduction to Biotechnology","q","q","j",
+                        chapterFilters(root,"Classification of Plants","Energy Flow in an Ecosystem ","Useful and Harmful Microbes","Life Processes in Living Organisms",
+                                "Heredity and Variation","Introduction to Biotechnology","1","q","q","j",
                                 "k","l"
                                 ,View.VISIBLE, View.VISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
-                                View.VISIBLE, View.VISIBLE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
+                                View.VISIBLE, View.GONE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
 
 
                     }
@@ -555,6 +574,7 @@ public class UploadFragment extends Fragment {
                 SUBJECT = "Geography";
                 DoubtList1.clear();
                 loadDataFromFirebaseSubject();
+
                 if (StudentBoard == null){
                     System.out.println("Board does not exist");
                 }
@@ -650,7 +670,7 @@ public class UploadFragment extends Fragment {
         layoutInflat(R.layout.chapter_buttons);
 
 
-        selectSubject.setText("< BACK TO SUBJECTS");
+        selectSubject.setText("< Back to Subjects");
         selectSubject.setTextColor(Color.parseColor("#121212"));
         selectSubject.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -658,6 +678,8 @@ public class UploadFragment extends Fragment {
                 CHAPTER = null;
                 DoubtList1.clear();
                 loadDataFromFirebase();
+
+
                 selectSubject.setTextColor(Color.parseColor("#121212"));
                 subjectFilter(root);
             }
@@ -721,7 +743,7 @@ public class UploadFragment extends Fragment {
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
 
-                Toast.makeText(getContext(), CHAPTER, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -731,7 +753,7 @@ public class UploadFragment extends Fragment {
                 CHAPTER = chapter2;
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
-                Toast.makeText(getContext(), CHAPTER, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -741,7 +763,7 @@ public class UploadFragment extends Fragment {
                 CHAPTER = chapter3;
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
-                Toast.makeText(getContext(), CHAPTER, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -751,7 +773,7 @@ public class UploadFragment extends Fragment {
                 CHAPTER = chapter4;
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
-                Toast.makeText(getContext(), CHAPTER, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -761,7 +783,7 @@ public class UploadFragment extends Fragment {
                 CHAPTER = chapter5;
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
-                Toast.makeText(getContext(), CHAPTER, Toast.LENGTH_SHORT).show();
+
 
             }
         });
@@ -772,7 +794,7 @@ public class UploadFragment extends Fragment {
                 CHAPTER = chapter6;
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
-                Toast.makeText(getContext(), CHAPTER, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -782,7 +804,7 @@ public class UploadFragment extends Fragment {
                 CHAPTER = chapter7;
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
-                Toast.makeText(getContext(), CHAPTER, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -792,7 +814,7 @@ public class UploadFragment extends Fragment {
                 CHAPTER = chapter8;
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
-                Toast.makeText(getContext(), CHAPTER, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -802,7 +824,7 @@ public class UploadFragment extends Fragment {
                 CHAPTER = chapter9;
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
-                Toast.makeText(getContext(), CHAPTER, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -812,7 +834,7 @@ public class UploadFragment extends Fragment {
                 CHAPTER = chapter10;
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
-                Toast.makeText(getContext(), CHAPTER, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -822,7 +844,7 @@ public class UploadFragment extends Fragment {
                 CHAPTER = chapter11;
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
-                Toast.makeText(getContext(), CHAPTER, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -832,7 +854,7 @@ public class UploadFragment extends Fragment {
                 CHAPTER = chapter12;
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
-                Toast.makeText(getContext(), CHAPTER, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -865,14 +887,17 @@ public class UploadFragment extends Fragment {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"),"");
+                            , querySnapshot.getDate("DateTime"),"", querySnapshot.getDate("QuestionDate"));
 
                     DoubtList1.add(homeDoubtData);
+                    Random random = new Random();
+
+
 
                     //HomeStuDoubtCardAdapter homeStuDoubtCardAdapter = new HomeStuDoubtCardAdapter(getContext(), DoubtList1);
 
 
-                    SmartSuggestionAdapter smartSuggestionAdapter = new SmartSuggestionAdapter(getContext(),DoubtList1);
+                    SmartSuggestionAdapter smartSuggestionAdapter = new SmartSuggestionAdapter(getActivity(),DoubtList1);
 
 
 
@@ -914,14 +939,14 @@ public class UploadFragment extends Fragment {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"),"");
+                            , querySnapshot.getDate("DateTime"),"",querySnapshot.getDate("QuestionDate"));
 
                     DoubtList1.add(homeDoubtData);
 
                     //HomeStuDoubtCardAdapter homeStuDoubtCardAdapter = new HomeStuDoubtCardAdapter(getContext(), DoubtList1);
 
 
-                    SmartSuggestionAdapter smartSuggestionAdapter = new SmartSuggestionAdapter(getContext(),DoubtList1);
+                    SmartSuggestionAdapter smartSuggestionAdapter = new SmartSuggestionAdapter(getActivity(),DoubtList1);
 
 
 

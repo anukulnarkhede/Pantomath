@@ -4,8 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -14,13 +12,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -34,9 +30,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -107,20 +103,27 @@ public class ProfilePictureSignup extends AppCompatActivity {
                 progressBar.setProgress(100, true);
                 IWillDoItLater.setEnabled(false);
                 ContinueButt.setEnabled(false);
-                firebaseAuth.createUserWithEmailAndPassword(NewAccount.EMAIL, Password.PASSWORD).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                firebaseAuth.createUserWithEmailAndPassword(NewAccount.EMAIL, Password.PASSWORD)
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
 
+
+
+
+
+
                         final String userId = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getEmail();
                         SignupInfoCarrier signupInfoCarrier = new SignupInfoCarrier(
-                                NewAccount.NAME, NewAccount.EMAIL, "","","Student","","", userId, ""
+                                toTitleCase(NewAccount.NAME), NewAccount.EMAIL, "","","Student","","", userId, ""
                         );
 
                         firebaseFirestore.document("Users/Students/StudentsInfo/" + userId ).set(signupInfoCarrier).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-
-                                startActivity(new Intent(ProfilePictureSignup.this, Home.class));
+                                FirebaseUser user = firebaseAuth.getCurrentUser();
+                                verification(user);
+                                //startActivity(new Intent(ProfilePictureSignup.this, Home.class));
                             }
                         })
 
@@ -166,6 +169,25 @@ public class ProfilePictureSignup extends AppCompatActivity {
 
     }
 
+
+    public void verification(FirebaseUser user){
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
+        user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                EmailVerificationPopUp emailVerificationPopUp = new EmailVerificationPopUp();
+                emailVerificationPopUp.show(getSupportFragmentManager(), "asa");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                RetryPopup retryPopup = new RetryPopup();
+                retryPopup.show(getSupportFragmentManager(), "axa");
+            }
+        });
+    }
+
     private void signup() {
 
 
@@ -201,13 +223,15 @@ public class ProfilePictureSignup extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     String ProfileURL = uri.toString();
                                     SignupInfoCarrier signupInfoCarrier = new SignupInfoCarrier(
-                                            NewAccount.NAME, NewAccount.EMAIL, "","","Student","","", userId, ProfileURL
+                                            toTitleCase(NewAccount.NAME), NewAccount.EMAIL, "","","Student","","", userId, ProfileURL
                                     );
                                     firebaseFirestore.document("Users/Students/StudentsInfo/" + userId ).set(signupInfoCarrier).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
 
-                                            startActivity(new Intent(ProfilePictureSignup.this, Home.class));
+                                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                                            verification(user);
+                                            //startActivity(new Intent(ProfilePictureSignup.this, Home.class));
                                         }
                                     })
                                             .addOnFailureListener(new OnFailureListener() {
@@ -362,6 +386,23 @@ public class ProfilePictureSignup extends AppCompatActivity {
 
 
 
+    public static String toTitleCase(String input) {
+        StringBuilder titleCase = new StringBuilder(input.length());
+        boolean nextTitleCase = true;
+
+        for (char c : input.toCharArray()) {
+            if (Character.isSpaceChar(c)) {
+                nextTitleCase = true;
+            } else if (nextTitleCase) {
+                c = Character.toTitleCase(c);
+                nextTitleCase = false;
+            }
+
+            titleCase.append(c);
+        }
+
+        return titleCase.toString();
+    }
 
 
 

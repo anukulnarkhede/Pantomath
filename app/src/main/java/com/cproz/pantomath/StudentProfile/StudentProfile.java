@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -111,12 +112,22 @@ public class StudentProfile extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
 
 
+        DoubtList1.clear();
 
         Algebra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DoubtList1.clear();
                 LoadDataFromFirebaseSubFilter("Algebra");
+                Algebra.setEnabled(false);
+                AllSubject.setEnabled(false);
+                Geometry.setEnabled(false);
+                Physics.setEnabled(false);
+                Chemistry.setEnabled(false);
+                Biology.setEnabled(false);
+                History.setEnabled(false);
+                Geography.setEnabled(false);
+                Languages.setEnabled(false);
             }
         });
 
@@ -125,7 +136,15 @@ public class StudentProfile extends AppCompatActivity {
             public void onClick(View v) {
                 DoubtList1.clear();
                 LoadDataFromFirebase();
-
+                Algebra.setEnabled(false);
+                AllSubject.setEnabled(false);
+                Geometry.setEnabled(false);
+                Physics.setEnabled(false);
+                Chemistry.setEnabled(false);
+                Biology.setEnabled(false);
+                History.setEnabled(false);
+                Geography.setEnabled(false);
+                Languages.setEnabled(false);
             }
         });
 
@@ -134,6 +153,15 @@ public class StudentProfile extends AppCompatActivity {
             public void onClick(View v) {
                 DoubtList1.clear();
                 LoadDataFromFirebaseSubFilter("Geometry");
+                Algebra.setEnabled(false);
+                AllSubject.setEnabled(false);
+                Geometry.setEnabled(false);
+                Physics.setEnabled(false);
+                Chemistry.setEnabled(false);
+                Biology.setEnabled(false);
+                History.setEnabled(false);
+                Geography.setEnabled(false);
+                Languages.setEnabled(false);
             }
         });
 
@@ -142,6 +170,15 @@ public class StudentProfile extends AppCompatActivity {
             public void onClick(View v) {
                 DoubtList1.clear();
                 LoadDataFromFirebaseSubFilter("Physics");
+                Algebra.setEnabled(false);
+                AllSubject.setEnabled(false);
+                Geometry.setEnabled(false);
+                Physics.setEnabled(false);
+                Chemistry.setEnabled(false);
+                Biology.setEnabled(false);
+                History.setEnabled(false);
+                Geography.setEnabled(false);
+                Languages.setEnabled(false);
             }
         });
 
@@ -150,6 +187,15 @@ public class StudentProfile extends AppCompatActivity {
             public void onClick(View v) {
                 DoubtList1.clear();
                 LoadDataFromFirebaseSubFilter("Chemistry");
+                Algebra.setEnabled(false);
+                AllSubject.setEnabled(false);
+                Geometry.setEnabled(false);
+                Physics.setEnabled(false);
+                Chemistry.setEnabled(false);
+                Biology.setEnabled(false);
+                History.setEnabled(false);
+                Geography.setEnabled(false);
+                Languages.setEnabled(false);
             }
         });
 
@@ -158,6 +204,15 @@ public class StudentProfile extends AppCompatActivity {
             public void onClick(View v) {
                 DoubtList1.clear();
                 LoadDataFromFirebaseSubFilter("Biology");
+                Algebra.setEnabled(false);
+                AllSubject.setEnabled(false);
+                Geometry.setEnabled(false);
+                Physics.setEnabled(false);
+                Chemistry.setEnabled(false);
+                Biology.setEnabled(false);
+                History.setEnabled(false);
+                Geography.setEnabled(false);
+                Languages.setEnabled(false);
             }
         });
 
@@ -166,6 +221,15 @@ public class StudentProfile extends AppCompatActivity {
             public void onClick(View v) {
                 DoubtList1.clear();
                 LoadDataFromFirebaseSubFilter("History");
+                Algebra.setEnabled(false);
+                AllSubject.setEnabled(false);
+                Geometry.setEnabled(false);
+                Physics.setEnabled(false);
+                Chemistry.setEnabled(false);
+                Biology.setEnabled(false);
+                History.setEnabled(false);
+                Geography.setEnabled(false);
+                Languages.setEnabled(false);
             }
         });
 
@@ -175,6 +239,15 @@ public class StudentProfile extends AppCompatActivity {
             public void onClick(View v) {
                 DoubtList1.clear();
                 LoadDataFromFirebaseSubFilter("Geography");
+                Algebra.setEnabled(false);
+                AllSubject.setEnabled(false);
+                Geometry.setEnabled(false);
+                Physics.setEnabled(false);
+                Chemistry.setEnabled(false);
+                Biology.setEnabled(false);
+                History.setEnabled(false);
+                Geography.setEnabled(false);
+                Languages.setEnabled(false);
             }
         });
 
@@ -183,6 +256,15 @@ public class StudentProfile extends AppCompatActivity {
             public void onClick(View v) {
                 DoubtList1.clear();
                 LoadDataFromFirebaseSubFilter("Languages");
+                Algebra.setEnabled(false);
+                AllSubject.setEnabled(false);
+                Geometry.setEnabled(false);
+                Physics.setEnabled(false);
+                Chemistry.setEnabled(false);
+                Biology.setEnabled(false);
+                History.setEnabled(false);
+                Geography.setEnabled(false);
+                Languages.setEnabled(false);
             }
         });
 
@@ -200,7 +282,7 @@ public class StudentProfile extends AppCompatActivity {
                     UserName.setText(toTitleCase(Objects.requireNonNull(documentSnapshot.getString("Name"))));
 
                     if (Objects.equals(documentSnapshot.getString("profileURL"), "")){
-                        profilePicture.setImageResource(R.drawable.defprofileimage);
+                        profilePicture.setImageResource(R.drawable.personal_info);
                     }
                     else{
                         Picasso.get().load(documentSnapshot.getString("profileURL")).into(profilePicture);
@@ -294,6 +376,7 @@ public class StudentProfile extends AppCompatActivity {
 
 
     private void LoadDataFromFirebase(){
+        DoubtList1.clear();
         db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS).whereEqualTo("Email", email).orderBy("DateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -318,7 +401,7 @@ public class StudentProfile extends AppCompatActivity {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"),"");
+                            , querySnapshot.getDate("DateTime"),"", querySnapshot.getDate("QuestionDate"));
 
                     DoubtList1.add(homeDoubtData);
 
@@ -339,12 +422,23 @@ public class StudentProfile extends AppCompatActivity {
                     recyclerView.setAdapter(smartSuggestionAdapter);
 
                 }
+                Algebra.setEnabled(true);
+                AllSubject.setEnabled(true);
+                Geometry.setEnabled(true);
+                Physics.setEnabled(true);
+                Chemistry.setEnabled(true);
+                Biology.setEnabled(true);
+                History.setEnabled(true);
+                Geography.setEnabled(true);
+                Languages.setEnabled(true);
+
             }
         });
     }
 
 
     private void LoadDataFromFirebaseNoOFUnsolved(){
+        DoubtList1.clear();
         db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS).whereEqualTo("Email", email).whereEqualTo("Status", "Unsolved").orderBy("DateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -371,7 +465,7 @@ public class StudentProfile extends AppCompatActivity {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"),"");
+                            , querySnapshot.getDate("DateTime"),"", querySnapshot.getDate("QuestionDate"));
 
                     DoubtList2.add(homeDoubtData);
 
@@ -400,6 +494,7 @@ public class StudentProfile extends AppCompatActivity {
 
 
     private void LoadDataFromFirebaseSubFilter(String Subjectx){
+        DoubtList1.clear();
         db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD", HomeFragment.CLASS).whereEqualTo("Email", email).whereEqualTo("Subject", Subjectx).orderBy("DateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -422,7 +517,7 @@ public class StudentProfile extends AppCompatActivity {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"),"");
+                            , querySnapshot.getDate("DateTime"),"",querySnapshot.getDate("QuestionDate"));
 
                     DoubtList1.add(homeDoubtData);
 
@@ -443,6 +538,15 @@ public class StudentProfile extends AppCompatActivity {
                     recyclerView.setAdapter(smartSuggestionAdapter);
 
                 }
+                Algebra.setEnabled(true);
+                AllSubject.setEnabled(true);
+                Geometry.setEnabled(true);
+                Physics.setEnabled(true);
+                Chemistry.setEnabled(true);
+                Biology.setEnabled(true);
+                History.setEnabled(true);
+                Geography.setEnabled(true);
+                Languages.setEnabled(true);
             }
         });
     }

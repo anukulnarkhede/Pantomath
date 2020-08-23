@@ -15,7 +15,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
        >
 
 
@@ -23,14 +22,14 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/searchBarHome"
                 android:layout_width="match_parent"
-                android:layout_height="48.4dp"
-                android:layout_marginStart="17.6dp"
-                android:layout_marginTop="17.6dp"
-                android:layout_marginEnd="17.6dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="3dp"
                 android:background="@drawable/search_bar_bg"
                 android:elevation="8dp"
-                app:cardCornerRadius="11dp"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -41,10 +40,11 @@
 
                 <ImageView
                     android:id="@+id/searchIcon"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:padding="10dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="16.5dp"
+                    android:layout_marginStart="2dp"
                     app:srcCompat="@drawable/ic_round_search_24"
 
 
@@ -52,40 +52,62 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/ProfilePictureHome"
-                    android:layout_width="30.8dp"
-                    android:layout_height="30.8dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:scaleType="centerCrop"
 
                     android:layout_gravity="center_vertical|end"
-                    android:layout_marginEnd="17.6dp"
-                    android:src="@drawable/defprofileimage"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/personal_info"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/Cross"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:scaleType="centerCrop"
+                    android:padding="10dp"
+
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginEnd="2dp"
+                    android:src="@drawable/cross"
 
                     />
 
                 <EditText
+
                     android:id="@+id/SearchEditText"
                     android:layout_width="match_parent"
                     android:layout_gravity="center_vertical|center"
-                    android:layout_marginStart="50dp"
+                    android:layout_marginStart="48dp"
                     android:layout_marginEnd="52dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:ems="10"
-                    android:textColor="@color/blue"
+
+                    android:singleLine="true"
+                    android:inputType="textImeMultiLine"
+                    android:imeOptions="actionSearch"
+                    android:textColor="#121212"
                     android:cursorVisible="true"
-                    android:inputType="text"
-                    android:hint="Search “Quadratic Equations”"
-                    android:textSize="15.4sp"
+                    android:textColorHint="#999"
+                    android:hint="Search in doubts"
+                    android:textSize="16sp"
+                    android:clickable="true"
                     android:backgroundTint="#fff"
 
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"
+                    android:focusable="true" />
             </androidx.cardview.widget.CardView>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/refreshLayout"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/searchBarHome"
-            android:layout_marginTop="-7dp">
+
+            android:layout_marginTop="-25dp">
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -99,16 +121,33 @@
                 android:clipToPadding="false"
                 android:elevation="0dp"
                 android:overScrollMode="never"
-                android:paddingTop="22dp"
-                android:paddingBottom="17.6dp"
+                android:paddingTop="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
+
+
+
+
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
     </RelativeLayout>
 
+    <ImageView
+        android:id="@+id/noResultsImg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:srcCompat="@drawable/notfound"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginHorizontal="64dp"
+        android:layout_marginBottom="300dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
