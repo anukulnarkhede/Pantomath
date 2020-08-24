@@ -11,6 +11,7 @@ import com.cproz.pantomath.Home.Home;
 import com.cproz.pantomath.Home.HomeFragment;
 import com.cproz.pantomath.Login.Login;
 import com.cproz.pantomath.R;
+import com.cproz.pantomath.Signup.EmailVerificationPopUp;
 import com.cproz.pantomath.Signup.PackageSelection;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,8 +42,13 @@ public class SplashScreen extends AppCompatActivity {
 
         if (firebaseUser != null){
 
+                if (user.isEmailVerified()){
+                    startActivity(new Intent(this, Home.class));
+                }else{
+                    startActivity(new Intent(this, Login.class));
 
-                startActivity(new Intent(this, Home.class));
+                }
+
 
 
         }
