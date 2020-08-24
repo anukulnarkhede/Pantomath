@@ -263,7 +263,7 @@ public class UploadImagePage extends AppCompatActivity {
         AddPhoto1 = findViewById(R.id.addPhoto1);
         AddPhoto2 = findViewById(R.id.addPhoto2);
         QuestionText = findViewById(R.id.QuestionUploadText);
-        Image1 = findViewById(R.id.FeedbackImage);
+        Image1 = findViewById(R.id.DoubtUploadImage1);
         Image2 = findViewById(R.id.DoubtUploadImage2);
         constraintLayout = findViewById(R.id.UploadImageCard);
         progressBar = findViewById(R.id.progressBarUpload);
