@@ -105,7 +105,7 @@ public class PackageSelection extends AppCompatActivity {
 
 
 
-        firebaseFirestore.collection("Users/Students/StudentsInfo/"  ).document( email).update("Class", SelectedClass, "Board",SelectedBoard).addOnCompleteListener(new OnCompleteListener<Void>() {
+        firebaseFirestore.collection("Users/Students/StudentsInfo/"  ).document( email).update("Class", SelectedClass, "Board",SelectedBoard, "User", "Not Verified").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 

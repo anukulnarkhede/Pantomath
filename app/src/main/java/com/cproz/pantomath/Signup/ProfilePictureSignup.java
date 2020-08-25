@@ -42,6 +42,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -109,13 +110,14 @@ public class ProfilePictureSignup extends AppCompatActivity {
                     public void onSuccess(AuthResult authResult) {
 
 
-
+                        final Date SignupTime = new Date();
 
 
 
                         final String userId = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getEmail();
                         SignupInfoCarrier signupInfoCarrier = new SignupInfoCarrier(
                                 toTitleCase(NewAccount.NAME), NewAccount.EMAIL, "","","Student","","", userId, ""
+                                ,SignupTime
                         );
 
                         firebaseFirestore.document("Users/Students/StudentsInfo/" + userId ).set(signupInfoCarrier).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -215,6 +217,9 @@ public class ProfilePictureSignup extends AppCompatActivity {
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
                     byte[] data = baos.toByteArray();
 
+
+                    final Date SignupTime = new Date();
+
                     reference.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -224,6 +229,7 @@ public class ProfilePictureSignup extends AppCompatActivity {
                                     String ProfileURL = uri.toString();
                                     SignupInfoCarrier signupInfoCarrier = new SignupInfoCarrier(
                                             toTitleCase(NewAccount.NAME), NewAccount.EMAIL, "","","Student","","", userId, ProfileURL
+                                    , SignupTime
                                     );
                                     firebaseFirestore.document("Users/Students/StudentsInfo/" + userId ).set(signupInfoCarrier).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override

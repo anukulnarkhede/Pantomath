@@ -910,6 +910,13 @@ public class UploadFragment extends Fragment {
                     recyclerView.setAdapter(smartSuggestionAdapter);
 
                 }
+
+                if (DoubtList1.isEmpty()){
+                    recyclerView.setAlpha(0);
+                }
+                else{
+                    recyclerView.setAlpha(1);
+                }
             }
         });
     }
@@ -958,6 +965,12 @@ public class UploadFragment extends Fragment {
 
                     recyclerView.setAdapter(smartSuggestionAdapter);
 
+                }
+                if (DoubtList1.isEmpty()){
+                    recyclerView.setAlpha(0);
+                }
+                else{
+                    recyclerView.setAlpha(1);
                 }
             }
         });

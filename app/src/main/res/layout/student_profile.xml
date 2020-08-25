@@ -204,48 +204,51 @@
         
         >
 
-        <LinearLayout
+        <RadioGroup
             android:id="@+id/scrollHorLayout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal">
             
-            <Button
+            <RadioButton
                 android:id="@+id/AllProfile"
-                android:stateListAnimator="@null"
-                android:layout_width="wrap_content"
+
+                android:layout_width="85dp"
+                android:textAlignment="center"
                 android:layout_height="44dp"
+                android:button="@drawable/all_subject_bg_selector"
                 android:text="All"
+                android:checked="true"
                 android:elevation="0dp"
                 android:layout_marginStart="16dp"
                 android:paddingHorizontal="16dp"
                 android:layout_marginEnd="8dp"
                 android:textAllCaps="false"
-                android:background="@drawable/all_subject_bg"
+                android:background="@drawable/all_subject_bg_selector"
                 android:textSize="14sp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="4dp"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="#121212"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+
 
 
                 />
 
 
-            <Button
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            <RadioButton
+
                 android:id="@+id/AlgebraProfile"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="44dp"
-                android:stateListAnimator="@null"
+                android:button="@drawable/subject_button_bg_selector"
                 android:text="Algebra"
                 android:textAlignment="center"
 
                 android:layout_marginEnd="8dp"
                 android:paddingHorizontal="16dp"
                 android:textAllCaps="false"
-                android:background="@drawable/subject_button_bg"
+                android:background="@drawable/subject_button_bg_selector"
                 android:textSize="14sp"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="@color/red"
@@ -255,7 +258,7 @@
 
                 tools:ignore="ButtonStyle" />
 
-            <Button
+            <RadioButton
                 android:id="@+id/GeometryProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
@@ -263,40 +266,39 @@
                 android:paddingHorizontal="16dp"
                 android:textAllCaps="false"
                 android:layout_marginEnd="8dp"
-                android:stateListAnimator="@null"
-                android:background="@drawable/subject_button_bg_geom"
+                android:button="@drawable/subject_button_bg_geom_selector"
+                android:background="@drawable/subject_button_bg_geom_selector"
                 android:textSize="14sp"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="#9A0D91"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="4dp"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+
 
 
                 />
 
-            <Button
+            <RadioButton
                 android:id="@+id/PhysicsProfile"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="44dp"
-                android:text="Physics"
-
-                android:stateListAnimator="@null"
-                android:paddingHorizontal="16dp"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_marginEnd="8dp"
-                android:textAllCaps="false"
-                android:background="@drawable/subject_button_bg_phy"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="#0078FF"
                 android:layout_marginTop="2dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="4dp"
+                android:background="@drawable/subject_button_bg_phy_selector"
+                android:button="@drawable/subject_button_bg_phy_selector"
+                android:fontFamily="sans-serif-medium"
+                android:paddingHorizontal="16dp"
+                android:text="Physics"
+                android:textAllCaps="false"
+                android:textColor="#0078FF"
+                android:textSize="14sp"
+                android:textAlignment="center"
 
 
                 />
 
-            <Button
+            <RadioButton
                 android:id="@+id/ChemistryProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
@@ -304,59 +306,61 @@
                 android:paddingHorizontal="16dp"
                 android:textAllCaps="false"
                 android:layout_marginEnd="8dp"
-                android:stateListAnimator="@null"
-                android:background="@drawable/subject_button_bg_chem"
+                android:background="@drawable/subject_button_bg_chem_selector"
+                android:button="@drawable/subject_button_bg_chem_selector"
                 android:textSize="14sp"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="#FF9B00"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="4dp"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+
 
 
                 />
 
-            <Button
+            <RadioButton
                 android:id="@+id/BiologyProfile"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="44dp"
                 android:text="Biology"
                 android:paddingHorizontal="16dp"
                 android:textAllCaps="false"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/subject_button_bg_bio"
+                android:background="@drawable/subject_button_bg_bio_selector"
                 android:textSize="14sp"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="#FF1ADD"
-                android:stateListAnimator="@null"
+                android:textAlignment="center"
+                android:button="@drawable/subject_button_bg_bio_selector"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="4dp"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+
 
 
                 />
 
-            <Button
+            <RadioButton
                 android:id="@+id/HistoryProfile"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="44dp"
                 android:text="History"
                 android:paddingHorizontal="16dp"
                 android:textAllCaps="false"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/subject_button_bg_his"
+                android:background="@drawable/subject_button_bg_his_selector"
                 android:textSize="14sp"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="#813912"
                 android:layout_marginTop="2dp"
+                android:textAlignment="center"
                 android:layout_marginBottom="4dp"
-                android:stateListAnimator="@null"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:button="@drawable/subject_button_bg_his_selector"
+
 
 
                 />
 
-            <Button
+            <RadioButton
                 android:id="@+id/GeographyProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
@@ -364,43 +368,43 @@
                 android:paddingHorizontal="16dp"
                 android:textAllCaps="false"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/subject_button_bg_geog"
+                android:background="@drawable/subject_button_bg_geog_selector"
                 android:textSize="14sp"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="#009F37"
                 android:layout_marginTop="2dp"
-                android:stateListAnimator="@null"
+                android:button="@drawable/subject_button_bg_geog_selector"
                 android:layout_marginBottom="4dp"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+
 
 
                 />
 
-            <Button
+            <RadioButton
                 android:id="@+id/LanguagesProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
                 android:text="Languages"
                 android:paddingHorizontal="16dp"
                 android:textAllCaps="false"
-                android:background="@drawable/subject_button_bg_lang"
+                android:background="@drawable/subject_button_bg_lang_selector"
                 android:textSize="14sp"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="#5550B6"
-                android:stateListAnimator="@null"
+                android:button="@drawable/subject_button_bg_lang_selector"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="2dp"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+
 
 
                 />
 
 
-            
-            
-            
-        </LinearLayout>
+
+
+
+        </RadioGroup>
 
     </HorizontalScrollView>
 
@@ -423,6 +427,20 @@
             app:layout_constraintEnd_toEndOf="@+id/ProfilePicture_profile"
             app:layout_constraintStart_toStartOf="@+id/ProfilePicture_profile"
             app:layout_constraintTop_toTopOf="@+id/ProfilePicture_profile" />
+
+
+        <ImageView
+            android:id="@+id/noResults"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="84dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginBottom="350dp"
+            android:src="@drawable/notfound"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollProfile" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

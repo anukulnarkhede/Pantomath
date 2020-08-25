@@ -23,6 +23,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,7 +71,8 @@ public class StudentProfile extends AppCompatActivity {
     TextView  NoOfDoubts,NoOfSolved,NoOfUnsolved,UserName, BoardClass;
     RecyclerView recyclerView;
     ImageView setting;
-    Button Algebra, Geometry, Physics, Chemistry, Biology, History, Geography, Languages, AllSubject;
+    RadioButton Algebra, Geometry, Physics, Chemistry, Biology, History, Geography, Languages, AllSubject;
+    RadioGroup radioGroup;
     static  String SUBJECT = StudentProfile.SUBJECT;
     public String Board, Class;
     private FirebaseFirestore db;
@@ -80,11 +83,12 @@ public class StudentProfile extends AppCompatActivity {
     FirebaseUser user = firebaseAuth.getCurrentUser();
     String email = user != null ? user.getEmail() : null;
     private DocumentReference ref = firebaseFirestore.collection("Users/Students/StudentsInfo/" ).document(String.valueOf(email));
-    List <HomeDoubtData> DoubtList2;
+    List <HomeDoubtData> DoubtList2, DoubtList3;
     String decision;
     Uri mCropImageUri;
     FirebaseStorage firebaseStorage;
     ProgressBar progressBar;
+    ImageView noResult;
 
 
     @Override
@@ -99,6 +103,7 @@ public class StudentProfile extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
         DoubtList1 = new ArrayList<>();
         DoubtList2 = new ArrayList<>();
+        DoubtList3 = new ArrayList<>();
 
         firebaseStorage = FirebaseStorage.getInstance();
         setSupportActionBar(toolbar);
@@ -114,7 +119,65 @@ public class StudentProfile extends AppCompatActivity {
 
         DoubtList1.clear();
 
-        Algebra.setOnClickListener(new View.OnClickListener() {
+        noResult.setVisibility(View.GONE);
+
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                switch (checkedId){
+                    case R.id.AllProfile:
+                        DoubtList1.clear();
+                        LoadDataFromFirebase();
+
+                        break;
+
+                    case R.id.AlgebraProfile:
+                        DoubtList1.clear();
+                        LoadDataFromFirebaseSubFilter("Algebra");
+                        break;
+
+                    case R.id.GeometryProfile:
+                        DoubtList1.clear();
+                        LoadDataFromFirebaseSubFilter("Geometry");
+                        break;
+
+                    case R.id.PhysicsProfile:
+                        DoubtList1.clear();
+                        LoadDataFromFirebaseSubFilter("Physics");
+                        break;
+
+                    case R.id.ChemistryProfile:
+                        DoubtList1.clear();
+                        LoadDataFromFirebaseSubFilter("Chemistry");
+                        break;
+
+                    case R.id.BiologyProfile:
+                        DoubtList1.clear();
+                        LoadDataFromFirebaseSubFilter("Biology");
+                        break;
+
+                    case R.id.HistoryProfile:
+                        DoubtList1.clear();
+                        LoadDataFromFirebaseSubFilter("History");
+                        break;
+
+                    case R.id.GeographyProfile:
+                        DoubtList1.clear();
+                        LoadDataFromFirebaseSubFilter("Geography");
+                        break;
+
+                    case R.id.LanguagesProfile:
+                        DoubtList1.clear();
+                        LoadDataFromFirebaseSubFilter("Languages");
+                        break;
+                }
+
+            }
+        });
+
+        /*Algebra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DoubtList1.clear();
@@ -266,7 +329,7 @@ public class StudentProfile extends AppCompatActivity {
                 Geography.setEnabled(false);
                 Languages.setEnabled(false);
             }
-        });
+        });*/
 
         ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -295,6 +358,9 @@ public class StudentProfile extends AppCompatActivity {
 
 
                     LoadDataFromFirebaseNoOFUnsolved();
+
+
+                    LoadDataFromFirebaseNoSolved();
 
 
 
@@ -370,6 +436,8 @@ public class StudentProfile extends AppCompatActivity {
         Geography = findViewById(R.id.GeographyProfile);
         Languages = findViewById(R.id.LanguagesProfile);
         AllSubject = findViewById(R.id.AllProfile);
+        radioGroup = findViewById(R.id.scrollHorLayout);
+        noResult = findViewById(R.id.noResults);
 
     }
 
@@ -422,15 +490,14 @@ public class StudentProfile extends AppCompatActivity {
                     recyclerView.setAdapter(smartSuggestionAdapter);
 
                 }
-                Algebra.setEnabled(true);
-                AllSubject.setEnabled(true);
-                Geometry.setEnabled(true);
-                Physics.setEnabled(true);
-                Chemistry.setEnabled(true);
-                Biology.setEnabled(true);
-                History.setEnabled(true);
-                Geography.setEnabled(true);
-                Languages.setEnabled(true);
+                if (DoubtList1.isEmpty()){
+                    recyclerView.setAlpha(0);
+                    noResult.setVisibility(View.VISIBLE);
+
+                }else{
+                    recyclerView.setAlpha(1);
+                    noResult.setVisibility(View.GONE);
+                }
 
             }
         });
@@ -476,9 +543,10 @@ public class StudentProfile extends AppCompatActivity {
 
                     NoOfUnsolved.setText(String.valueOf(DoubtList2.size()));
 
-                    int x = DoubtList1.size() - DoubtList2.size();
 
-                    NoOfSolved.setText(String.valueOf(x));
+
+
+
 
 
 
@@ -488,6 +556,69 @@ public class StudentProfile extends AppCompatActivity {
 
 
                 }
+
+
+            }
+        });
+    }
+
+
+
+
+    private void LoadDataFromFirebaseNoSolved(){
+        DoubtList1.clear();
+        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS).whereEqualTo("Email", email).whereEqualTo("Status", "Solved").orderBy("DateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
+
+
+                    //Date date = new Date();
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                            querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                            querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                            querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                            querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                            querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                            , querySnapshot.getDate("DateTime"),"", querySnapshot.getDate("QuestionDate"));
+
+                    DoubtList3.add(homeDoubtData);
+
+
+
+
+
+
+                    NoOfSolved.setText(String.valueOf(DoubtList3.size()));
+
+
+
+
+
+
+
+
+
+
+
+
+
+                }
+
+
             }
         });
     }
@@ -538,15 +669,14 @@ public class StudentProfile extends AppCompatActivity {
                     recyclerView.setAdapter(smartSuggestionAdapter);
 
                 }
-                Algebra.setEnabled(true);
-                AllSubject.setEnabled(true);
-                Geometry.setEnabled(true);
-                Physics.setEnabled(true);
-                Chemistry.setEnabled(true);
-                Biology.setEnabled(true);
-                History.setEnabled(true);
-                Geography.setEnabled(true);
-                Languages.setEnabled(true);
+                if (DoubtList1.isEmpty()){
+                    recyclerView.setAlpha(0);
+                    noResult.setVisibility(View.VISIBLE);
+
+                }else{
+                    recyclerView.setAlpha(1);
+                    noResult.setVisibility(View.GONE);
+                }
             }
         });
     }

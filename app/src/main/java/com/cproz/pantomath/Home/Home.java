@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.cproz.pantomath.NotVerified;
 import com.cproz.pantomath.R;
 import com.cproz.pantomath.Notifications.NotificationsFragments;
 import com.cproz.pantomath.Signup.PackageSelection;
@@ -43,7 +44,7 @@ public class Home extends AppCompatActivity {
     FirebaseUser user = firebaseAuth.getCurrentUser();
     String email = user != null ? user.getEmail() : null;
     private DocumentReference ref = firebaseFirestore.collection("Users/Students/StudentsInfo/" ).document(String.valueOf(email));
-
+    String User;
 
 
     @Override
@@ -56,6 +57,7 @@ public class Home extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
         assert firebaseUser != null;
         if(firebaseUser.isEmailVerified()){
 
@@ -74,6 +76,30 @@ public class Home extends AppCompatActivity {
 
 
         }
+
+        ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+            User = documentSnapshot.getString("User");
+
+                assert User != null;
+                if (User.equals("Not Verified")){
+                    Intent intent = new Intent(Home.this, NotVerified.class);
+                    intent.putExtra("UserStatus", "Not Verified");
+                    startActivity(intent);
+            }else if (User.equals("Verified")){
+
+                startActivity(new Intent(Home.this, Home.class));
+            }else if (User.equals("Blocked")){
+                    Intent intent = new Intent(Home.this, NotVerified.class);
+                    intent.putExtra("UserStatus", "Blocked");
+                    startActivity(intent);
+                }
+
+
+            }
+        });
 
 
         //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();

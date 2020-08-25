@@ -602,7 +602,7 @@ public class UploadImagePage extends AppCompatActivity {
 
                 Name, Email, AnsPhotoUrl1, AnsPhotoUrl2, AnsText, AudioUrl,Chapter, FileUrl,Link,
                 Photo1url, Photo2url, ProfileImageURL, "Unsolved", Text, Board, STD, Uid,Subject,Teacher, "True", date,
-                "",date
+                "",date,""
 
 
 

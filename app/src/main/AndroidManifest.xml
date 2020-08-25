@@ -23,11 +23,16 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan"
         tools:ignore="AllowBackup">
-        <activity android:name=".StudentProfile.Feedback"
-            android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".StudentProfile.Settings"
+
+
+        <activity android:name=".NotVerified"
             />
 
+
+        <activity
+            android:name=".StudentProfile.Feedback"
+            android:parentActivityName=".StudentProfile.Settings"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Home.Image"
             android:parentActivityName=".Home.DoubtDetails"

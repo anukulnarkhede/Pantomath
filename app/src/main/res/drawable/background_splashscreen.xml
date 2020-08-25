@@ -6,7 +6,7 @@
 
     <item>
 
-        <bitmap android:src="@drawable/splash_panto"
+        <bitmap android:src="@drawable/panto_splash"
             android:gravity="center"
             />
 

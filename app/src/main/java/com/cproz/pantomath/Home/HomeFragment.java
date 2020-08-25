@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
 
     ImageView noResults;
 
-String ProfileImageURL = "";
+    String ProfileImageURL = "";
 
 
 
@@ -92,8 +92,9 @@ String ProfileImageURL = "";
 
         recyclerView = root.findViewById(R.id.RecyclerViewHome);
         ProfilePictureHome = root.findViewById(R.id.ProfilePictureHome);
-        SearchView = root.findViewById(R.id.SearchEditText);
         swipeRefreshLayout = root.findViewById(R.id.refreshLayout);
+        SearchView = root.findViewById(R.id.SearchEditText);
+
         searchIcon = root.findViewById(R.id.searchIcon);
         cardView = root.findViewById(R.id.searchBarHome);
         Cross = root.findViewById(R.id.Cross);
@@ -236,58 +237,7 @@ String ProfileImageURL = "";
                         Cross.setVisibility(View.GONE);
                         searchIcon.setImageResource(R.drawable.ic_round_search_24);
                         swipeRefreshLayout.setEnabled(true);
-                        ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                if (documentSnapshot.exists()){
-                                    CLASS  = documentSnapshot.getString("Class");
-                                    BOARD = documentSnapshot.getString("Board");
-                                    PROFILEURL = documentSnapshot.getString("profileURL");
-                                    NAME = documentSnapshot.getString("Name");
 
-                                    System.out.print(DoubtList2.size());
-
-
-                                    if (PROFILEURL.equals("")){
-                                        ProfilePictureHome.setImageResource(R.drawable.personal_info);
-                                    }
-                                    else {
-                                        Picasso.get().load(PROFILEURL).into(ProfilePictureHome);
-                                    }
-
-
-
-                                    ProfilePictureHome.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            startActivity(new Intent(getContext(), StudentProfile.class));
-
-                                        }
-                                    });
-
-
-                                    DoubtList2.clear();
-                                    DataFromFirestore();
-
-                                    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                                        @Override
-                                        public void onRefresh() {
-
-
-                                            DoubtList2.clear();
-                                            DataFromFirestore();
-
-                                            swipeRefreshLayout.setRefreshing(false);
-                                        }
-                                    });
-
-
-                                }
-                                else{
-                                    System.out.println("does not exist");
-                                }
-                            }
-                        });
                     }
                 });
 
@@ -426,8 +376,8 @@ String ProfileImageURL = "";
         ArrayList<HomeDoubtData> filteredList = new ArrayList<>();
         for (HomeDoubtData item: DoubtList2){
 
-            if (item.getTeacher().contains(text.toLowerCase())||item.getSubject().toLowerCase().contains(text.toLowerCase()) || item.getChapter().toLowerCase().contains(text.toLowerCase()) || item.getQText().contains(text.toLowerCase())
-            || item.getAnsText().contains(text.toLowerCase())){
+            if (/*item.getTeacher().toLowerCase().contains(text.toLowerCase())||*/item.getSubject().toLowerCase().contains(text.toLowerCase()) || item.getChapter().toLowerCase().contains(text.toLowerCase()) || item.getQText().toLowerCase().contains(text.toLowerCase())
+            || item.getAnsText().toLowerCase().contains(text.toLowerCase())){
 
                 filteredList.add(item);
                 homeDoubtAdapter.filteredList(filteredList);

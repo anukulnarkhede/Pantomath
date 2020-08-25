@@ -54,6 +54,8 @@
             android:textColor="#121212"
             android:textSize="14sp"
 
+            app:layout_constraintEnd_toStartOf="@+id/SubjectTag_Notification"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/profilePicStu"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="HardcodedText" />

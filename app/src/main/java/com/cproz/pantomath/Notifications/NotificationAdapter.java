@@ -64,10 +64,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationViewHo
 
         holder.NewQuestionTextNotifications.setText(DoubtList.get(position).getTeacher()+"\nhas solved your doubt.");
 
-        if (DoubtList.get(position).getProfileImageURL().equals("")){
+        if (DoubtList.get(position).getTeacherImageUrl().equals("")){
             holder.profileImage.setImageResource(R.drawable.personal_info);
         }else
-        if (!DoubtList.get(position).getProfileImageURL().equals("")){
+        {
             Picasso.get().load(DoubtList.get(position).getTeacherImageUrl()).into(holder.profileImage);
         }
 

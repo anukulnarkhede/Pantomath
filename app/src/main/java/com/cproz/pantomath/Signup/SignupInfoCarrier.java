@@ -1,11 +1,15 @@
 package com.cproz.pantomath.Signup;
 
 
+import java.util.Date;
+
 public class SignupInfoCarrier {
 
     public String Name, Email, Number, Address, User, Board, Class, uid, profileURL;
+    public Date SignupTime;
 
-    public SignupInfoCarrier(String name, String email, String number, String address, String user, String Board, String Class, String uid, String profileURL) {
+    public SignupInfoCarrier(String name, String email, String number, String address, String user, String Board, String Class, String uid, String profileURL
+            , Date SignupTime) {
         this.Name = name;
         this.Email = email;
         this.Number = number;
@@ -15,6 +19,7 @@ public class SignupInfoCarrier {
         this.User = user;
         this.uid = uid;
         this.profileURL = profileURL;
+        this.SignupTime = SignupTime;
 
     }
 
