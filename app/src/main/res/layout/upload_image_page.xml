@@ -9,13 +9,74 @@
     android:background="#fff"
     >
 
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constFullscreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="12dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/FullScreenBgButt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#87000000"
+            android:orientation="horizontal" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginHorizontal="16dp"
+            android:elevation="4dp"
+            app:cardBackgroundColor="#fff"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/FullScreenBgButt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="34dp"
+                    android:contentDescription="123"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/doubt_uploaded"
+                    tools:ignore="HardcodedText" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
     <Button
         android:elevation="4dp"
         android:id="@+id/ConfirmDoubtUpload"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginHorizontal="16dp"
-        android:background="@drawable/confirm_doubt"
+        android:background="@drawable/subject_button_bg_phy_selector"
 
         android:stateListAnimator="@null"
         android:layout_marginBottom="16dp"
@@ -125,27 +186,29 @@
 
                 <com.jackandphantom.circularimageview.RoundedImage
                     android:id="@+id/DoubtUploadImage1"
-                    android:layout_width="156dp"
+                    android:layout_width="0dp"
                     android:layout_height="190dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/image_view_bg"
-                    app:layout_constraintEnd_toStartOf="@+id/DoubtUploadImage2"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/SubjectTagUpload"
                     app:rounded_radius="20" />
 
                 <com.jackandphantom.circularimageview.RoundedImage
                     android:id="@+id/DoubtUploadImage2"
-                    android:layout_width="156dp"
+                    android:layout_width="0dp"
                     android:layout_height="190dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
+                    android:layout_marginStart="8dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/image_view_bg"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
                     app:layout_constraintTop_toBottomOf="@+id/SubjectTagUpload"
                     app:rounded_radius="20" />
 
@@ -214,6 +277,15 @@
                     app:layout_constraintStart_toStartOf="@+id/DoubtUploadImage2"
                     app:layout_constraintTop_toTopOf="@+id/DoubtUploadImage2"
                     tools:ignore="HardcodedText" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintGuide_percent="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

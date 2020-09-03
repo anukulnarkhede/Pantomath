@@ -177,159 +177,7 @@ public class StudentProfile extends AppCompatActivity {
             }
         });
 
-        /*Algebra.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DoubtList1.clear();
-                LoadDataFromFirebaseSubFilter("Algebra");
-                Algebra.setEnabled(false);
-                AllSubject.setEnabled(false);
-                Geometry.setEnabled(false);
-                Physics.setEnabled(false);
-                Chemistry.setEnabled(false);
-                Biology.setEnabled(false);
-                History.setEnabled(false);
-                Geography.setEnabled(false);
-                Languages.setEnabled(false);
-            }
-        });
 
-        AllSubject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DoubtList1.clear();
-                LoadDataFromFirebase();
-                Algebra.setEnabled(false);
-                AllSubject.setEnabled(false);
-                Geometry.setEnabled(false);
-                Physics.setEnabled(false);
-                Chemistry.setEnabled(false);
-                Biology.setEnabled(false);
-                History.setEnabled(false);
-                Geography.setEnabled(false);
-                Languages.setEnabled(false);
-            }
-        });
-
-        Geometry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DoubtList1.clear();
-                LoadDataFromFirebaseSubFilter("Geometry");
-                Algebra.setEnabled(false);
-                AllSubject.setEnabled(false);
-                Geometry.setEnabled(false);
-                Physics.setEnabled(false);
-                Chemistry.setEnabled(false);
-                Biology.setEnabled(false);
-                History.setEnabled(false);
-                Geography.setEnabled(false);
-                Languages.setEnabled(false);
-            }
-        });
-
-        Physics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DoubtList1.clear();
-                LoadDataFromFirebaseSubFilter("Physics");
-                Algebra.setEnabled(false);
-                AllSubject.setEnabled(false);
-                Geometry.setEnabled(false);
-                Physics.setEnabled(false);
-                Chemistry.setEnabled(false);
-                Biology.setEnabled(false);
-                History.setEnabled(false);
-                Geography.setEnabled(false);
-                Languages.setEnabled(false);
-            }
-        });
-
-        Chemistry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DoubtList1.clear();
-                LoadDataFromFirebaseSubFilter("Chemistry");
-                Algebra.setEnabled(false);
-                AllSubject.setEnabled(false);
-                Geometry.setEnabled(false);
-                Physics.setEnabled(false);
-                Chemistry.setEnabled(false);
-                Biology.setEnabled(false);
-                History.setEnabled(false);
-                Geography.setEnabled(false);
-                Languages.setEnabled(false);
-            }
-        });
-
-        Biology.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DoubtList1.clear();
-                LoadDataFromFirebaseSubFilter("Biology");
-                Algebra.setEnabled(false);
-                AllSubject.setEnabled(false);
-                Geometry.setEnabled(false);
-                Physics.setEnabled(false);
-                Chemistry.setEnabled(false);
-                Biology.setEnabled(false);
-                History.setEnabled(false);
-                Geography.setEnabled(false);
-                Languages.setEnabled(false);
-            }
-        });
-
-        History.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DoubtList1.clear();
-                LoadDataFromFirebaseSubFilter("History");
-                Algebra.setEnabled(false);
-                AllSubject.setEnabled(false);
-                Geometry.setEnabled(false);
-                Physics.setEnabled(false);
-                Chemistry.setEnabled(false);
-                Biology.setEnabled(false);
-                History.setEnabled(false);
-                Geography.setEnabled(false);
-                Languages.setEnabled(false);
-            }
-        });
-
-
-        Geography.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DoubtList1.clear();
-                LoadDataFromFirebaseSubFilter("Geography");
-                Algebra.setEnabled(false);
-                AllSubject.setEnabled(false);
-                Geometry.setEnabled(false);
-                Physics.setEnabled(false);
-                Chemistry.setEnabled(false);
-                Biology.setEnabled(false);
-                History.setEnabled(false);
-                Geography.setEnabled(false);
-                Languages.setEnabled(false);
-            }
-        });
-
-        Languages.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DoubtList1.clear();
-                LoadDataFromFirebaseSubFilter("Languages");
-                Algebra.setEnabled(false);
-                AllSubject.setEnabled(false);
-                Geometry.setEnabled(false);
-                Physics.setEnabled(false);
-                Chemistry.setEnabled(false);
-                Biology.setEnabled(false);
-                History.setEnabled(false);
-                Geography.setEnabled(false);
-                Languages.setEnabled(false);
-            }
-        });*/
 
         ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -445,7 +293,9 @@ public class StudentProfile extends AppCompatActivity {
 
     private void LoadDataFromFirebase(){
         DoubtList1.clear();
-        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS).whereEqualTo("Email", email).orderBy("DateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS)
+                .whereEqualTo("Email", email).orderBy("DateTime", Query.Direction.DESCENDING).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
@@ -462,16 +312,37 @@ public class StudentProfile extends AppCompatActivity {
 
 
 
+                    if (!querySnapshot.getString("Status").equals("Reported")){
+                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
+                                querySnapshot.getString("AnsPhotoUrl2"),
+                                querySnapshot.getString("AnsText"),
+                                querySnapshot.getString("AudioUrl"),
+                                querySnapshot.getString("Board"),
+                                querySnapshot.getString("Chapter"),
+                                querySnapshot.getString("Email"),
+                                querySnapshot.getString("FileUrl"),
+                                querySnapshot.getString("Link"),
+                                querySnapshot.getString("Name"),
+                                querySnapshot.getString("Photo1url"),
+                                querySnapshot.getString("Photo2url"),
+                                querySnapshot.getString("ProfileImageURL"),
+                                querySnapshot.getString("QText"),
+                                querySnapshot.getString("STD"),
+                                querySnapshot.getString("Status"),
+                                querySnapshot.getString("Subject"),
+                                querySnapshot.getString("Teacher"),
+                                querySnapshot.getString("Uid")
+                                , querySnapshot.getDate("DateTime"),
+                                querySnapshot.getString("TeacherImageUrl"),
+                                querySnapshot.getDate("QuestionDate"));
 
-                    homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
-                            querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
-                            querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
-                            querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
-                            querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
-                            querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"),"", querySnapshot.getDate("QuestionDate"));
+                        DoubtList1.add(homeDoubtData);
 
-                    DoubtList1.add(homeDoubtData);
+
+
+                    }
+
+
 
                     //HomeStuDoubtCardAdapter homeStuDoubtCardAdapter = new HomeStuDoubtCardAdapter(getContext(), DoubtList1);
 
@@ -506,7 +377,9 @@ public class StudentProfile extends AppCompatActivity {
 
     private void LoadDataFromFirebaseNoOFUnsolved(){
         DoubtList1.clear();
-        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS).whereEqualTo("Email", email).whereEqualTo("Status", "Unsolved").orderBy("DateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS)
+                .whereEqualTo("Email", email).whereEqualTo("Status", "Unsolved").orderBy("DateTime", Query.Direction.DESCENDING)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
@@ -526,16 +399,32 @@ public class StudentProfile extends AppCompatActivity {
 
 
 
-                    homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
-                            querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
-                            querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
-                            querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
-                            querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
-                            querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"),"", querySnapshot.getDate("QuestionDate"));
+                    if (querySnapshot.getString("Status") != "Reported"){
+                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
+                                querySnapshot.getString("AnsPhotoUrl2"),
+                                querySnapshot.getString("AnsText"),
+                                querySnapshot.getString("AudioUrl"),
+                                querySnapshot.getString("Board"),
+                                querySnapshot.getString("Chapter"),
+                                querySnapshot.getString("Email"),
+                                querySnapshot.getString("FileUrl"),
+                                querySnapshot.getString("Link"),
+                                querySnapshot.getString("Name"),
+                                querySnapshot.getString("Photo1url"),
+                                querySnapshot.getString("Photo2url"),
+                                querySnapshot.getString("ProfileImageURL"),
+                                querySnapshot.getString("QText"),
+                                querySnapshot.getString("STD"),
+                                querySnapshot.getString("Status"),
+                                querySnapshot.getString("Subject"),
+                                querySnapshot.getString("Teacher"),
+                                querySnapshot.getString("Uid")
+                                , querySnapshot.getDate("DateTime"),
+                                querySnapshot.getString("TeacherImageUrl"),
+                                querySnapshot.getDate("QuestionDate"));
 
-                    DoubtList2.add(homeDoubtData);
-
+                        DoubtList1.add(homeDoubtData);
+                    }
 
 
 
@@ -567,7 +456,10 @@ public class StudentProfile extends AppCompatActivity {
 
     private void LoadDataFromFirebaseNoSolved(){
         DoubtList1.clear();
-        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS).whereEqualTo("Email", email).whereEqualTo("Status", "Solved").orderBy("DateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD)
+                .whereEqualTo("STD",HomeFragment.CLASS).whereEqualTo("Email", email)
+                .whereEqualTo("Status", "Solved").orderBy("DateTime", Query.Direction.DESCENDING)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
@@ -587,15 +479,32 @@ public class StudentProfile extends AppCompatActivity {
 
 
 
-                    homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
-                            querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
-                            querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
-                            querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
-                            querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
-                            querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"),"", querySnapshot.getDate("QuestionDate"));
+                    if (querySnapshot.getString("Status") != "Reported"){
+                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
+                                querySnapshot.getString("AnsPhotoUrl2"),
+                                querySnapshot.getString("AnsText"),
+                                querySnapshot.getString("AudioUrl"),
+                                querySnapshot.getString("Board"),
+                                querySnapshot.getString("Chapter"),
+                                querySnapshot.getString("Email"),
+                                querySnapshot.getString("FileUrl"),
+                                querySnapshot.getString("Link"),
+                                querySnapshot.getString("Name"),
+                                querySnapshot.getString("Photo1url"),
+                                querySnapshot.getString("Photo2url"),
+                                querySnapshot.getString("ProfileImageURL"),
+                                querySnapshot.getString("QText"),
+                                querySnapshot.getString("STD"),
+                                querySnapshot.getString("Status"),
+                                querySnapshot.getString("Subject"),
+                                querySnapshot.getString("Teacher"),
+                                querySnapshot.getString("Uid")
+                                , querySnapshot.getDate("DateTime"),
+                                querySnapshot.getString("TeacherImageUrl"),
+                                querySnapshot.getDate("QuestionDate"));
 
-                    DoubtList3.add(homeDoubtData);
+                        DoubtList1.add(homeDoubtData);
+                    }
 
 
 
@@ -626,7 +535,9 @@ public class StudentProfile extends AppCompatActivity {
 
     private void LoadDataFromFirebaseSubFilter(String Subjectx){
         DoubtList1.clear();
-        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD", HomeFragment.CLASS).whereEqualTo("Email", email).whereEqualTo("Subject", Subjectx).orderBy("DateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD", HomeFragment.CLASS)
+                .whereEqualTo("Email", email).whereEqualTo("Subject", Subjectx).orderBy("DateTime", Query.Direction.DESCENDING)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
@@ -642,15 +553,32 @@ public class StudentProfile extends AppCompatActivity {
 
 
 
-                    homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
-                            querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
-                            querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
-                            querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
-                            querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
-                            querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"),"",querySnapshot.getDate("QuestionDate"));
+                    if (!querySnapshot.getString("Status").equals("Reported")){
+                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
+                                querySnapshot.getString("AnsPhotoUrl2"),
+                                querySnapshot.getString("AnsText"),
+                                querySnapshot.getString("AudioUrl"),
+                                querySnapshot.getString("Board"),
+                                querySnapshot.getString("Chapter"),
+                                querySnapshot.getString("Email"),
+                                querySnapshot.getString("FileUrl"),
+                                querySnapshot.getString("Link"),
+                                querySnapshot.getString("Name"),
+                                querySnapshot.getString("Photo1url"),
+                                querySnapshot.getString("Photo2url"),
+                                querySnapshot.getString("ProfileImageURL"),
+                                querySnapshot.getString("QText"),
+                                querySnapshot.getString("STD"),
+                                querySnapshot.getString("Status"),
+                                querySnapshot.getString("Subject"),
+                                querySnapshot.getString("Teacher"),
+                                querySnapshot.getString("Uid")
+                                , querySnapshot.getDate("DateTime"),
+                                querySnapshot.getString("TeacherImageUrl"),
+                                querySnapshot.getDate("QuestionDate"));
 
-                    DoubtList1.add(homeDoubtData);
+                        DoubtList1.add(homeDoubtData);
+                    }
 
                     //HomeStuDoubtCardAdapter homeStuDoubtCardAdapter = new HomeStuDoubtCardAdapter(getContext(), DoubtList1);
 
@@ -819,7 +747,9 @@ public class StudentProfile extends AppCompatActivity {
                     public void onSuccess(Uri uri) {
                         String ProfileURL = uri.toString();
 
-                        firebaseFirestore.collection("Users/Students/StudentsInfo/"  ).document( email).update("profileURL", ProfileURL).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        firebaseFirestore.collection("Users/Students/StudentsInfo/"  )
+                                .document( email).update("profileURL", ProfileURL)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
 

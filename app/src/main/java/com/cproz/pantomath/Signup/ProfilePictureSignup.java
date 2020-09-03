@@ -116,7 +116,7 @@ public class ProfilePictureSignup extends AppCompatActivity {
 
                         final String userId = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getEmail();
                         SignupInfoCarrier signupInfoCarrier = new SignupInfoCarrier(
-                                toTitleCase(NewAccount.NAME), NewAccount.EMAIL, "","","Student","","", userId, ""
+                                toTitleCase(NewAccount.NAME), NewAccount.EMAIL, "","","Not Verified","","", userId, ""
                                 ,SignupTime
                         );
 
@@ -228,7 +228,7 @@ public class ProfilePictureSignup extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     String ProfileURL = uri.toString();
                                     SignupInfoCarrier signupInfoCarrier = new SignupInfoCarrier(
-                                            toTitleCase(NewAccount.NAME), NewAccount.EMAIL, "","","Student","","", userId, ProfileURL
+                                            toTitleCase(NewAccount.NAME), NewAccount.EMAIL, "","","Not Verified","","", userId, ProfileURL
                                     , SignupTime
                                     );
                                     firebaseFirestore.document("Users/Students/StudentsInfo/" + userId ).set(signupInfoCarrier).addOnCompleteListener(new OnCompleteListener<Void>() {

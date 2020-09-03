@@ -79,6 +79,7 @@ public class NotificationsFragments extends Fragment {
                     public void onRefresh() {
 
 
+                        swipeRefreshLayout.setEnabled(false);
                         DoubtList1.clear();
                         LoadNotifications();
 
@@ -108,30 +109,34 @@ public class NotificationsFragments extends Fragment {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
-                    homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
-                            querySnapshot.getString("AnsPhotoUrl2"),
-                            querySnapshot.getString("AnsText"),
-                            querySnapshot.getString("AudioUrl"),
-                            querySnapshot.getString("Board"),
-                            querySnapshot.getString("Chapter"),
-                            querySnapshot.getString("Email"),
-                            querySnapshot.getString("FileUrl"),
-                            querySnapshot.getString("Link"),
-                            querySnapshot.getString("Name"),
-                            querySnapshot.getString("Photo1url"),
-                            querySnapshot.getString("Photo2url"),
-                            querySnapshot.getString("ProfileImageURL"),
-                            querySnapshot.getString("QText"),
-                            querySnapshot.getString("STD"),
-                            querySnapshot.getString("Status"),
-                            querySnapshot.getString("Subject"),
-                            querySnapshot.getString("Teacher"),
-                            querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"),
-                            "",
-                            querySnapshot.getDate("QuestionDate"));
 
-                    DoubtList1.add(homeDoubtData);
+                    if (!querySnapshot.getString("Status").equals("Reported")){
+                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
+                                querySnapshot.getString("AnsPhotoUrl2"),
+                                querySnapshot.getString("AnsText"),
+                                querySnapshot.getString("AudioUrl"),
+                                querySnapshot.getString("Board"),
+                                querySnapshot.getString("Chapter"),
+                                querySnapshot.getString("Email"),
+                                querySnapshot.getString("FileUrl"),
+                                querySnapshot.getString("Link"),
+                                querySnapshot.getString("Name"),
+                                querySnapshot.getString("Photo1url"),
+                                querySnapshot.getString("Photo2url"),
+                                querySnapshot.getString("ProfileImageURL"),
+                                querySnapshot.getString("QText"),
+                                querySnapshot.getString("STD"),
+                                querySnapshot.getString("Status"),
+                                querySnapshot.getString("Subject"),
+                                querySnapshot.getString("Teacher"),
+                                querySnapshot.getString("Uid")
+                                , querySnapshot.getDate("DateTime"),
+                                "",
+                                querySnapshot.getDate("QuestionDate"));
+
+                        DoubtList1.add(homeDoubtData);
+                    }
+
 
                     NotificationAdapter notificationAdapter = new NotificationAdapter(getContext(),DoubtList1);
                     recyclerView.setItemViewCacheSize(40);
@@ -140,6 +145,7 @@ public class NotificationsFragments extends Fragment {
 
 
                 }
+                swipeRefreshLayout.setEnabled(true);
             }
         });
 

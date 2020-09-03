@@ -5,7 +5,10 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -53,6 +56,7 @@ public class Login extends AppCompatActivity {
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,7 +121,13 @@ public class Login extends AppCompatActivity {
 
 
 
+        ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        assert connectivityManager != null;
+        Network networkInfo = connectivityManager.getActiveNetwork();
+        if (networkInfo == null){
+            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
@@ -211,6 +221,7 @@ public class Login extends AppCompatActivity {
 
 
         firebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
@@ -223,7 +234,19 @@ public class Login extends AppCompatActivity {
                 else{
                     Login.setEnabled(true);
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(Login.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();//toast for invalid entries;;
+                    //Toast.makeText(Login.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();//toast for invalid entries;;
+                    ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                    assert connectivityManager != null;
+                    Network networkInfo = connectivityManager.getActiveNetwork();
+                    if (networkInfo == null){
+                        Toast.makeText(Login.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(Login.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();//toast for invalid entries;;
+                    }
+
+
+
                 }
             }
         });//login_Student_auth function end

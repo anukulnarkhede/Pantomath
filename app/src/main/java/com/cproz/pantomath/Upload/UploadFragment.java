@@ -237,6 +237,30 @@ public class UploadFragment extends Fragment {
                                 View.VISIBLE, View.VISIBLE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
 
                     }
+                }//algebra
+                else if (StudentBoard.equals("ICSE")){
+                    if (StudentClass == null){
+                        System.out.println("Class does not exist");
+                    }
+                    else if (StudentClass.equals("9th")){
+
+                        chapterFilters(root,"Pure Arithmetic","Commercial Mathematics","Expansion","Factorisation",
+                                "Simultaneous linear equation in 2 variable","Indices and Exponents","Statistics","h","i","j",
+                                "k","l"
+                                ,View.VISIBLE , View.VISIBLE , View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                                View.VISIBLE, View.VISIBLE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
+
+                    }
+                    else if (StudentClass.equals("10th")){
+
+
+                        chapterFilters(root,"Compound Interest","Sales Tax & Value Added Tax","Banking","Shares & Dividends",
+                                "Linear in Equations","Quadratic Equation","Reflection","Ration & Proportion","Factorisation","Matrices",
+                                "Co-ordinate Geometry","Probability"
+                                ,View.VISIBLE , View.VISIBLE , View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                                View.VISIBLE, View.VISIBLE, View.VISIBLE, View.VISIBLE, View.VISIBLE, View.VISIBLE,View.VISIBLE);
+
+                    }
                 }
 
             }
@@ -299,7 +323,31 @@ public class UploadFragment extends Fragment {
                                 View.VISIBLE, View.VISIBLE, View.VISIBLE, View.GONE, View.GONE, View.GONE,View.GONE);
 
                     }
+                }//Geometry
+                else if (StudentBoard.equals("ICSE")){
+                    if (StudentClass == null){
+                        System.out.println("Class does not exist");
+                    }
+                    else if (StudentClass.equals("9th")){
+
+                        chapterFilters(root,"Triangles","Rectilinear Figures","Circle","Mensuration",
+                                "Trigonometry","Coordinate Geometry","c","c","c","c",
+                                "k","l"
+                                ,View.VISIBLE , View.VISIBLE , View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                                View.VISIBLE, View.GONE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
+
+                    }
+                    else if (StudentClass.equals("10th")){
+
+                        chapterFilters(root,"Symmetry","Similarity","Loci","Circles",
+                                "Construction","Mensuration","Trigonometry","Statistics","i","j",
+                                "k","l"
+                                ,View.VISIBLE , View.VISIBLE , View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                                View.VISIBLE, View.VISIBLE, View.VISIBLE, View.GONE, View.GONE, View.GONE,View.GONE);
+
+                    }
                 }
+
 
             }
         });
@@ -362,7 +410,31 @@ public class UploadFragment extends Fragment {
                                 ,View.VISIBLE, View.VISIBLE,View.VISIBLE, View.VISIBLE, View.GONE,
                                 View.GONE, View.GONE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
 
+                    }//Physics
+                }
+                else if (StudentBoard.equals("ICSE")){
+                    if (StudentClass == null){
+                        System.out.println("Class does not exist");
                     }
+                    else if (StudentClass.equals("9th")){
+
+                        chapterFilters(root,"Measurement & Experimentation","Motion in One Direction","Laws of Motion","Fluids",
+                                "Heat & Energy","Light","Sound","Electricity & Magnetism","i","j",
+                                "k","l"
+                                ,View.VISIBLE, View.VISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                                View.VISIBLE, View.VISIBLE, View.VISIBLE, View.GONE, View.GONE, View.GONE,View.GONE);
+
+                    }
+                    else if (StudentClass.equals("10th")){
+
+
+                        chapterFilters(root,"Force, Work, Power & Energy","Light","Sound","Electricity & Magnetism",
+                                "Heat","Modern Physics","x","h","i","j",
+                                "k","l"
+                                ,View.VISIBLE, View.VISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                                View.VISIBLE, View.GONE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
+
+                    }//Physics
                 }
 
             }
@@ -426,6 +498,29 @@ public class UploadFragment extends Fragment {
                                 "k","l"
                                 ,View.VISIBLE, View.VISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
                                 View.GONE, View.GONE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
+
+                    }
+                }//Chemistry
+                else if (StudentBoard.equals("ICSE")){
+                    if (StudentClass == null){
+                        System.out.println("Class does not exist");
+                    }
+                    else if (StudentClass.equals("9th")){
+
+                        chapterFilters(root,"The Language of Chemistry","Chemical Changes and Reactions","Water","Atomic Structure and Chemical Bonding",
+                                "The Periodic Table","Study of First element - Hydrogen","Study of Gas Laws","h","i","j",
+                                "k","l"
+                                ,View.VISIBLE, View.VISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                                View.VISIBLE, View.VISIBLE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
+
+                    }
+                    else if (StudentClass.equals("10th")){
+
+                        chapterFilters(root,"Periodic Properties and Variation of Properties- Physical & Chemical","Chemical Bonding","Student of Acids, Bases & Salts","Analytical Chemistry",
+                                "Mole Concept and Stoichiometry","Electrolysis","Metallurgy","Study of Compounds","Organic Chemistry","j",
+                                "k","l"
+                                ,View.VISIBLE, View.VISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                                View.VISIBLE, View.VISIBLE, View.VISIBLE, View.VISIBLE, View.GONE, View.GONE,View.GONE);
 
                     }
                 }
@@ -494,6 +589,30 @@ public class UploadFragment extends Fragment {
                                 View.VISIBLE, View.VISIBLE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
 
                     }
+                }//Biology
+                else if (StudentBoard.equals("ICSE")){
+                    if (StudentClass == null){
+                        System.out.println("Class does not exist");
+                    }
+                    else if (StudentClass.equals("9th")){
+
+                        chapterFilters(root,"Basic Biology","Flowering Plants","Plants Physiology","Diversity in Living Organisms",
+                                "Human Anatomy and Physiology","x","x","x","x","x",
+                                "k","l"
+                                ,View.VISIBLE, View.VISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                                View.GONE, View.GONE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
+
+                    }
+                    else if (StudentClass.equals("10th")){
+
+
+                        chapterFilters(root,"Basic Biology","Plants Physiology","Human Anatomy and Physiology","x",
+                                "x","x","x","x","x","x",
+                                "k","l"
+                                ,View.VISIBLE, View.VISIBLE,View.VISIBLE, View.GONE, View.GONE,
+                                View.GONE, View.GONE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
+
+                    }
                 }
 
             }
@@ -560,6 +679,34 @@ public class UploadFragment extends Fragment {
 
                     }
                 }
+                //History
+                else if (StudentBoard.equals("ICSE")){
+                    if (StudentClass == null){
+                        System.out.println("Class does not exist");
+                    }
+                    else if (StudentClass.equals("9th")){
+
+
+                        chapterFilters(root,"The Harappan Civilization","The Vedic Period","Jainism and Buddhism","The Sangam Age",
+                                "The Age of The Guptas","Medieval Indian","The Modern Age in Europe","Our Constitution","Election","Local Self Government",
+                                "k","l"
+                                ,View.VISIBLE, View.VISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                                View.VISIBLE, View.VISIBLE, View.VISIBLE, View.VISIBLE, View.VISIBLE, View.GONE,View.GONE);
+
+
+                    }
+                    else if (StudentClass.equals("10th")){
+
+
+                        chapterFilters(root,"The Indian National Movement","Mass Phase of The National Movement","The Contemporary World","The Union Legislature",
+                                "The Union Executive","The Judiciary","x","x","x","D",
+                                "k","l"
+                                ,View.VISIBLE, View.VISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                                View.VISIBLE, View.GONE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
+
+                    }
+                }
+
 
             }
         });
@@ -625,6 +772,33 @@ public class UploadFragment extends Fragment {
                                 View.GONE, View.GONE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
 
                     }
+                }//Geography
+                else if (StudentBoard.equals("ICSE")){
+                    if (StudentClass == null){
+                        System.out.println("Class does not exist");
+                    }
+                    else if (StudentClass.equals("9th")){
+
+
+                        chapterFilters(root,"Our World","Structure of Earth","Hydrosphere","Atmosphere",
+                                "Pollution","Natural Region of The World","Map Work","Introduction to Economics","Types of Economics",
+                                "The Indian Economy : A Study",
+                                "k","l"
+                                ,View.VISIBLE, View.VISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                                View.VISIBLE, View.GONE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
+
+
+                    }
+                    else if (StudentClass.equals("10th")){
+
+                        chapterFilters(root,"Maps Works","Location, Extent & Physical Features Climate","Climate","Soil Resources",
+                                "Natural Vegetation","Water Resources","Mineral and Energy Resources","Agriculture","Manufacturing Industries",
+                                "Transport",
+                                "Waste Management","Economics"
+                                ,View.VISIBLE, View.VISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                                View.VISIBLE, View.VISIBLE, View.VISIBLE, View.VISIBLE, View.VISIBLE, View.VISIBLE,View.VISIBLE);
+
+                    }
                 }
 
             }
@@ -635,14 +809,11 @@ public class UploadFragment extends Fragment {
         languagesFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SUBJECT = "Languages";
+
                 DoubtList1.clear();
                 loadDataFromFirebaseSubject();
-                chapterFilters(root,"English","Hindi","Marathi","a",
-                        "x","s","w","w","w","D",
-                        "k","l"
-                        ,View.VISIBLE, View.VISIBLE,View.VISIBLE, View.GONE, View.GONE,
-                        View.GONE, View.GONE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
+                chapterFiltersForLanguages(root, "English", "Hindi", "Marathi", "Sanskrit", "French",View.VISIBLE,View.VISIBLE,View.VISIBLE
+                ,View.VISIBLE,View.VISIBLE);
             }
         });
 
@@ -670,7 +841,7 @@ public class UploadFragment extends Fragment {
         layoutInflat(R.layout.chapter_buttons);
 
 
-        selectSubject.setText("< Back to Subjects");
+        selectSubject.setText("< Select Chapter");
         selectSubject.setTextColor(Color.parseColor("#121212"));
         selectSubject.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -864,6 +1035,147 @@ public class UploadFragment extends Fragment {
 
 
 
+
+
+
+
+
+    @SuppressLint("SetTextI18n")
+    public void chapterFiltersForLanguages(final View root, final String chapter1, final String chapter2, final String chapter3, final String chapter4, final String chapter5, int chap1Visiblity, int chap2Visiblity, int chap3Visiblity, int chap4Visiblity, int chap5Visiblity){
+
+
+        layoutInflat(R.layout.chapter_buttons);
+
+
+        selectSubject.setText("< Back");
+        selectSubject.setTextColor(Color.parseColor("#121212"));
+        selectSubject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CHAPTER = null;
+                DoubtList1.clear();
+                loadDataFromFirebase();
+
+
+                selectSubject.setTextColor(Color.parseColor("#121212"));
+                subjectFilter(root);
+            }
+        });
+
+        Button Chapter1, Chapter2, Chapter3, Chapter4, Chapter5,Chapter6, Chapter7, Chapter8, Chapter9, Chapter10, Chapter11, Chapter12;
+
+        Chapter1 = root.findViewById(R.id.chapter1);
+        Chapter2 = root.findViewById(R.id.chapter2);
+        Chapter3 = root.findViewById(R.id.chapter3);
+        Chapter4 = root.findViewById(R.id.chapter4);
+        Chapter5 = root.findViewById(R.id.chapter5);
+        Chapter6 = root.findViewById(R.id.chapter6);
+        Chapter7 = root.findViewById(R.id.chapter7);
+        Chapter8 = root.findViewById(R.id.chapter8);
+        Chapter9 = root.findViewById(R.id.chapter9);
+        Chapter10 = root.findViewById(R.id.chapter10);
+        Chapter11 = root.findViewById(R.id.chapter11);
+        Chapter12 = root.findViewById(R.id.chapter12);
+
+
+        Chapter1.setText(chapter1);
+        Chapter1.setVisibility(chap1Visiblity);
+
+        Chapter2.setText(chapter2);
+        Chapter2.setVisibility(chap2Visiblity);
+
+        Chapter3.setText(chapter3);
+        Chapter3.setVisibility(chap3Visiblity);
+
+        Chapter4.setText(chapter4);
+        Chapter4.setVisibility(chap4Visiblity);
+
+        Chapter5.setText(chapter5);
+        Chapter5.setVisibility(chap5Visiblity);
+
+
+        Chapter6.setVisibility(View.GONE);
+        Chapter7.setVisibility(View.GONE);
+        Chapter8.setVisibility(View.GONE);
+        Chapter9.setVisibility(View.GONE);
+        Chapter10.setVisibility(View.GONE);
+        Chapter11.setVisibility(View.GONE);
+        Chapter12.setVisibility(View.GONE);
+
+
+
+
+        Chapter1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SUBJECT = chapter1;
+
+                startActivity(new Intent(getContext(), UploadImagePage.class));
+
+
+            }
+        });
+
+        Chapter2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SUBJECT = chapter2;
+
+                startActivity(new Intent(getContext(), UploadImagePage.class));
+
+            }
+        });
+
+        Chapter3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SUBJECT = chapter3;
+
+                startActivity(new Intent(getContext(), UploadImagePage.class));
+
+            }
+        });
+
+        Chapter4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SUBJECT = chapter4;
+
+                startActivity(new Intent(getContext(), UploadImagePage.class));
+
+            }
+        });
+
+        Chapter5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SUBJECT = chapter5;
+
+                startActivity(new Intent(getContext(), UploadImagePage.class));
+
+
+            }
+        });
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private void loadDataFromFirebase() {
         db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -880,17 +1192,20 @@ public class UploadFragment extends Fragment {
 
 
 
+                    if (Objects.equals(querySnapshot.getString("Status"), "Solved") || (querySnapshot.getString("Status").equals("Unsolved") && querySnapshot.getString("Email").equals(email))){
+                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                , querySnapshot.getDate("DateTime"),"", querySnapshot.getDate("QuestionDate"));
 
-                    homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
-                            querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
-                            querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
-                            querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
-                            querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
-                            querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"),"", querySnapshot.getDate("QuestionDate"));
+                        DoubtList1.add(homeDoubtData);
+                    }
 
-                    DoubtList1.add(homeDoubtData);
-                    Random random = new Random();
+
+                   // Random random = new Random();
 
 
 
@@ -939,16 +1254,20 @@ public class UploadFragment extends Fragment {
 
 
 
+                    if (Objects.equals(querySnapshot.getString("Status"), "Solved") || (querySnapshot.getString("Status").equals("Unsolved") && querySnapshot.getString("Email").equals(email))){
 
-                    homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
-                            querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
-                            querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
-                            querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
-                            querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
-                            querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"),"",querySnapshot.getDate("QuestionDate"));
+                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                , querySnapshot.getDate("DateTime"),"",querySnapshot.getDate("QuestionDate"));
 
-                    DoubtList1.add(homeDoubtData);
+                        DoubtList1.add(homeDoubtData);
+                    }
+
+
 
                     //HomeStuDoubtCardAdapter homeStuDoubtCardAdapter = new HomeStuDoubtCardAdapter(getContext(), DoubtList1);
 

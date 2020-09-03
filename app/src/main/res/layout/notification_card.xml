@@ -37,7 +37,6 @@
             android:textAllCaps="false"
             android:textColor="@color/blue"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/timeTextNotification"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/NewDoubtTextNotification"
             tools:ignore="HardcodedText" />
@@ -60,27 +59,12 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="HardcodedText" />
 
-        <TextView
-            android:id="@+id/timeTextNotification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="sans-serif"
-            android:text="2 min ago"
-            android:textColor="#999999"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/profilePicStu"
-            app:layout_constraintTop_toBottomOf="@+id/NewDoubtTextNotification"
-            tools:ignore="HardcodedText"
-            tools:layout_editor_absoluteX="16dp" />
-
         <com.jackandphantom.circularimageview.CircleImage
             android:id="@+id/profilePicStu"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginStart="16dp"
             android:src="@drawable/personal_info"
-            app:layout_constraintBottom_toBottomOf="@+id/timeTextNotification"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/NewDoubtTextNotification" />
 

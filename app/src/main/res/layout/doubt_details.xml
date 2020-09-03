@@ -67,8 +67,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ProfilePictureDoubtsDetails"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:scaleType="centerCrop"
@@ -244,8 +244,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ProfilePictureTeacherDoubtsDetails"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:scaleType="centerCrop"
 
@@ -429,6 +429,9 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 
 

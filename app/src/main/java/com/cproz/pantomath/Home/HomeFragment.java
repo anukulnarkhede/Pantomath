@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.cproz.pantomath.BuildConfig;
 import com.cproz.pantomath.R;
 import com.cproz.pantomath.StudentProfile.StudentProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -45,6 +46,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -78,7 +81,7 @@ public class HomeFragment extends Fragment {
     CardView cardView;
 
 
-    @SuppressLint({"ResourceAsColor", "ClickableViewAccessibility"})
+    @SuppressLint({"ResourceAsColor", "ClickableViewAccessibility", "SetTextI18n"})
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -103,6 +106,11 @@ public class HomeFragment extends Fragment {
 
         Cross.setVisibility(View.GONE);
         noResults.setVisibility(View.GONE);
+
+
+//        SearchView.setText(BuildConfig.VERSION_CODE);
+
+
         /*SearchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,6 +138,12 @@ public class HomeFragment extends Fragment {
 
             }
         });*/
+
+
+
+
+
+
 
 
 
@@ -199,7 +213,7 @@ public class HomeFragment extends Fragment {
                         @Override
                         public void onRefresh() {
 
-
+                            swipeRefreshLayout.setEnabled(false);
                             DoubtList2.clear();
                             DataFromFirestore();
 
@@ -317,20 +331,24 @@ public class HomeFragment extends Fragment {
                     });*/
 
 
+                    if ((Objects.equals(querySnapshot.getString("Status"), "Solved"))
+                            || ((Objects.equals(querySnapshot.getString("Status"), "Unsolved"))&& Objects.equals(querySnapshot.getString("Email"), email))){
+                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                , querySnapshot.getDate("DateTime"),querySnapshot.getString("TeacherImageUrl"),querySnapshot.getDate("QuestionDate"));
+
+                        DoubtList2.add(homeDoubtData);
+
+                    }
 
 
 
 
 
-                    homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
-                            querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
-                            querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
-                            querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
-                            querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
-                            querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"),"",querySnapshot.getDate("QuestionDate"));
-
-                    DoubtList2.add(homeDoubtData);
 
 
 
@@ -343,6 +361,7 @@ public class HomeFragment extends Fragment {
 
 
                 }
+                swipeRefreshLayout.setEnabled(true);
             }
         });
 

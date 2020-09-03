@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
+        android:gravity="start"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.545"
@@ -23,6 +23,7 @@
 
         <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/class9th"
+            android:layout_marginStart="16dp"
             android:button="@drawable/class_selector_9th"
             android:layout_width="wrap_content"
             android:layout_marginEnd="16dp"
@@ -37,19 +38,29 @@
     </RadioGroup>
 
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView120"
+
+        >
+
     <RadioGroup
         android:layout_marginTop="16dp"
         android:id="@+id/selectBoard"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView120">
+        android:gravity="start"
+        >
 
         <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/SSC"
+            android:layout_marginStart="16dp"
             android:button="@drawable/ssc_board_selector"
             android:layout_marginEnd="16dp"
             android:layout_width="wrap_content"
@@ -59,9 +70,19 @@
             android:id="@+id/CBSE"
             android:button="@drawable/cbse_board_selector"
             android:layout_width="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/ICSE"
+            android:layout_marginEnd="16dp"
+            android:button="@drawable/icse_selector"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </RadioGroup>
+    </HorizontalScrollView>
+
 
     <TextView
         android:id="@+id/textView12"
@@ -96,10 +117,10 @@
         android:id="@+id/createAcc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/login_butt"
+        android:background="@drawable/login_butt_selector"
         android:paddingHorizontal="16dp"
         android:layout_marginBottom="24dp"
-        android:text="Enter Pantomath"
+        android:text="Next"
         android:textAlignment="center"
         android:fontFamily="sans-serif-medium"
         android:textSize="16sp"

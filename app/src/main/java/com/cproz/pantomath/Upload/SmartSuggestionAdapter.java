@@ -186,12 +186,19 @@ public class SmartSuggestionAdapter extends RecyclerView.Adapter<SmartSuggestion
 
 
         }
-        Date dateTime = DoubtList.get(position).getDateTime();
+//        final Date dateTime = DoubtList.get(position).getDateTime();
+//
+//        assert dateTime != null;
+//        long mili = dateTime.getTime();
+//
+//        final String datex = DateUtils.getRelativeTimeSpanString(mili).toString();
 
+
+        Date dateTime = DoubtList.get(position).getQuestionDate();
         assert dateTime != null;
         long mili = dateTime.getTime();
+        final String QuestionDate = DateUtils.getRelativeTimeSpanString(mili).toString();
 
-        final String datex = DateUtils.getRelativeTimeSpanString(mili).toString();
 
 
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
@@ -207,7 +214,7 @@ public class SmartSuggestionAdapter extends RecyclerView.Adapter<SmartSuggestion
                 intent.putExtra("QuestionText", DoubtList.get(holder.getAdapterPosition()).getQText());
                 intent.putExtra("Board", DoubtList.get(holder.getAdapterPosition()).getBoard());
                 intent.putExtra("Chapter", DoubtList.get(holder.getAdapterPosition()).getChapter());
-                intent.putExtra("DateTime", datex);
+                intent.putExtra("DateTime", DoubtList.get(holder.getAdapterPosition()).getDateTime());
                 intent.putExtra("Email", DoubtList.get(holder.getAdapterPosition()).getEmailHome());
                 intent.putExtra("FileUrl", DoubtList.get(holder.getAdapterPosition()).getFileUrl());
                 intent.putExtra("Link", DoubtList.get(holder.getAdapterPosition()).getLink());
@@ -218,7 +225,7 @@ public class SmartSuggestionAdapter extends RecyclerView.Adapter<SmartSuggestion
                 intent.putExtra("Subject", DoubtList.get(holder.getAdapterPosition()).getSubject());
                 intent.putExtra("Teacher", DoubtList.get(holder.getAdapterPosition()).getTeacher());
                 intent.putExtra("TeacherImage", DoubtList.get(holder.getAdapterPosition()).getTeacherImageUrl());
-
+                intent.putExtra("QuestionDate", QuestionDate);
                 mContext.startActivity(intent);
             }
         });

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.cproz.pantomath.NotVerified;
 import com.cproz.pantomath.R;
@@ -56,26 +57,9 @@ public class Home extends AppCompatActivity {
 
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-
-        assert firebaseUser != null;
-        if(firebaseUser.isEmailVerified()){
-
-            ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    if (Objects.equals(documentSnapshot.getString("Class"), "") || Objects.equals(documentSnapshot.getString("Board"), "")){
-                        startActivity(new Intent(Home.this, PackageSelection.class));
-                    }
-                    else {
-                        startActivity(new Intent(Home.this, Home.class));
-                    }
-                }
-            });
+        final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
 
-
-        }
 
         ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -83,18 +67,65 @@ public class Home extends AppCompatActivity {
 
             User = documentSnapshot.getString("User");
 
-                assert User != null;
-                if (User.equals("Not Verified")){
-                    Intent intent = new Intent(Home.this, NotVerified.class);
-                    intent.putExtra("UserStatus", "Not Verified");
-                    startActivity(intent);
-            }else if (User.equals("Verified")){
 
-                startActivity(new Intent(Home.this, Home.class));
-            }else if (User.equals("Blocked")){
-                    Intent intent = new Intent(Home.this, NotVerified.class);
-                    intent.putExtra("UserStatus", "Blocked");
-                    startActivity(intent);
+                assert User != null;
+                switch (User) {
+
+                    case "Active":
+
+                        startActivity(new Intent(Home.this, Home.class));
+                        assert firebaseUser != null;
+                        if(firebaseUser.isEmailVerified()){
+
+                            String Board = documentSnapshot.getString("Board");
+                            String Class = documentSnapshot.getString("Class");
+
+                            if (Objects.equals(Class, "") || Objects.equals(Board, "")){
+                                startActivity(new Intent(Home.this, PackageSelection.class));
+                            } else {
+                                startActivity(new Intent(Home.this, Home.class));
+                            }
+
+//                            ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                                @Override
+//                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+//
+//                                    String Board = documentSnapshot.getString("Board");
+//                                    String Class = documentSnapshot.getString("Class");
+//
+//                                    if (Objects.equals(Class, "") || Objects.equals(Board, "")){
+//                                        startActivity(new Intent(Home.this, PackageSelection.class));
+//                                    }
+//                                    else {
+//                                        startActivity(new Intent(Home.this, Home.class));
+//                                    }
+//                                }
+//                            });
+
+
+
+                        }
+                        break;
+                    case "Not Verified": {
+                        Intent intent = new Intent(Home.this, NotVerified.class);
+                        intent.putExtra("UserStatus", User);
+                        startActivity(intent);
+                        break;
+                    }
+                    case "Suspended": {
+                        Intent intent = new Intent(Home.this, NotVerified.class);
+                        intent.putExtra("UserStatus", User);
+                        startActivity(intent);
+                        break;
+                    }
+                    case "Deleted": {
+                        Intent intent = new Intent(Home.this, NotVerified.class);
+                        intent.putExtra("UserStatus", User);
+                        startActivity(intent);
+                        break;
+                    }
+
+
                 }
 
 

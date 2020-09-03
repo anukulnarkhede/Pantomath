@@ -9,22 +9,61 @@
 
     >
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:elevation="0dp"
+        app:elevation="0dp"
+        android:translationZ="0dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/SolveToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="0dp"
+            android:translationZ="0dp"
+            android:background="#fff">
+
+            <TextView
+
+                android:id="@+id/toolbar_DoubtsDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="sans-serif-medium"
+                android:text="D-Solve"
+                android:textColor="@color/blue"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
         android:id="@+id/login_vector"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
         android:src="@drawable/login_vector"
         app:layout_constraintBottom_toTopOf="@+id/existingAccText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription"
-         />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/existingAccText"
@@ -127,6 +166,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="OR Continue With"
+        android:alpha="0"
         android:textColor="@color/grey_muted_hint"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/googleLogin_butt"
@@ -145,6 +185,7 @@
         android:text="Google"
         android:textAllCaps="false"
         android:textColor="@color/red"
+        android:alpha="0"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/CreatAccLoginText"
         app:layout_constraintEnd_toEndOf="parent"

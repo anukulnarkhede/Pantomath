@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.cproz.pantomath.AdditionalInfo.AdditionalInfo;
 import com.cproz.pantomath.Home.Home;
 import com.cproz.pantomath.R;
 import com.cproz.pantomath.StudentProfile.StudentProfile;
@@ -28,6 +29,9 @@ public class PackageSelection extends AppCompatActivity {
     RadioButton selectclass, selectboard;
     Button createAccount;
     String SelectedClass, SelectedBoard;
+
+    public static  String SELECTEDBOARD = PackageSelection.SELECTEDBOARD = "", SELECTEDCLASS = PackageSelection.SELECTEDCLASS = "";
+
 
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -54,10 +58,10 @@ public class PackageSelection extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch(checkedId) {
                     case(R.id.class9th):
-                        SelectedClass = "9th";
+                        SELECTEDCLASS = "9th";
                         break;
                     case(R.id.class10th):
-                        SelectedClass = "10th";
+                        SELECTEDCLASS = "10th";
                         break;
                 }
             }
@@ -69,12 +73,15 @@ public class PackageSelection extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch(checkedId) {
                     case(R.id.SSC):
-                        SelectedBoard = "SSC";
+                        SELECTEDBOARD = "SSC";
                         break;
 
                     case(R.id.CBSE):
-                        SelectedBoard = "CBSE";
+                        SELECTEDBOARD = "CBSE";
                         break;
+
+                    case(R.id.ICSE):
+                        SELECTEDBOARD = "ICSE";
                 }
             }
         });
@@ -85,8 +92,20 @@ public class PackageSelection extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(PackageSelection.this, SelectedBoard + "  " + SelectedClass, Toast.LENGTH_SHORT).show();
-                UpdateClassBoards();
+
+                if (SELECTEDBOARD == "" || SelectedClass == ""){
+                    Toast.makeText(PackageSelection.this, "Select class and board", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Intent intent = new Intent(PackageSelection.this, AdditionalInfo.class);
+                    intent.putExtra("Board", SELECTEDBOARD);
+                    intent.putExtra("Class", SELECTEDCLASS);
+                    startActivity(intent);
+//                Toast.makeText(PackageSelection.this, SelectedBoard + "  " + SelectedClass, Toast.LENGTH_SHORT).show();
+//                UpdateClassBoards();
+                }
+
+
             }
         });
 
@@ -101,27 +120,27 @@ public class PackageSelection extends AppCompatActivity {
         createAccount = findViewById(R.id.createAcc);
     }
 
-    public void UpdateClassBoards(){
-
-
-
-        firebaseFirestore.collection("Users/Students/StudentsInfo/"  ).document( email).update("Class", SelectedClass, "Board",SelectedBoard, "User", "Not Verified").addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-
-                startActivity(new Intent(PackageSelection.this, Home.class));
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                        System.out.println("Profile Picture was unable to update");
-                        //progressBar.setVisibility(View.GONE);
-
-                    }
-                });
-    }
+//    public void UpdateClassBoards(){
+//
+//
+//
+//        firebaseFirestore.collection("Users/Students/StudentsInfo/"  ).document( email).update("Class", SelectedClass, "Board",SelectedBoard).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//
+//                startActivity(new Intent(PackageSelection.this, Home.class));
+//            }
+//        })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//
+//                        System.out.println("Profile Picture was unable to update");
+//                        //progressBar.setVisibility(View.GONE);
+//
+//                    }
+//                });
+//    }
 
 
     @Override

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.text.Html;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,13 +30,14 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationViewHo
 
 
     private Context mContext;
+    public List<HomeDoubtData> DoubtList ;
 
     public NotificationAdapter(Context mContext, List<HomeDoubtData> doubtList) {
         this.mContext = mContext;
         DoubtList = doubtList;
     }
 
-    public List<HomeDoubtData> DoubtList ;
+
 
     @NonNull
     @Override
@@ -56,13 +58,16 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationViewHo
 
         final String datex = DateUtils.getRelativeTimeSpanString(mili).toString();
 
-        holder.timeText.setText(datex);
+//        holder.timeText.setText(datex);
 
         holder.subjectTag.setText(DoubtList.get(position).getSubject());
 
         holder.subjectTag.setText(DoubtList.get(position).getSubject());
 
-        holder.NewQuestionTextNotifications.setText(DoubtList.get(position).getTeacher()+"\nhas solved your doubt.");
+
+        String sourceString = "<b>" + toTitleCase(DoubtList.get(position).getTeacher())  + "</b> " + " has solved your<br>Doubt<br><b>" + datex + "</b>";
+
+       holder.NewQuestionTextNotifications.setText(Html.fromHtml(sourceString));
 
         if (DoubtList.get(position).getTeacherImageUrl().equals("")){
             holder.profileImage.setImageResource(R.drawable.personal_info);
@@ -164,6 +169,24 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationViewHo
 
     }
 
+    public static String toTitleCase(String input) {
+        StringBuilder titleCase = new StringBuilder(input.length());
+        boolean nextTitleCase = true;
+
+        for (char c : input.toCharArray()) {
+            if (Character.isSpaceChar(c)) {
+                nextTitleCase = true;
+            } else if (nextTitleCase) {
+                c = Character.toTitleCase(c);
+                nextTitleCase = false;
+            }
+
+            titleCase.append(c);
+        }
+
+        return titleCase.toString();
+    }
+
     @Override
     public int getItemCount() {
         return DoubtList.size();
@@ -175,7 +198,7 @@ class NotificationViewHolder extends RecyclerView.ViewHolder{
 
     ConstraintLayout cardBg;
     Button subjectTag;
-    TextView timeText, NewQuestionTextNotifications;
+    TextView NewQuestionTextNotifications;
     CircleImage profileImage;
 
     public NotificationViewHolder(@NonNull View itemView) {
@@ -184,7 +207,6 @@ class NotificationViewHolder extends RecyclerView.ViewHolder{
         NewQuestionTextNotifications = itemView.findViewById(R.id.NewDoubtTextNotification);
         cardBg = itemView.findViewById(R.id.notification_card_bg);
         subjectTag = itemView.findViewById(R.id.SubjectTag_Notification);
-        timeText = itemView.findViewById(R.id.timeTextNotification);
         profileImage = itemView.findViewById(R.id.profilePicStu);
     }
 }

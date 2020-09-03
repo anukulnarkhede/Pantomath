@@ -239,7 +239,7 @@
             <RadioButton
 
                 android:id="@+id/AlgebraProfile"
-                android:layout_width="85dp"
+                android:layout_width="wrap_content"
                 android:layout_height="44dp"
                 android:button="@drawable/subject_button_bg_selector"
                 android:text="Algebra"
@@ -280,7 +280,7 @@
 
             <RadioButton
                 android:id="@+id/PhysicsProfile"
-                android:layout_width="85dp"
+                android:layout_width="wrap_content"
                 android:layout_height="44dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="8dp"
@@ -320,7 +320,7 @@
 
             <RadioButton
                 android:id="@+id/BiologyProfile"
-                android:layout_width="85dp"
+                android:layout_width="wrap_content"
                 android:layout_height="44dp"
                 android:text="Biology"
                 android:paddingHorizontal="16dp"
@@ -341,7 +341,7 @@
 
             <RadioButton
                 android:id="@+id/HistoryProfile"
-                android:layout_width="85dp"
+                android:layout_width="wrap_content"
                 android:layout_height="44dp"
                 android:text="History"
                 android:paddingHorizontal="16dp"

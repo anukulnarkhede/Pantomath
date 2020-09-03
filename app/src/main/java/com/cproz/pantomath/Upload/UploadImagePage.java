@@ -20,10 +20,12 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cproz.pantomath.Home.Home;
 import com.cproz.pantomath.Home.HomeFragment;
 import com.cproz.pantomath.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -41,6 +43,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class UploadImagePage extends AppCompatActivity {
 
@@ -66,7 +70,9 @@ public class UploadImagePage extends AppCompatActivity {
     public StorageReference storageReference;
 
     private FirebaseFirestore fireDB;
-
+    ConstraintLayout constFullscreen;
+    LinearLayout FullScreenBgButt;
+    Button crossProf;
 
     public DocumentReference ref;
 
@@ -79,6 +85,11 @@ public class UploadImagePage extends AppCompatActivity {
         Initialise();
 
 
+        constFullscreen = findViewById(R.id.constFullscreen);
+        FullScreenBgButt = findViewById(R.id.FullScreenBgButt);
+
+
+        constFullscreen.setVisibility(View.GONE);
 
 
 
@@ -94,6 +105,7 @@ public class UploadImagePage extends AppCompatActivity {
             }
         });
 
+        //Toast.makeText(this, UploadFragment.SUBJECT, Toast.LENGTH_SHORT).show();
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -139,8 +151,30 @@ public class UploadImagePage extends AppCompatActivity {
                 break;
 
 
-            case "Languages":
-                SubjTag.setText(UploadFragment.CHAPTER);
+            case "English":
+                SubjTag.setText(UploadFragment.SUBJECT);
+                colorChange(R.drawable.doubt_card_bg_lang, R.drawable.subject_button_bg_lang, Color.parseColor("#5550B6"));
+                break;
+
+            case "Hindi":
+                SubjTag.setText(UploadFragment.SUBJECT);
+                colorChange(R.drawable.doubt_card_bg_lang, R.drawable.subject_button_bg_lang, Color.parseColor("#5550B6"));
+                break;
+
+            case "Marathi":
+                SubjTag.setText(UploadFragment.SUBJECT);
+                colorChange(R.drawable.doubt_card_bg_lang, R.drawable.subject_button_bg_lang, Color.parseColor("#5550B6"));
+                break;
+
+
+            case "Sanskrit":
+                SubjTag.setText(UploadFragment.SUBJECT);
+                colorChange(R.drawable.doubt_card_bg_lang, R.drawable.subject_button_bg_lang, Color.parseColor("#5550B6"));
+                break;
+
+
+            case "French":
+                SubjTag.setText(UploadFragment.SUBJECT);
                 colorChange(R.drawable.doubt_card_bg_lang, R.drawable.subject_button_bg_lang, Color.parseColor("#5550B6"));
                 break;
 
@@ -418,8 +452,19 @@ public class UploadImagePage extends AppCompatActivity {
             Photo1url = "";
             Photo2url = "";
             UploadToFirestore(Uid);
-            DoubtUploadedPopUp doubtUploadedPopUp = new DoubtUploadedPopUp();
-            doubtUploadedPopUp.show(getSupportFragmentManager(), "fra");
+
+            Timer timer;
+            timer = new Timer();
+            constFullscreen.setVisibility(View.VISIBLE);
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    startActivity(new Intent(UploadImagePage.this, Home.class ));
+                }
+            }, 2500);
+
+//            DoubtUploadedPopUp doubtUploadedPopUp = new DoubtUploadedPopUp();
+//            doubtUploadedPopUp.show(getSupportFragmentManager(), "fra");
 
 
         }
@@ -462,8 +507,15 @@ public class UploadImagePage extends AppCompatActivity {
                                         public void onSuccess(Uri urix) {
                                             Photo2url = urix.toString();
                                             UploadToFirestore(Uid);
-                                            DoubtUploadedPopUp doubtUploadedPopUp = new DoubtUploadedPopUp();
-                                            doubtUploadedPopUp.show(getSupportFragmentManager(), "fra");
+                                            Timer timer;
+                                            timer = new Timer();
+                                            constFullscreen.setVisibility(View.VISIBLE);
+                                            timer.schedule(new TimerTask() {
+                                                @Override
+                                                public void run() {
+                                                    startActivity(new Intent(UploadImagePage.this, Home.class ));
+                                                }
+                                            }, 2500);
                                         }
                                     });
 
@@ -472,6 +524,7 @@ public class UploadImagePage extends AppCompatActivity {
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
+                                    constFullscreen.setVisibility(View.GONE);
                                     Toast.makeText(UploadImagePage.this, "Failed to Upload Image 1", Toast.LENGTH_SHORT).show();
                                     ConfirmDoubt.setEnabled(true);
                                     progressBar.setVisibility(View.GONE);
@@ -524,8 +577,15 @@ public class UploadImagePage extends AppCompatActivity {
                             Photo2url = "";
                             Photo1url = uri.toString();
                             UploadToFirestore(Uid);
-                            DoubtUploadedPopUp doubtUploadedPopUp = new DoubtUploadedPopUp();
-                            doubtUploadedPopUp.show(getSupportFragmentManager(), "fra");
+                            Timer timer;
+                            timer = new Timer();
+                            constFullscreen.setVisibility(View.VISIBLE);
+                            timer.schedule(new TimerTask() {
+                                @Override
+                                public void run() {
+                                    startActivity(new Intent(UploadImagePage.this, Home.class ));
+                                }
+                            }, 2500);
                         }
                     });
 
@@ -534,6 +594,7 @@ public class UploadImagePage extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    constFullscreen.setVisibility(View.GONE);
                     ConfirmDoubt.setEnabled(true);
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(UploadImagePage.this, "Failed to Upload Image 1", Toast.LENGTH_SHORT).show();
@@ -585,7 +646,7 @@ public class UploadImagePage extends AppCompatActivity {
         STD = HomeFragment.CLASS;
         ProfileImageURL = HomeFragment.PROFILEURL;
 
-        Text = QuestionText.getText().toString();
+        Text = QuestionText.getText().toString().trim();
 
         DocumentReference doubt = fireDB.collection("Doubts/").document(Uid);
 
@@ -617,6 +678,7 @@ public class UploadImagePage extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                constFullscreen.setVisibility(View.GONE);
                 ConfirmDoubt.setEnabled(true);
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(UploadImagePage.this, "Failed", Toast.LENGTH_SHORT).show();
@@ -633,9 +695,6 @@ public class UploadImagePage extends AppCompatActivity {
     }
 
 
-    public void NotificationUpload(){
-
-    }
 
 
 }

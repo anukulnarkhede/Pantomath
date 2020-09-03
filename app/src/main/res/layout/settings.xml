@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StudentProfile.Settings"
     tools:ignore="HardcodedText"
-    android:background="#fff"
+    android:background="#ffffff"
     >
 
     <com.google.android.material.appbar.AppBarLayout
@@ -49,6 +50,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="0.7dp"
         android:background="#000"
@@ -117,6 +119,7 @@
 
 
     <ImageView
+        android:visibility="gone"
         android:id="@+id/imageView3"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -128,6 +131,7 @@
         />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/textView100"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -141,6 +145,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/textView130"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -155,6 +160,7 @@
 
 
     <View
+        android:visibility="gone"
         android:id="@+id/view3"
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -169,6 +175,7 @@
         />
 
     <Button
+        android:visibility="gone"
         android:id="@+id/InviteFriends"
         android:layout_width="match_parent"
         android:layout_height="69dp"
@@ -428,5 +435,28 @@
         />
 
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="From"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="Cproz"
+        android:textColor="#0476D9"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

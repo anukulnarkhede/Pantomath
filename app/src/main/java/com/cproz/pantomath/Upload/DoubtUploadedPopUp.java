@@ -18,12 +18,12 @@ import java.util.TimerTask;
 
 public class DoubtUploadedPopUp extends DialogFragment {
 
-    Timer timer;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.doubt_uploaded_dialogue, container,false);
-
+        Timer timer;
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override

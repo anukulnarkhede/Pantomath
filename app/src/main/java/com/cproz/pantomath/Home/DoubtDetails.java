@@ -102,9 +102,9 @@ public class DoubtDetails extends AppCompatActivity {
             TeacherProfilePic.setImageResource(R.drawable.personal_info);
         }
         else
-            if (!Objects.equals(bundle.getString("TeacherImage"), "")){
-                Picasso.get().load(bundle.getString("TeacherImage")).into(TeacherProfilePic);
-            }
+        if (!Objects.equals(bundle.getString("TeacherImage"), "")){
+            Picasso.get().load(bundle.getString("TeacherImage")).into(TeacherProfilePic);
+        }
 
             QuestionText.setText(bundle.getString("QuestionText"));
 
@@ -440,6 +440,8 @@ public class DoubtDetails extends AppCompatActivity {
                 Pause.setVisibility(View.GONE);
             }
         });
+
+
 
 
         TimeText1.setText(bundle.getString("QuestionDate"));
