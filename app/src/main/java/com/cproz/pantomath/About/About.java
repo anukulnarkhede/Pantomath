@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.telephony.mbms.MbmsErrors;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.cproz.pantomath.BuildConfig;
 import com.cproz.pantomath.R;
 
 import java.util.Objects;
@@ -19,9 +21,11 @@ import java.util.Objects;
 public class About extends AppCompatActivity {
 
     Button TermsButt, PrivacyPolicyButt;
+    TextView buildNumberAct;
 
     Toolbar toolbar;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +60,7 @@ public class About extends AppCompatActivity {
             }
         });
 
+        buildNumberAct.setText(BuildConfig.VERSION_NAME + " - Beta");
 
 
 
@@ -68,6 +73,7 @@ public class About extends AppCompatActivity {
         TermsButt = findViewById(R.id.TermsButt);
         PrivacyPolicyButt  = findViewById(R.id.PrivacyPolicyButt);
         toolbar = findViewById(R.id.AboutToolbar);
+        buildNumberAct = findViewById(R.id.buildNumberAct);
     }
 
 
