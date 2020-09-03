@@ -104,6 +104,9 @@ public class StudentProfile extends AppCompatActivity {
         DoubtList1 = new ArrayList<>();
         DoubtList2 = new ArrayList<>();
         DoubtList3 = new ArrayList<>();
+        DoubtList1.clear();
+        DoubtList2.clear();
+        DoubtList3.clear();
 
         firebaseStorage = FirebaseStorage.getInstance();
         setSupportActionBar(toolbar);
@@ -199,7 +202,7 @@ public class StudentProfile extends AppCompatActivity {
                         Picasso.get().load(documentSnapshot.getString("profileURL")).into(profilePicture);
                     }
 
-
+                    DoubtList1.clear();
 
 
                     LoadDataFromFirebase();
@@ -376,7 +379,7 @@ public class StudentProfile extends AppCompatActivity {
 
 
     private void LoadDataFromFirebaseNoOFUnsolved(){
-        DoubtList1.clear();
+        final List<String> Listx = new ArrayList<>();
         db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS)
                 .whereEqualTo("Email", email).whereEqualTo("Status", "Unsolved").orderBy("DateTime", Query.Direction.DESCENDING)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -399,38 +402,13 @@ public class StudentProfile extends AppCompatActivity {
 
 
 
-                    if (querySnapshot.getString("Status") != "Reported"){
-                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
-                                querySnapshot.getString("AnsPhotoUrl2"),
-                                querySnapshot.getString("AnsText"),
-                                querySnapshot.getString("AudioUrl"),
-                                querySnapshot.getString("Board"),
-                                querySnapshot.getString("Chapter"),
-                                querySnapshot.getString("Email"),
-                                querySnapshot.getString("FileUrl"),
-                                querySnapshot.getString("Link"),
-                                querySnapshot.getString("Name"),
-                                querySnapshot.getString("Photo1url"),
-                                querySnapshot.getString("Photo2url"),
-                                querySnapshot.getString("ProfileImageURL"),
-                                querySnapshot.getString("QText"),
-                                querySnapshot.getString("STD"),
-                                querySnapshot.getString("Status"),
-                                querySnapshot.getString("Subject"),
-                                querySnapshot.getString("Teacher"),
-                                querySnapshot.getString("Uid")
-                                , querySnapshot.getDate("DateTime"),
-                                querySnapshot.getString("TeacherImageUrl"),
-                                querySnapshot.getDate("QuestionDate"));
-
-                        DoubtList1.add(homeDoubtData);
-                    }
+                    Listx.add(querySnapshot.getData().toString());
 
 
 
 
 
-                    NoOfUnsolved.setText(String.valueOf(DoubtList2.size()));
+
 
 
 
@@ -445,7 +423,7 @@ public class StudentProfile extends AppCompatActivity {
 
 
                 }
-
+                NoOfUnsolved.setText(String.valueOf(Listx.size()));
 
             }
         });
@@ -455,7 +433,8 @@ public class StudentProfile extends AppCompatActivity {
 
 
     private void LoadDataFromFirebaseNoSolved(){
-        DoubtList1.clear();
+
+        final List<String> Listx = new ArrayList<>();
         db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD)
                 .whereEqualTo("STD",HomeFragment.CLASS).whereEqualTo("Email", email)
                 .whereEqualTo("Status", "Solved").orderBy("DateTime", Query.Direction.DESCENDING)
@@ -479,39 +458,16 @@ public class StudentProfile extends AppCompatActivity {
 
 
 
-                    if (querySnapshot.getString("Status") != "Reported"){
-                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
-                                querySnapshot.getString("AnsPhotoUrl2"),
-                                querySnapshot.getString("AnsText"),
-                                querySnapshot.getString("AudioUrl"),
-                                querySnapshot.getString("Board"),
-                                querySnapshot.getString("Chapter"),
-                                querySnapshot.getString("Email"),
-                                querySnapshot.getString("FileUrl"),
-                                querySnapshot.getString("Link"),
-                                querySnapshot.getString("Name"),
-                                querySnapshot.getString("Photo1url"),
-                                querySnapshot.getString("Photo2url"),
-                                querySnapshot.getString("ProfileImageURL"),
-                                querySnapshot.getString("QText"),
-                                querySnapshot.getString("STD"),
-                                querySnapshot.getString("Status"),
-                                querySnapshot.getString("Subject"),
-                                querySnapshot.getString("Teacher"),
-                                querySnapshot.getString("Uid")
-                                , querySnapshot.getDate("DateTime"),
-                                querySnapshot.getString("TeacherImageUrl"),
-                                querySnapshot.getDate("QuestionDate"));
 
-                        DoubtList1.add(homeDoubtData);
-                    }
+
+                        Listx.add(querySnapshot.getData().toString());
 
 
 
 
 
 
-                    NoOfSolved.setText(String.valueOf(DoubtList3.size()));
+
 
 
 
@@ -527,7 +483,7 @@ public class StudentProfile extends AppCompatActivity {
 
                 }
 
-
+                NoOfSolved.setText(String.valueOf(Listx.size()));
             }
         });
     }

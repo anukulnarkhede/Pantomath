@@ -131,7 +131,7 @@ public class NotificationsFragments extends Fragment {
                                 querySnapshot.getString("Teacher"),
                                 querySnapshot.getString("Uid")
                                 , querySnapshot.getDate("DateTime"),
-                                "",
+                                querySnapshot.getString("TeacherImageUrl"),
                                 querySnapshot.getDate("QuestionDate"));
 
                         DoubtList1.add(homeDoubtData);
