@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:fontFamily="sans-serif-medium"
-                android:text="D-Solve"
+                android:text="Solved'out"
                 android:textColor="@color/blue"
                 android:textSize="20sp"
                 tools:ignore="HardcodedText" />

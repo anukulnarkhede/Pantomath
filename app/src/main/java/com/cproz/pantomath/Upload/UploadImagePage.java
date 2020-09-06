@@ -182,6 +182,8 @@ public class UploadImagePage extends AppCompatActivity {
         }
 
 
+
+
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
@@ -208,10 +210,15 @@ public class UploadImagePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                fl2 = 1;
-                fl1 = 0;
-                onSelectImageClick(v);
-                uriImg2 = mCropImageUri;
+                if (uriImg1==null){
+                    Toast.makeText(UploadImagePage.this, "Add First Image", Toast.LENGTH_SHORT).show();
+                }else{
+                    fl2 = 1;
+                    fl1 = 0;
+                    onSelectImageClick(v);
+                    uriImg2 = mCropImageUri;
+                }
+
             }
         });
 
