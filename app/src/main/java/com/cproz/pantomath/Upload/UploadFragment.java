@@ -7,10 +7,12 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.text.style.UpdateLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -63,19 +66,40 @@ public class UploadFragment extends Fragment {
     RelativeLayout relativeLayout;
 
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
     FirebaseUser user = firebaseAuth.getCurrentUser();
+
     String email = user != null ? user.getEmail() : null;
+
     private DocumentReference ref = firebaseFirestore.collection("Users/Students/StudentsInfo/" ).document(String.valueOf(email));
+
     String StudentClass = null, StudentBoard = null;
-    public static String SUBJECT = UploadFragment.SUBJECT, CHAPTER = UploadFragment.CHAPTER, NAME = UploadFragment.NAME, EMAIL = UploadFragment.EMAIL;
+
+    public static String
+            SUBJECT = UploadFragment.SUBJECT,
+            CHAPTER = UploadFragment.CHAPTER = "",
+            NAME = UploadFragment.NAME,
+            EMAIL = UploadFragment.EMAIL,
+            ADDRESS = UploadFragment.ADDRESS,
+            INSTITUTE = UploadFragment.INSTITUTE,
+            BRANCH = UploadFragment.BRANCH;
+
     Toolbar toolbar;
+
     TextView selectSubject;
+
     RecyclerView recyclerView;
+
     private String url1;
+
     private List<HomeDoubtData> DoubtList1;
+
     private HomeDoubtData homeDoubtData;
+
     private FirebaseFirestore db;
+
     private TextView text;
 
 
@@ -112,7 +136,10 @@ public class UploadFragment extends Fragment {
                     UploadFragment.NAME = documentSnapshot.getString("Name");
                     UploadFragment.EMAIL = documentSnapshot.getString("Email");
                     email = documentSnapshot.getString("Email");
-                    loadDataFromFirebase();
+                    //loadDataFromFirebase();
+                    UploadFragment.ADDRESS = documentSnapshot.getString("Address");
+                    UploadFragment.BRANCH = documentSnapshot.getString("Branch");
+                    UploadFragment.INSTITUTE = documentSnapshot.getString("Institute");
 
 
 
@@ -169,7 +196,17 @@ public class UploadFragment extends Fragment {
     public void subjectFilter(final View root){
         selectSubject.setText("Select Subject");
         layoutInflat(R.layout.subject_buttons);
-        final LinearLayoutCompat algebraFilter, geometryFilter, physicsFilter, chemistryFilter, biologyFilter, historyFilter, geographyFilter, languagesFilter;
+
+        final ConstraintLayout
+                algebraFilter,
+                geometryFilter,
+                physicsFilter,
+                chemistryFilter,
+                biologyFilter,
+                historyFilter,
+                geographyFilter,
+                languagesFilter;
+
         algebraFilter = root.findViewById(R.id.AlgebraFilter);
         geometryFilter = root.findViewById(R.id.GeometryFilter);
         physicsFilter = root.findViewById(R.id.PhysicsFilter);
@@ -187,7 +224,7 @@ public class UploadFragment extends Fragment {
 
                 SUBJECT = "Algebra";
                 DoubtList1.clear();
-                loadDataFromFirebaseSubject();
+                //loadDataFromFirebaseSubject();
                 if (StudentBoard == null){
                     System.out.println("Board does not exist");
                 }
@@ -274,7 +311,7 @@ public class UploadFragment extends Fragment {
 
                 SUBJECT = "Geometry";
                 DoubtList1.clear();
-                loadDataFromFirebaseSubject();
+                //loadDataFromFirebaseSubject();
                 if (StudentBoard == null){
                     System.out.println("Board does not exist");
                 }
@@ -361,7 +398,7 @@ public class UploadFragment extends Fragment {
 
                 SUBJECT = "Physics";
                 DoubtList1.clear();
-                loadDataFromFirebaseSubject();
+                //loadDataFromFirebaseSubject();
                 if (StudentBoard == null){
                     System.out.println("Board does not exist");
                 }
@@ -451,7 +488,7 @@ public class UploadFragment extends Fragment {
 
                 SUBJECT = "Chemistry";
                 DoubtList1.clear();
-                loadDataFromFirebaseSubject();
+                //loadDataFromFirebaseSubject();
                 if (StudentBoard == null){
                     System.out.println("Board does not exist");
                 }
@@ -487,7 +524,7 @@ public class UploadFragment extends Fragment {
                         chapterFilters(root,"Matter in Our Surrounding","Is Matter Around us Pure","Atoms and Molecules","Structure of Atoms",
                                 "x","x","x","h","i","j",
                                 "k","l"
-                                ,View.VISIBLE, View.VISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                                ,View.VISIBLE, View.VISIBLE,View.VISIBLE, View.VISIBLE, View.GONE,
                                 View.GONE, View.GONE, View.GONE, View.GONE, View.GONE, View.GONE,View.GONE);
 
                     }
@@ -539,7 +576,7 @@ public class UploadFragment extends Fragment {
 
                 SUBJECT = "Biology";
                 DoubtList1.clear();
-                loadDataFromFirebaseSubject();
+                //loadDataFromFirebaseSubject();
                 if (StudentBoard == null){
                     System.out.println("Board does not exist");
                 }
@@ -626,7 +663,7 @@ public class UploadFragment extends Fragment {
 
                 SUBJECT = "History";
                 DoubtList1.clear();
-                loadDataFromFirebaseSubject();
+                //loadDataFromFirebaseSubject();
                 if (StudentBoard == null){
                     System.out.println("Board does not exist");
                 }
@@ -720,7 +757,7 @@ public class UploadFragment extends Fragment {
 
                 SUBJECT = "Geography";
                 DoubtList1.clear();
-                loadDataFromFirebaseSubject();
+                //loadDataFromFirebaseSubject();
 
                 if (StudentBoard == null){
                     System.out.println("Board does not exist");
@@ -811,7 +848,7 @@ public class UploadFragment extends Fragment {
             public void onClick(View v) {
 
                 DoubtList1.clear();
-                loadDataFromFirebaseSubject();
+                //loadDataFromFirebaseSubject();
                 chapterFiltersForLanguages(root, "English", "Hindi", "Marathi", "Sanskrit", "French",View.VISIBLE,View.VISIBLE,View.VISIBLE
                 ,View.VISIBLE,View.VISIBLE);
             }
@@ -848,7 +885,7 @@ public class UploadFragment extends Fragment {
             public void onClick(View v) {
                 CHAPTER = null;
                 DoubtList1.clear();
-                loadDataFromFirebase();
+                //loadDataFromFirebase();
 
 
                 selectSubject.setTextColor(Color.parseColor("#121212"));
@@ -1054,7 +1091,7 @@ public class UploadFragment extends Fragment {
             public void onClick(View v) {
                 CHAPTER = null;
                 DoubtList1.clear();
-                loadDataFromFirebase();
+                //loadDataFromFirebase();
 
 
                 selectSubject.setTextColor(Color.parseColor("#121212"));
@@ -1109,6 +1146,7 @@ public class UploadFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 SUBJECT = chapter1;
+                CHAPTER = "";
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
 
@@ -1120,6 +1158,7 @@ public class UploadFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 SUBJECT = chapter2;
+                CHAPTER = "";
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
 
@@ -1130,6 +1169,7 @@ public class UploadFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 SUBJECT = chapter3;
+                CHAPTER = "";
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
 
@@ -1140,6 +1180,7 @@ public class UploadFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 SUBJECT = chapter4;
+                CHAPTER = "";
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
 
@@ -1150,6 +1191,7 @@ public class UploadFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 SUBJECT = chapter5;
+                CHAPTER = "";
 
                 startActivity(new Intent(getContext(), UploadImagePage.class));
 
@@ -1176,124 +1218,124 @@ public class UploadFragment extends Fragment {
 
 
 
-    private void loadDataFromFirebase() {
-        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
+//    private void loadDataFromFirebase() {
+//        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
+//
+//
+//                    //Date date = new Date();
+//
+//
+//
+//
+//
+//
+//
+//
+//                    if (Objects.equals(querySnapshot.getString("Status"), "Solved") || (querySnapshot.getString("Status").equals("Unsolved") && querySnapshot.getString("Email").equals(email))){
+//                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+//                                querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+//                                querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+//                                querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+//                                querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+//                                querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+//                                , querySnapshot.getDate("DateTime"),"", querySnapshot.getDate("QuestionDate"));
+//
+//                        DoubtList1.add(homeDoubtData);
+//                    }
+//
+//
+//                   // Random random = new Random();
+//
+//
+//
+//                    //HomeStuDoubtCardAdapter homeStuDoubtCardAdapter = new HomeStuDoubtCardAdapter(getContext(), DoubtList1);
+//
+//
+//                    SmartSuggestionAdapter smartSuggestionAdapter = new SmartSuggestionAdapter(getActivity(),DoubtList1);
+//
+//
+//
+//
+//
+//
+//
+//                    recyclerView.setItemViewCacheSize(25);
+//
+//                    recyclerView.setAdapter(smartSuggestionAdapter);
+//
+//                }
+//
+//                if (DoubtList1.isEmpty()){
+//                    recyclerView.setAlpha(0);
+//                }
+//                else{
+//                    recyclerView.setAlpha(1);
+//                }
+//            }
+//        });
+//    }
 
 
-                    //Date date = new Date();
-
-
-
-
-
-
-
-
-                    if (Objects.equals(querySnapshot.getString("Status"), "Solved") || (querySnapshot.getString("Status").equals("Unsolved") && querySnapshot.getString("Email").equals(email))){
-                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
-                                querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
-                                querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
-                                querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
-                                querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
-                                querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                                , querySnapshot.getDate("DateTime"),"", querySnapshot.getDate("QuestionDate"));
-
-                        DoubtList1.add(homeDoubtData);
-                    }
-
-
-                   // Random random = new Random();
-
-
-
-                    //HomeStuDoubtCardAdapter homeStuDoubtCardAdapter = new HomeStuDoubtCardAdapter(getContext(), DoubtList1);
-
-
-                    SmartSuggestionAdapter smartSuggestionAdapter = new SmartSuggestionAdapter(getActivity(),DoubtList1);
-
-
-
-
-
-
-
-                    recyclerView.setItemViewCacheSize(25);
-
-                    recyclerView.setAdapter(smartSuggestionAdapter);
-
-                }
-
-                if (DoubtList1.isEmpty()){
-                    recyclerView.setAlpha(0);
-                }
-                else{
-                    recyclerView.setAlpha(1);
-                }
-            }
-        });
-    }
-
-
-    private void loadDataFromFirebaseSubject() {
-        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS).whereEqualTo("Subject", UploadFragment.SUBJECT).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
-
-
-
-                    //Date date = new Date();
-
-
-
-
-
-
-
-
-                    if (Objects.equals(querySnapshot.getString("Status"), "Solved") || (querySnapshot.getString("Status").equals("Unsolved") && querySnapshot.getString("Email").equals(email))){
-
-                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
-                                querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
-                                querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
-                                querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
-                                querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
-                                querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                                , querySnapshot.getDate("DateTime"),"",querySnapshot.getDate("QuestionDate"));
-
-                        DoubtList1.add(homeDoubtData);
-                    }
-
-
-
-                    //HomeStuDoubtCardAdapter homeStuDoubtCardAdapter = new HomeStuDoubtCardAdapter(getContext(), DoubtList1);
-
-
-                    SmartSuggestionAdapter smartSuggestionAdapter = new SmartSuggestionAdapter(getActivity(),DoubtList1);
-
-
-
-
-
-
-
-                    recyclerView.setItemViewCacheSize(25);
-
-                    recyclerView.setAdapter(smartSuggestionAdapter);
-
-                }
-                if (DoubtList1.isEmpty()){
-                    recyclerView.setAlpha(0);
-                }
-                else{
-                    recyclerView.setAlpha(1);
-                }
-            }
-        });
-    }
+//    private void loadDataFromFirebaseSubject() {
+//        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS).whereEqualTo("Subject", UploadFragment.SUBJECT).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
+//
+//
+//
+//                    //Date date = new Date();
+//
+//
+//
+//
+//
+//
+//
+//
+//                    if (Objects.equals(querySnapshot.getString("Status"), "Solved") || (querySnapshot.getString("Status").equals("Unsolved") && querySnapshot.getString("Email").equals(email))){
+//
+//                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+//                                querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+//                                querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+//                                querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+//                                querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+//                                querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+//                                , querySnapshot.getDate("DateTime"),"",querySnapshot.getDate("QuestionDate"));
+//
+//                        DoubtList1.add(homeDoubtData);
+//                    }
+//
+//
+//
+//                    //HomeStuDoubtCardAdapter homeStuDoubtCardAdapter = new HomeStuDoubtCardAdapter(getContext(), DoubtList1);
+//
+//
+//                    SmartSuggestionAdapter smartSuggestionAdapter = new SmartSuggestionAdapter(getActivity(),DoubtList1);
+//
+//
+//
+//
+//
+//
+//
+//                    recyclerView.setItemViewCacheSize(25);
+//
+//                    recyclerView.setAdapter(smartSuggestionAdapter);
+//
+//                }
+//                if (DoubtList1.isEmpty()){
+//                    recyclerView.setAlpha(0);
+//                }
+//                else{
+//                    recyclerView.setAlpha(1);
+//                }
+//            }
+//        });
+//    }
 
 
 

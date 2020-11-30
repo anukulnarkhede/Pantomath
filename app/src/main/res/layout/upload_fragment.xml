@@ -31,7 +31,7 @@
             android:background="#fff">
 
             <TextView
-
+                android:autoSizeMaxTextSize="20dp"
                 android:id="@+id/toolbar_titleUpload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,8 +40,8 @@
                 android:text="Add Doubt"
 
                 android:textColor="@color/blue"
-                android:textSize="20sp"
-                tools:ignore="HardcodedText" />
+                android:textSize="20dp"
+                tools:ignore="HardcodedText,SpUsage" />
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -77,7 +77,7 @@
         android:fontFamily="sans-serif"
         android:text="Select Subject"
         android:textColor="#121212"
-        android:textSize="16sp"
+        android:textSize="@dimen/TextSize16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.014"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,29 +88,23 @@
         android:id="@+id/buttonPlaceHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:gravity="center"
-        android:paddingBottom="16dp"
         android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectSubject"
-        app:layout_constraintVertical_bias="0.0"
-        android:background="@drawable/rectangle_bg"
-        android:overScrollMode="never"
-        >
+        app:layout_constraintVertical_bias="0.0">
 
-
-
-
+<!--        <include layout="@layout/subject_buttons"/>-->
+<!--        <include layout="@layout/chapter_buttons"/>-->
 
     </RelativeLayout>
 
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/smartSuggestions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -127,6 +121,7 @@
         tools:ignore="HardcodedText" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
         android:id="@+id/smartSuggestionRecyclerView"
         android:background="#FFFFFF"
         android:layout_width="match_parent"

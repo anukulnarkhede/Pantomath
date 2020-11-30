@@ -30,7 +30,7 @@
             >
 
             <TextView
-
+                android:autoSizeMaxTextSize="20dp"
                 android:id="@+id/toolbar_titleSettings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Notifications"
                 android:textColor="@color/blue"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 tools:ignore="HardcodedText" />
 
         </androidx.appcompat.widget.Toolbar>

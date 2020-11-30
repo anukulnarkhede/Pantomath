@@ -16,11 +16,11 @@
         android:background="@drawable/login_butt_selector"
         android:fontFamily="sans-serif-medium"
         android:paddingHorizontal="16dp"
-        android:text="Save Changes"
+        android:text="Done"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/blue"
-        android:textSize="16sp"
+        android:textSize="@dimen/TextSize16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
             android:background="#fff">
 
             <TextView
-
+                android:autoSizeMaxTextSize="20sp"
                 android:id="@+id/toolbar_titleProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -56,8 +56,8 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Additional information"
                 android:textColor="@color/blue"
-                android:textSize="20sp"
-                tools:ignore="HardcodedText" />
+                android:textSize="20dp"
+                tools:ignore="HardcodedText,UnusedAttribute" />
 
 
 
@@ -86,7 +86,7 @@
        android:layout_marginTop="24dp"
         android:textColor="@color/black"
         android:textColorHint="@color/grey_muted_hint"
-        android:textSize="16sp"
+        android:textSize="@dimen/TextSize16"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
@@ -102,7 +102,7 @@
         app:layout_constraintTop_toBottomOf="@+id/PhoneNumber"
         android:layout_marginTop="32dp"
         android:textAlignment="center"
-        android:background="@drawable/ic_spinner_background"
+        android:background="@drawable/spinner_bg_selector"
         android:layout_marginHorizontal="16dp"
         />
 
@@ -114,25 +114,37 @@
         app:layout_constraintTop_toBottomOf="@+id/City"
         android:layout_marginTop="16dp"
         android:textAlignment="center"
-        android:background="@drawable/ic_spinner_background"
+        android:background="@drawable/spinner_bg_selector"
+        android:layout_marginHorizontal="16dp"
+        />
+
+
+    <Spinner
+        android:id="@+id/SelectBranch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/SelectInstitute"
+        android:layout_marginTop="16dp"
+        android:textAlignment="center"
+        android:background="@drawable/spinner_bg_selector"
         android:layout_marginHorizontal="16dp"
         />
 
     <CheckBox
+        android:enabled="false"
         android:id="@+id/OtherStudents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I’m not from Litmus Academy."
-        android:textSize="14sp"
+        android:text="My institute is not listed."
+        android:textSize="@dimen/TextSize14"
         android:fontFamily="sans-serif"
         android:textColor="#999999"
-        android:button="@drawable/check_box"
+        android:button="@drawable/check_box_selector"
         android:paddingStart="12dp"
-        android:enabled="false"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SelectInstitute"
+        app:layout_constraintTop_toBottomOf="@+id/SelectBranch"
         tools:ignore="HardcodedText,RtlSymmetry" />
 
     <TextView
@@ -140,7 +152,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Note : All fields are compulsory."
-        android:textSize="12sp"
+        android:textSize="@dimen/TextSize12"
         android:textColor="#999999"
         android:layout_marginTop="26dp"
         android:layout_marginStart="16dp"

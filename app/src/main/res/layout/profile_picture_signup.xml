@@ -31,7 +31,7 @@
             app:elevation="0dp">
 
             <TextView
-
+                android:autoSizeMaxTextSize="20dp"
                 android:id="@+id/toolbar_titleProfilePicture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Profile Picture"
                 android:textColor="@color/blue"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 tools:ignore="HardcodedText" />
 
         </androidx.appcompat.widget.Toolbar>
@@ -67,7 +67,7 @@
         android:layout_marginTop="16dp"
         android:text="Set a Profile Picture for your Account"
         android:textAlignment="center"
-        android:textSize="14sp"
+        android:textSize="@dimen/TextSize14"
         android:textColor="@color/grey_muted_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +97,7 @@
             android:fontFamily="sans-serif-medium"
             android:text="Select Photo"
             android:textColor="@color/blue"
-            android:textSize="16sp"
+            android:textSize="@dimen/TextSize16"
             tools:ignore="HardcodedText" />
 
         <ImageView
@@ -126,7 +126,7 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/blue"
-        android:textSize="16sp"
+        android:textSize="@dimen/TextSize16"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -136,6 +136,7 @@
 
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -150,7 +151,8 @@
         app:layout_constraintBottom_toTopOf="@+id/passwordbaseLineVector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        android:focusable="true" />
 
 
     <ImageView
@@ -165,18 +167,27 @@
         android:layout_marginBottom="24dp"
         tools:ignore="ContentDescription" />
 
-    <ProgressBar
+    <Button
         android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="194dp"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#73000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        app:layout_constraintVertical_bias="0.197" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--    <ProgressBar-->
+<!--        android:id="@+id/progressBar"-->
+<!--        style="?android:attr/progressBarStyle"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="194dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.498"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

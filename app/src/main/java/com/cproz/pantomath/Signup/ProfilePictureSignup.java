@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -19,12 +18,9 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.cproz.pantomath.Home.Home;
 import com.cproz.pantomath.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,12 +35,10 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Objects;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfilePictureSignup extends AppCompatActivity {
@@ -56,7 +50,7 @@ public class ProfilePictureSignup extends AppCompatActivity {
     TextView IWillDoItLater;
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
-    ProgressBar progressBar;
+    Button progressBar;
     public String decision;
     private Uri mCropImageUri = null;
     TextView SelectPhotoText;
@@ -71,10 +65,10 @@ public class ProfilePictureSignup extends AppCompatActivity {
 
         Initialization();
 
-        progressBar = findViewById(R.id.progressBar);
+      progressBar = findViewById(R.id.progressBar);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
-        progressBar.setVisibility(View.GONE);
+      progressBar.setVisibility(View.GONE);
         firebaseStorage = FirebaseStorage.getInstance();
 
         setSupportActionBar(toolbar);
@@ -96,58 +90,60 @@ public class ProfilePictureSignup extends AppCompatActivity {
 
 
 
-        IWillDoItLater.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                progressBar.setProgress(100, true);
-                IWillDoItLater.setEnabled(false);
-                ContinueButt.setEnabled(false);
-                firebaseAuth.createUserWithEmailAndPassword(NewAccount.EMAIL, Password.PASSWORD)
-                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-
-
-                        final Date SignupTime = new Date();
-
-
-
-                        final String userId = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getEmail();
-                        SignupInfoCarrier signupInfoCarrier = new SignupInfoCarrier(
-                                toTitleCase(NewAccount.NAME), NewAccount.EMAIL, "","","Not Verified","","", userId, ""
-                                ,SignupTime
-                        );
-
-                        firebaseFirestore.document("Users/Students/StudentsInfo/" + userId ).set(signupInfoCarrier).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                FirebaseUser user = firebaseAuth.getCurrentUser();
-                                verification(user);
-                                //startActivity(new Intent(ProfilePictureSignup.this, Home.class));
-                            }
-                        })
-
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(ProfilePictureSignup.this, "Signup Failed", Toast.LENGTH_SHORT).show();
-                                        System.out.println("Document upload failed");
-                                        IWillDoItLater.setEnabled(true);
-                                        ContinueButt.setEnabled(true);
-                                    }
-                                });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        IWillDoItLater.setEnabled(true);
-                        ContinueButt.setEnabled(true);
-                    }
-                });
-            }
-        });
+//        IWillDoItLater.setOnClickListener(new View.OnClickListener() {
+//            @RequiresApi(api = Build.VERSION_CODES.N)
+//            @Override
+//            public void onClick(View v) {
+//                progressBar.setVisibility(View.VISIBLE);
+////                progressBar.setProgress(100, true);
+//                IWillDoItLater.setEnabled(false);
+//                ContinueButt.setEnabled(false);
+//                firebaseAuth.createUserWithEmailAndPassword(NewAccount.EMAIL, Password.PASSWORD)
+//                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+//                    @Override
+//                    public void onSuccess(AuthResult authResult) {
+//
+//
+//                        final Date SignupTime = new Date();
+//
+//
+//
+//                        final String userId = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getEmail();
+//                        SignupInfoCarrier signupInfoCarrier = new SignupInfoCarrier(
+//                                toTitleCase(NewAccount.NAME), NewAccount.EMAIL, "","","","","", userId, ""
+//                                ,SignupTime,0, "",""
+//                        );
+//
+//                        firebaseFirestore.document("Users/Students/StudentsInfo/" + userId ).set(signupInfoCarrier).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<Void> task) {
+//                                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                                verification(user);
+//                                //startActivity(new Intent(ProfilePictureSignup.this, Home.class));
+//                            }
+//                        })
+//
+//                                .addOnFailureListener(new OnFailureListener() {
+//                                    @Override
+//                                    public void onFailure(@NonNull Exception e) {
+//                                        progressBar.setVisibility(View.GONE);
+//                                        Toast.makeText(ProfilePictureSignup.this, "Signup Failed", Toast.LENGTH_SHORT).show();
+//                                        System.out.println("Document upload failed");
+//                                        IWillDoItLater.setEnabled(true);
+//                                        ContinueButt.setEnabled(true);
+//                                    }
+//                                });
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        progressBar.setVisibility(View.GONE);
+//                        IWillDoItLater.setEnabled(true);
+//                        ContinueButt.setEnabled(true);
+//                    }
+//                });
+//            }
+//        });
 
 
 
@@ -160,8 +156,8 @@ public class ProfilePictureSignup extends AppCompatActivity {
                 }
                 else{
                     ContinueButt.setEnabled(false);
-                    progressBar.setVisibility(View.VISIBLE);
-                    progressBar.setProgress(100, true);
+                   progressBar.setVisibility(View.VISIBLE);
+//                    progressBar.setProgress(100, true);
                     signup();
 
                 }
@@ -192,8 +188,9 @@ public class ProfilePictureSignup extends AppCompatActivity {
 
     private void signup() {
 
-
-        firebaseAuth.createUserWithEmailAndPassword(NewAccount.EMAIL, Password.PASSWORD).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        firebaseAuth.createUserWithEmailAndPassword(NewAccount.EMAIL, Password.PASSWORD)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
@@ -220,6 +217,7 @@ public class ProfilePictureSignup extends AppCompatActivity {
 
                     final Date SignupTime = new Date();
 
+
                     reference.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -228,10 +226,12 @@ public class ProfilePictureSignup extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     String ProfileURL = uri.toString();
                                     SignupInfoCarrier signupInfoCarrier = new SignupInfoCarrier(
-                                            toTitleCase(NewAccount.NAME), NewAccount.EMAIL, "","","Not Verified","","", userId, ProfileURL
-                                    , SignupTime
+                                            toTitleCase(NewAccount.NAME), NewAccount.EMAIL.toLowerCase().trim(), "","","","","", userId, ProfileURL
+                                    , SignupTime,0, "",""
                                     );
-                                    firebaseFirestore.document("Users/Students/StudentsInfo/" + userId ).set(signupInfoCarrier).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    firebaseFirestore.document("Users/Students/StudentsInfo/" + userId )
+                                            .set(signupInfoCarrier)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
 
@@ -260,17 +260,12 @@ public class ProfilePictureSignup extends AppCompatActivity {
 
 
                 }
-                else
-                {
+                else {
                     Toast.makeText(ProfilePictureSignup.this, "Signup Failed", Toast.LENGTH_SHORT).show();
                     System.out.println("password login failed");
                     ContinueButt.setEnabled(true);
+                    progressBar.setVisibility(View.GONE);
                 }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(ProfilePictureSignup.this, "Signup Failed", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -372,7 +367,7 @@ public class ProfilePictureSignup extends AppCompatActivity {
 
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (mCropImageUri != null && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             // required permissions granted, start crop image activity
             startCropImageActivity(mCropImageUri);

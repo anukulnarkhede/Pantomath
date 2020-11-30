@@ -47,7 +47,7 @@ public class Login extends AppCompatActivity {
     String EmailString, PasswordString;
     Button Login, LoginWithGoogle;
     private FirebaseAuth firebaseAuth;
-    ProgressBar progressBar;
+    Button progressBar;
 
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -108,6 +108,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Login.setEnabled(false);
                 validation();
             }
         });
@@ -121,13 +122,18 @@ public class Login extends AppCompatActivity {
 
 
 
-        ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        try {
+            ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        assert connectivityManager != null;
-        Network networkInfo = connectivityManager.getActiveNetwork();
-        if (networkInfo == null){
-            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            assert connectivityManager != null;
+            Network networkInfo = connectivityManager.getActiveNetwork();
+            if (networkInfo == null){
+                Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            System.out.println(e);
         }
+
 
 
     }
@@ -146,7 +152,7 @@ public class Login extends AppCompatActivity {
         Login = findViewById(R.id.LoginButt);
         LoginWithGoogle = findViewById(R.id.googleLogin_butt);
         ErrorText = findViewById(R.id.errorTextLogin);
-        progressBar = findViewById(R.id.progressBarLogin);
+       progressBar = findViewById(R.id.progressBarLogin);
     }
     @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
@@ -154,8 +160,8 @@ public class Login extends AppCompatActivity {
 
 
 
-        progressBar.setVisibility(View.VISIBLE);
-        progressBar.setProgress(100, true);
+       progressBar.setVisibility(View.VISIBLE);
+//        progressBar.setProgress(100, true);
 
         EmailString = Email.getText().toString().trim();
         PasswordString = Password.getText().toString();
@@ -166,31 +172,35 @@ public class Login extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
                 Password.setBackgroundResource(R.drawable.error_text_field_bg);
                 Email.requestFocus();
+                Login.setEnabled(true);
 
         }
         else if (EmailString.isEmpty()){
             ErrorText.setVisibility(View.VISIBLE);
             Email.setBackgroundResource(R.drawable.error_text_field_bg);
-            progressBar.setVisibility(View.GONE);
+           progressBar.setVisibility(View.GONE);
             Email.requestFocus();
             Password.setBackgroundResource(R.drawable.text_view_bg);
+            Login.setEnabled(true);
         }
         else if (!Patterns.EMAIL_ADDRESS.matcher(EmailString).matches()){
             ErrorText.setVisibility(View.VISIBLE);
             Password.setBackgroundResource(R.drawable.text_view_bg);
             ErrorText.setText("Make sure your email is correct.");
-            progressBar.setVisibility(View.GONE);
+           progressBar.setVisibility(View.GONE);
             Email.setBackgroundResource(R.drawable.error_text_field_bg);
             Email.requestFocus();
+            Login.setEnabled(true);
 
         }
         else if (PasswordString.isEmpty()){
             ErrorText.setVisibility(View.VISIBLE);
             ErrorText.setText("Please enter the password");
-            progressBar.setVisibility(View.GONE);
+           progressBar.setVisibility(View.GONE);
             Email.setBackgroundResource(R.drawable.text_view_bg);
             Password.setBackgroundResource(R.drawable.error_text_field_bg);
             Password.requestFocus();
+            Login.setEnabled(true);
         }
         else
         {
@@ -242,7 +252,7 @@ public class Login extends AppCompatActivity {
                     if (networkInfo == null){
                         Toast.makeText(Login.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(Login.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();//toast for invalid entries;;
+                        Toast.makeText(Login.this, "Invalid Credentials", Toast.LENGTH_SHORT).show(); //toast for invalid entries;;
                     }
 
 
@@ -292,6 +302,8 @@ public class Login extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    Login.setEnabled(true);
+                    progressBar.setEnabled(false);
                     Toast.makeText(Login.this, "Please try again", Toast.LENGTH_SHORT).show();
                 }
             });

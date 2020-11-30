@@ -39,8 +39,9 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="About"
                 android:textColor="@color/blue"
-                android:textSize="20sp"
-                tools:ignore="HardcodedText" />
+                android:textSize="20dp"
+                android:autoSizeMaxTextSize="20sp"
+                tools:ignore="HardcodedText,UnusedAttribute" />
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -92,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Build version"
-                android:textSize="16sp"
+                android:textSize="@dimen/TextSize16"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="#121212"
                 tools:ignore="HardcodedText"
@@ -107,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Build version"
-                android:textSize="14sp"
+                android:textSize="@dimen/TextSize14"
                 android:fontFamily="sans-serif"
                 android:textColor="#999999"
                 tools:ignore="HardcodedText"
@@ -136,7 +137,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Privacy Policy"
                 android:textColor="#121212"
-                android:textSize="16sp"
+                android:textSize="@dimen/TextSize16"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="@id/view3"
@@ -163,7 +164,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Terms of Service"
                 android:textColor="#121212"
-                android:textSize="16sp"
+                android:textSize="@dimen/TextSize16"
                 app:layout_constraintBottom_toTopOf="@id/view4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view3"
@@ -206,11 +207,12 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="32dp"
                 android:fontFamily="sans-serif"
-                android:text="Developed By"
-                android:textSize="14sp"
+                android:text="Concept and Created By"
+                android:textSize="@dimen/TextSize14"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view4" />
+                app:layout_constraintTop_toBottomOf="@+id/view4"
+                tools:ignore="HardcodedText" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -229,7 +231,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:textSize="14sp"
+                android:textSize="@dimen/TextSize14"
                 android:fontFamily="sans-serif"
                 android:layout_marginTop="22dp"
                 android:text="Powered By"

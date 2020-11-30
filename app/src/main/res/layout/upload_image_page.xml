@@ -121,9 +121,9 @@
                 android:layout_gravity="start"
                 android:fontFamily="sans-serif-medium"
                 android:text="New Doubt"
-
+                android:autoSizeMaxTextSize="20dp"
                 android:textColor="@color/blue"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 tools:ignore="HardcodedText" />
 
         </androidx.appcompat.widget.Toolbar>
@@ -133,6 +133,7 @@
 
     <ScrollView
 
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fff"
@@ -144,10 +145,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff">
-
-
-
-
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -177,7 +174,7 @@
                     android:text="Algebra"
                     android:textAllCaps="false"
                     android:textColor="@color/red"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/TextSize14"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -189,8 +186,8 @@
                     android:layout_width="0dp"
                     android:layout_height="190dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/image_view_bg"
                     app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -202,9 +199,9 @@
                     android:id="@+id/DoubtUploadImage2"
                     android:layout_width="0dp"
                     android:layout_height="190dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginStart="8dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/image_view_bg"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -221,6 +218,7 @@
                     android:layout_marginBottom="1dp"
                     android:background="#00FFFFFF"
                     android:ems="10"
+                    android:textSize="@dimen/TextSize16"
                     android:hint="Question"
                     android:inputType="textMultiLine"
                     android:textColor="#121212"
@@ -261,6 +259,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Add a Photo"
+                    android:textSize="@dimen/TextSize14"
                     app:layout_constraintBottom_toBottomOf="@+id/DoubtUploadImage1"
                     app:layout_constraintEnd_toEndOf="@+id/DoubtUploadImage1"
                     app:layout_constraintStart_toStartOf="@+id/DoubtUploadImage1"
@@ -272,6 +271,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Add a Photo"
+                    android:textSize="@dimen/TextSize14"
                     app:layout_constraintBottom_toBottomOf="@+id/DoubtUploadImage2"
                     app:layout_constraintEnd_toEndOf="@+id/DoubtUploadImage2"
                     app:layout_constraintStart_toStartOf="@+id/DoubtUploadImage2"
@@ -291,19 +291,19 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-            <ProgressBar
-                android:id="@+id/progressBarUpload"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:elevation="4dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/UploadImageCard"
-                app:layout_constraintTop_toTopOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
+    <Button
+        android:id="@+id/progressBarUpload"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+       android:background="#73000000"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

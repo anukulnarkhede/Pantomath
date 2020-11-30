@@ -3,6 +3,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/blue</item>
+        <item name="android:windowDisablePreview">true</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/blue</item>
         <item name="android:statusBarColor">@color/white</item>
@@ -18,10 +19,7 @@
         >
 
         <item name="android:windowBackground"
-            >@drawable/background_splashscreen
-
-
-        </item>
+            >@drawable/background_splashscreen</item>
 
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
@@ -33,6 +31,7 @@
 
     <style name="uploadFragment" parent="Theme.AppCompat.Light.NoActionBar">
 
+        <item name="android:windowDisablePreview">true</item>
         <item name="android:statusBarColor">#fff</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
         <item name="colorPrimary">@color/blue</item>
@@ -47,6 +46,7 @@
 
     <style name="imageView" parent="Theme.AppCompat.Light.NoActionBar">
 
+        <item name="android:windowDisablePreview">true</item>
         <item name="android:statusBarColor">#fff</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
         <item name="colorPrimary">@color/blue</item>

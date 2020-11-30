@@ -24,11 +24,11 @@ public class NewAccount extends AppCompatActivity {
 
     Toolbar toolbar;
     Button nextButt;
-    EditText Name, Email;
+    EditText Name, Email, LastName;
     TextView errorText;
 
 
-    public static String NAME = NewAccount.NAME, EMAIL = NewAccount.EMAIL;
+    public static String NAME = NewAccount.NAME, EMAIL = NewAccount.EMAIL, LASTNAME = NewAccount.LASTNAME;
 
 
     @Override
@@ -91,6 +91,7 @@ public class NewAccount extends AppCompatActivity {
         errorText = findViewById(R.id.errorNewAcc);
         Email = findViewById(R.id.NewAccEmail);
         Name = findViewById(R.id.NewAccName);
+        LastName = findViewById(R.id.NewAccLastName);
 
 
     }
@@ -98,10 +99,11 @@ public class NewAccount extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     public void Validation(){
 
-        NewAccount.NAME = Name.getText().toString();
-        NewAccount.EMAIL = Email.getText().toString().trim();
+        NewAccount.NAME = Name.getText().toString() + " " + LastName.getText().toString();
+        NewAccount.LASTNAME = LastName.getText().toString();
+        NewAccount.EMAIL = toTitleCase(Email.getText().toString().toLowerCase().trim());
 
-        if (NAME.isEmpty()&&EMAIL.isEmpty()){
+        if (NAME.isEmpty()&&EMAIL.isEmpty()&&LASTNAME.isEmpty()){
 
             errorText.setVisibility(View.VISIBLE);
             errorText.setText("All fields are required");
@@ -111,7 +113,7 @@ public class NewAccount extends AppCompatActivity {
 
 
         }
-        else if (NAME.isEmpty()){
+        else if (Name.getText().toString().isEmpty()){
 
             errorText.setVisibility(View.VISIBLE);
             errorText.setText("Please enter your name");
@@ -123,6 +125,13 @@ public class NewAccount extends AppCompatActivity {
         else if (EMAIL.isEmpty()){
             errorText.setVisibility(View.VISIBLE);
             errorText.setText("Please enter your email");
+            Email.setBackgroundResource(R.drawable.error_text_field_bg);
+            Email.requestFocus();
+            Name.setBackgroundResource(R.drawable.text_view_bg);
+        }
+        else if (LASTNAME.isEmpty()){
+            errorText.setVisibility(View.VISIBLE);
+            errorText.setText("Please enter your last name");
             Email.setBackgroundResource(R.drawable.error_text_field_bg);
             Email.requestFocus();
             Name.setBackgroundResource(R.drawable.text_view_bg);
@@ -142,6 +151,25 @@ public class NewAccount extends AppCompatActivity {
             overridePendingTransition(10,10);
         }
 
+    }
+
+
+    public static String toTitleCase(String input) {
+        StringBuilder titleCase = new StringBuilder(input.length());
+        boolean nextTitleCase = true;
+
+        for (char c : input.toCharArray()) {
+            if (Character.isSpaceChar(c)) {
+                nextTitleCase = true;
+            } else if (nextTitleCase) {
+                c = Character.toTitleCase(c);
+                nextTitleCase = false;
+            }
+
+            titleCase.append(c);
+        }
+
+        return titleCase.toString();
     }
 
 

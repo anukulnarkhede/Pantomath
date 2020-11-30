@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditQuestion.EditQuestion"
+    android:background="#fff"
+    >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constFullscreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="12dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/FullScreenBgButt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#87000000"
+            android:orientation="horizontal"
+            />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginHorizontal="16dp"
+            android:elevation="4dp"
+            app:cardBackgroundColor="#fff"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/FullScreenBgButt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="34dp"
+                    android:contentDescription="123"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/doubt_uploaded"
+                    tools:ignore="HardcodedText" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <Button
+        android:elevation="4dp"
+        android:id="@+id/ConfirmDoubtUpload"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp"
+        android:background="@drawable/subject_button_bg_phy_selector"
+
+        android:stateListAnimator="@null"
+        android:layout_marginBottom="16dp"
+        android:text="Confirm Edit"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/TextSize16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="#fff"
+        android:elevation="2dp"
+        android:translationZ="2dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/AddDoubtToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+
+            android:background="#fff">
+
+            <TextView
+
+                android:id="@+id/toolbar_titleUpload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="sans-serif-medium"
+                android:text="Edit Doubt"
+                android:autoSizeMaxTextSize="20dp"
+                android:textColor="@color/blue"
+                android:textSize="20dp"
+                tools:ignore="HardcodedText" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/UploadImageCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/doubt_card_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <Button
+                    android:id="@+id/SubjectTagUpload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/subject_button_bg"
+                    android:clickable="false"
+                    android:elevation="0dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingHorizontal="16dp"
+                    android:stateListAnimator="@null"
+                    android:text="Algebra"
+                    android:textAllCaps="false"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/TextSize14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+
+
+                <com.jackandphantom.circularimageview.RoundedImage
+                    android:id="@+id/DoubtUploadImage1"
+                    android:layout_width="0dp"
+                    android:layout_height="190dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/image_view_bg"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/SubjectTagUpload"
+                    app:rounded_radius="20" />
+
+                <com.jackandphantom.circularimageview.RoundedImage
+                    android:id="@+id/DoubtUploadImage2"
+                    android:layout_width="0dp"
+                    android:layout_height="190dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/image_view_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/SubjectTagUpload"
+                    app:rounded_radius="20" />
+
+                <EditText
+                    android:id="@+id/QuestionUploadText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="16dp"
+                    android:layout_marginBottom="1dp"
+                    android:background="#00FFFFFF"
+                    android:ems="10"
+                    android:textSize="@dimen/TextSize16"
+                    android:hint="Question"
+                    android:inputType="textMultiLine"
+                    android:textColor="#121212"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/DoubtUploadImage1"
+                    tools:ignore="HardcodedText" />
+
+                <Button
+                    android:id="@+id/Image1cancel_button"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/ic_rounded_cross"
+                    app:layout_constraintBottom_toBottomOf="@+id/DoubtUploadImage1"
+                    app:layout_constraintEnd_toEndOf="@+id/DoubtUploadImage1"
+                    app:layout_constraintHorizontal_bias="0.931"
+                    app:layout_constraintStart_toStartOf="@+id/DoubtUploadImage1"
+                    app:layout_constraintTop_toTopOf="@+id/DoubtUploadImage1"
+                    app:layout_constraintVertical_bias="0.042" />
+
+                <Button
+                    android:id="@+id/Image2cancel_button"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/ic_rounded_cross"
+                    app:layout_constraintBottom_toBottomOf="@+id/DoubtUploadImage2"
+                    app:layout_constraintEnd_toEndOf="@+id/DoubtUploadImage2"
+                    app:layout_constraintHorizontal_bias="0.938"
+                    app:layout_constraintStart_toStartOf="@+id/DoubtUploadImage2"
+                    app:layout_constraintTop_toTopOf="@+id/DoubtUploadImage2"
+                    app:layout_constraintVertical_bias="0.042" />
+
+                <TextView
+                    android:id="@+id/addPhoto1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add a Photo"
+                    android:textSize="@dimen/TextSize14"
+                    app:layout_constraintBottom_toBottomOf="@+id/DoubtUploadImage1"
+                    app:layout_constraintEnd_toEndOf="@+id/DoubtUploadImage1"
+                    app:layout_constraintStart_toStartOf="@+id/DoubtUploadImage1"
+                    app:layout_constraintTop_toTopOf="@+id/DoubtUploadImage1"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/addPhoto2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add a Photo"
+                    android:textSize="@dimen/TextSize14"
+                    app:layout_constraintBottom_toBottomOf="@+id/DoubtUploadImage2"
+                    app:layout_constraintEnd_toEndOf="@+id/DoubtUploadImage2"
+                    app:layout_constraintStart_toStartOf="@+id/DoubtUploadImage2"
+                    app:layout_constraintTop_toTopOf="@+id/DoubtUploadImage2"
+                    tools:ignore="HardcodedText" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintGuide_percent="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/progressBarUpload"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:background="#73000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

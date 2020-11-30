@@ -51,6 +51,7 @@ public class PackageSelection extends AppCompatActivity {
 
 
 
+
         int radioIdClass = selectClass.getCheckedRadioButtonId(), radioIdBoard = selectBoard.getCheckedRadioButtonId();
 
         selectClass.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

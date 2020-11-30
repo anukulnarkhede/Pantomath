@@ -10,6 +10,10 @@
     <item android:state_checked="true"
         android:drawable="@drawable/icse_selected"/>
 
+    <item android:state_enabled="false"
+        android:drawable="@drawable/icse_disabled"/>
+
+
 
     <item android:drawable="@drawable/ic_icse_button"/>
 </selector>

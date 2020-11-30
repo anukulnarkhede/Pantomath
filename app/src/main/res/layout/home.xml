@@ -8,7 +8,6 @@
     tools:context=".Home.Home"
     android:background="@color/white"
     >
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,7 +15,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
@@ -39,12 +37,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/home_bottom_bar_items">
-
         </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-
         <!--app:labelVisibilityMode="selected"-->
-
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

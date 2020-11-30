@@ -64,27 +64,31 @@
             android:button="@drawable/ssc_board_selector"
             android:layout_marginEnd="16dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            />
 
         <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/CBSE"
             android:button="@drawable/cbse_board_selector"
             android:layout_width="wrap_content"
             android:layout_marginEnd="16dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            />
 
         <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/ICSE"
             android:layout_marginEnd="16dp"
             android:button="@drawable/icse_selector"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            />
 
     </RadioGroup>
     </HorizontalScrollView>
 
 
     <TextView
+        android:autoSizeMaxTextSize="20sp"
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -96,7 +100,7 @@
         android:layout_marginTop="38dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText,UnusedAttribute" />
 
 
     <TextView
@@ -123,10 +127,25 @@
         android:text="Next"
         android:textAlignment="center"
         android:fontFamily="sans-serif-medium"
-        android:textSize="16sp"
+        android:textSize="@dimen/TextSize16"
         android:textAllCaps="false"
         android:textColor="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Note : This app is currently available for only students of Litmus Academy."
+        android:textColor="@color/red"
+        android:textSize="@dimen/TextSize14"
+        app:layout_constraintBottom_toTopOf="@+id/createAcc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />

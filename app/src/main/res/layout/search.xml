@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Home.SearchActivity"
+    android:background="#ffffff"
+
+    >
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="2dp"
+        android:translationZ="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/SearchToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#fff"
+            android:elevation="0dp"
+            android:translationZ="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:navigationIcon="@drawable/back_search">
+
+            <EditText
+                android:id="@+id/SearchEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|center"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:backgroundTint="#fff"
+                android:clickable="true"
+                android:cursorVisible="true"
+                android:ems="10"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:hint="Search in doubts"
+                android:imeOptions="actionSearch"
+                android:inputType="textImeMultiLine"
+                android:singleLine="true"
+                android:textColor="#121212"
+                android:textColorHint="#999"
+                android:textSize="@dimen/TextSize16"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:id="@+id/Cross"
+                android:visibility="gone"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:scaleType="centerCrop"
+                android:padding="10dp"
+
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/cross"
+
+                />
+
+        </androidx.appcompat.widget.Toolbar>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            >
+        <TextView
+            android:id="@+id/noOfSearchResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="14dp"
+            android:textColor="#999999"
+            android:layout_marginStart="16dp"
+            android:layout_alignParentStart="true"
+            android:gravity="start"
+            android:layout_marginBottom="16dp"
+
+            />
+
+
+            <ImageView
+                android:layout_alignParentEnd="true"
+                android:layout_width="140dp"
+                android:layout_height="20dp"
+                android:gravity="end"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/algolia_search"
+
+                />
+
+        </RelativeLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        android:overScrollMode="never"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searchRecyclerView"
+            android:layout_width="match_parent"
+            android:overScrollMode="never"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingTop="16dp"
+            android:paddingBottom="128dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/noResultsSearch"
+
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:srcCompat="@drawable/notfound" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

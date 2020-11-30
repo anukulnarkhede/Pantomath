@@ -166,7 +166,63 @@ public class SmartSuggestionAdapter extends RecyclerView.Adapter<SmartSuggestion
                 }
                 break;
 
-            case "Languages":
+            case "English":
+                holder.subTag.setBackgroundResource(R.drawable.subject_button_bg_lang);
+                holder.subTag.setTextColor(Color.parseColor("#5550B6"));
+                holder.constraintLayout.setBackgroundResource(R.drawable.smart_suggestion_card_bg_lang);
+                holder.solved.setBackgroundResource(R.drawable.small_squar_bg_lang);
+                if (DoubtList.get(position).getStatus().equals("Unsolved")){
+                    holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_grey);
+                    holder.solved.setBackgroundResource(R.drawable.square_small_bg_grey);
+                }
+                else if (DoubtList.get(position).getStatus().equals("Solved")){
+                    holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_lang);
+                }
+                break;
+
+            case "Hindi":
+                holder.subTag.setBackgroundResource(R.drawable.subject_button_bg_lang);
+                holder.subTag.setTextColor(Color.parseColor("#5550B6"));
+                holder.constraintLayout.setBackgroundResource(R.drawable.smart_suggestion_card_bg_lang);
+                holder.solved.setBackgroundResource(R.drawable.small_squar_bg_lang);
+                if (DoubtList.get(position).getStatus().equals("Unsolved")){
+                    holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_grey);
+                    holder.solved.setBackgroundResource(R.drawable.square_small_bg_grey);
+                }
+                else if (DoubtList.get(position).getStatus().equals("Solved")){
+                    holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_lang);
+                }
+                break;
+
+            case "Marathi":
+                holder.subTag.setBackgroundResource(R.drawable.subject_button_bg_lang);
+                holder.subTag.setTextColor(Color.parseColor("#5550B6"));
+                holder.constraintLayout.setBackgroundResource(R.drawable.smart_suggestion_card_bg_lang);
+                holder.solved.setBackgroundResource(R.drawable.small_squar_bg_lang);
+                if (DoubtList.get(position).getStatus().equals("Unsolved")){
+                    holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_grey);
+                    holder.solved.setBackgroundResource(R.drawable.square_small_bg_grey);
+                }
+                else if (DoubtList.get(position).getStatus().equals("Solved")){
+                    holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_lang);
+                }
+                break;
+
+            case "Sanskrit":
+                holder.subTag.setBackgroundResource(R.drawable.subject_button_bg_lang);
+                holder.subTag.setTextColor(Color.parseColor("#5550B6"));
+                holder.constraintLayout.setBackgroundResource(R.drawable.smart_suggestion_card_bg_lang);
+                holder.solved.setBackgroundResource(R.drawable.small_squar_bg_lang);
+                if (DoubtList.get(position).getStatus().equals("Unsolved")){
+                    holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_grey);
+                    holder.solved.setBackgroundResource(R.drawable.square_small_bg_grey);
+                }
+                else if (DoubtList.get(position).getStatus().equals("Solved")){
+                    holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_lang);
+                }
+                break;
+
+            case "French":
                 holder.subTag.setBackgroundResource(R.drawable.subject_button_bg_lang);
                 holder.subTag.setTextColor(Color.parseColor("#5550B6"));
                 holder.constraintLayout.setBackgroundResource(R.drawable.smart_suggestion_card_bg_lang);

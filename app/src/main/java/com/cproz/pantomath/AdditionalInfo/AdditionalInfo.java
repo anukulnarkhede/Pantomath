@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -37,18 +38,21 @@ import java.util.Objects;
 
 public class AdditionalInfo extends AppCompatActivity {
 
+
     EditText PhoneNumber;
-    Spinner CitySpinner, InstituteSeletor;
+    Spinner CitySpinner, InstituteSeletor, SelectBranch;
     Toolbar toolbar;
     String SelectedCity = "", SelectedInstitute = "";
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser user = firebaseAuth.getCurrentUser();
     String email = Objects.requireNonNull(user).getEmail();
-    public static String SELECTEDCITY = AdditionalInfo.SELECTEDCITY = "",SELECTEDINSTITUTE =  AdditionalInfo.SELECTEDINSTITUTE = "";
+    public static String SELECTEDCITY = AdditionalInfo.SELECTEDCITY = "",SELECTEDINSTITUTE =  AdditionalInfo.SELECTEDINSTITUTE = "", SELECTEDBRANCH = AdditionalInfo.SELECTEDBRANCH;
     Button UpdateInfo;
+    CheckBox OtherStudents;
     TextView ErrorText;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +65,59 @@ public class AdditionalInfo extends AppCompatActivity {
         Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.blue), PorterDuff.Mode.SRC_ATOP);
 
 
+        Bundle bundle = getIntent().getExtras();
+        assert bundle != null;
+        if (Objects.equals(bundle.getString("Settings"), "Settings")){
+           OtherStudents.setVisibility(View.GONE);
+           UpdateInfo.setText("Save Changes");
+        }else{
+            OtherStudents.setVisibility(View.VISIBLE);
+        }
 
 
-        final String[] City = {"Select City", "Aurangabad", "Nashik"};
+
+//        final String[] City = {"Select City",
+//                "Aurangabad",
+//                "Nashik",
+//                "Ahmednagar",
+//                "Akola",
+//                "Amravati",
+//                "Bhandara",
+//                "Beed",
+//                "Buldhana",
+//                "Chandrapur",
+//                "Dhule",
+//                "Gadchiroli",
+//                "Gondia",
+//                "Hingoli",
+//                "Jalgaon",
+//                "Jalna",
+//                "Kolhapur",
+//                "Latur",
+//                "Mumbai City",
+//                "Mumbai suburban",
+//                "Nandurbar",
+//                "Nanded",
+//                "Nagpur",
+//                "Osmanabad",
+//                "Parbhani",
+//                "Pune",
+//                "Raigad",
+//                "Ratnagiri",
+//                "Sindhudurg",
+//                "Sangli",
+//                "Solapur",
+//                "Satara",
+//                "Thane",
+//                "Wardha",
+//                "Washim",
+//                "Yavatmal"};
+
+        final String[] City = {
+                "Select City",
+                "Aurangabad",
+                "Nashik",
+                };
 
         final ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(City));
 
@@ -77,6 +131,27 @@ public class AdditionalInfo extends AppCompatActivity {
                 SELECTEDCITY = City[position];
                 //Toast.makeText(AddTeacher.this, SUBJECT, Toast.LENGTH_SHORT).show();
 
+
+                if (SELECTEDCITY.equals("Select City")){
+                    InstituteSeletor.setEnabled(false);
+                    OtherStudents.setEnabled(false);
+                    final String[] Institute = {"Select Institute", "Litmus Academy"};
+                    OtherStudents.setChecked(false);
+                    Institute(Institute);
+                }else
+                if (SELECTEDCITY.equals("Aurangabad")||SELECTEDCITY.equals("Nashik")){
+                    InstituteSeletor.setEnabled(true);
+                    OtherStudents.setEnabled(false);
+                    final String[] Institute = {"Select Institute", "Litmus Academy"};
+                    OtherStudents.setChecked(false);
+                    Institute(Institute);
+                }else {
+                    OtherStudents.setEnabled(false);
+                    InstituteSeletor.setEnabled(false);
+                    final String[] Institute = {"Select Institute", "Litmus Academy"};
+                    Institute(Institute);
+                    OtherStudents.setChecked(false);
+                }
 
 
 
@@ -96,31 +171,17 @@ public class AdditionalInfo extends AppCompatActivity {
 
 
 
-        final String[] Institute = {"Select Institute", "Litmus Academy, A-Cidco", "Litmus Academy, A-Hudco", "Litmus Academy, A-Jyoti Nagar",
-                "Litmus Academy, A-Deolai", "Litmus Academy, A-Nirala Bazar", "Litmus Academy, N-Ashok Stambh", "Litmus Academy, N-Jehan Circle",
-                "Litmus Academy, N-Indira Nagar",
-                "Litmus Academy, N-Trimurti Chauk", "Litmus Academy, N-Ashoka Marg", "Litmus Academy, N-Amrutdham", "Litmus Academy, N-Deolali Camp"};
-
-        final ArrayList<String> arrayList1 = new ArrayList<>(Arrays.asList(Institute));
-
-        final ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<>(this, R.layout.style_spinner, arrayList1);
 
 
-        InstituteSeletor.setAdapter(arrayAdapter1);
+        final String[] Institute = {"Select Institute", "Litmus Academy"};
 
-        InstituteSeletor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SELECTEDINSTITUTE = Institute[position];
+        Institute(Institute);
 
+//        InstituteSeletor.setEnabled(false);
+        final String[] Branches = {"Select Branch", "Cidco", "Hudco", "Nirala Bazar", "Deolai", "Jyoti Nagar"};
 
-            }
+        Branch(Branches);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
 
 
@@ -134,12 +195,16 @@ public class AdditionalInfo extends AppCompatActivity {
                 String Institute = SELECTEDINSTITUTE;
                 String Board = PackageSelection.SELECTEDBOARD;
                 String STD = PackageSelection.SELECTEDCLASS;
+                String Branch = SELECTEDBRANCH;
+
+
 
 
 
                 if (PhoneNumber.getText().toString().isEmpty()){
                     PhoneNumber.requestFocus();
                     ErrorText.setTextColor(Color.parseColor("#FF2829"));
+                    ErrorText.setText("Phone Number is Compulsory");
 
                 }
 
@@ -154,9 +219,29 @@ public class AdditionalInfo extends AppCompatActivity {
                     ErrorText.setText("Select City");
                     ErrorText.setTextColor(Color.parseColor("#FF2829"));
                 }
+                else if (OtherStudents.isChecked()){
+                    Institute = "Litmus Academy";
+                    Branch = "NA";
+                    InstituteSeletor.setEnabled(false);
+                    SelectBranch.setEnabled(false);
+
+                    ErrorText.setTextColor(Color.parseColor("#999999"));
+
+                    Bundle bundle = getIntent().getExtras();
+                    assert bundle != null;
+                    if (Objects.equals(bundle.getString("Settings"), "Settings")){
+                        UpdateSettings(number, city, Institute, Branch);
+                    }else{
+                        UpdateCity(number,city,Institute,Board,STD, Branch,"Unpaid");
+                    }
+                }
                 else if (Institute.equals("Select Institute")){
 
                     ErrorText.setText("Select Institute");
+                    ErrorText.setTextColor(Color.parseColor("#FF2829"));
+                }
+                else if (SELECTEDBRANCH.equals("Select Branch")){
+                    ErrorText.setText("Select Branch");
                     ErrorText.setTextColor(Color.parseColor("#FF2829"));
                 }
                 else{
@@ -166,9 +251,9 @@ public class AdditionalInfo extends AppCompatActivity {
                     Bundle bundle = getIntent().getExtras();
                     assert bundle != null;
                     if (Objects.equals(bundle.getString("Settings"), "Settings")){
-                        UpdateSettings(number, city, Institute);
+                        UpdateSettings(number, city, Institute, Branch);
                     }else{
-                        UpdateCity(number,city,Institute,Board,STD);
+                        UpdateCity(number,city,Institute,Board,STD, Branch,"Not Verified");
                     }
                 }
 
@@ -190,12 +275,15 @@ public class AdditionalInfo extends AppCompatActivity {
         toolbar = findViewById(R.id.AdditionalInfoToolbar);
         UpdateInfo = findViewById(R.id.UpdateInfo);
         ErrorText = findViewById(R.id.errorText);
+        SelectBranch = findViewById(R.id.SelectBranch);
+        OtherStudents = findViewById(R.id.OtherStudents);
+
 
     }
 
-    public void UpdateCity(String number, String city, String Institute, String Board, String STD){
+    public void UpdateCity(String number, String city, String Institute, String Board, String STD, String Branch,String UserStatus){
         firebaseFirestore.collection("Users/Students/StudentsInfo/").document(email).
-                update("Number", number, "Address", city, "Institute", Institute, "Board", Board, "Class", STD).addOnCompleteListener(new OnCompleteListener<Void>() {
+                update("Number", number, "Address", city, "Institute", Institute, "Board", Board, "Class", STD, "User", UserStatus, "Branch", Branch).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 startActivity(new Intent(AdditionalInfo.this, Home.class));
@@ -209,9 +297,9 @@ public class AdditionalInfo extends AppCompatActivity {
     }
 
 
-    public void UpdateSettings(String number, String city, String Institute){
+    public void UpdateSettings(String number, String city, String Institute, String Branch){
         firebaseFirestore.collection("Users/Students/StudentsInfo/").document(email).
-                update("Number", number, "Address", city).addOnCompleteListener(new OnCompleteListener<Void>() {
+                update("Number", number, "Address", city, "Institute", Institute, "Branch", Branch).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 startActivity(new Intent(AdditionalInfo.this, Home.class));
@@ -223,4 +311,69 @@ public class AdditionalInfo extends AppCompatActivity {
             }
         });
     }
+
+    public void Institute(final String[] Institute){
+        final ArrayList<String> arrayList1 = new ArrayList<>(Arrays.asList(Institute));
+
+        final ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<>(this, R.layout.style_spinner, arrayList1);
+
+
+        InstituteSeletor.setAdapter(arrayAdapter1);
+
+        InstituteSeletor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                SELECTEDINSTITUTE = Institute[position];
+
+                if (SELECTEDINSTITUTE.equals("Select Institute")||SELECTEDCITY.equals("Select City")){
+                    SelectBranch.setEnabled(false);
+                    final String[] Branches = {"Select Branch", "Cidco", "Hudco", "Nirala Bazar", "Deolai", "Jyoti Nagar"};
+
+                    Branch(Branches);
+                }else
+                if (SELECTEDCITY.equals("Aurangabad")&&SELECTEDINSTITUTE.equals("Litmus Academy")){
+                    SelectBranch.setEnabled(true);
+                    final String[] Branches = {"Select Branch", "Cidco", "Hudco", "Nirala Bazar", "Deolai", "Jyoti Nagar"};
+
+                    Branch(Branches);
+                }else
+                    if (SELECTEDCITY.equals("Nashik")&&SELECTEDINSTITUTE.equals("Litmus Academy")){
+                        SelectBranch.setEnabled(true);
+                        final String[] Branches = {"Select Branch", "Indira Nagar", "Jehan Circle", "Ashok Stambh", "Trimurti Chauk", "Ashoka Marg", "Amrutdham", "Deolali Camp"};
+
+                        Branch(Branches);
+                    }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public void Branch(final String[] Branches){
+        final ArrayList<String> arrayList1 = new ArrayList<>(Arrays.asList(Branches));
+
+        final ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<>(this, R.layout.style_spinner, arrayList1);
+
+
+        SelectBranch.setAdapter(arrayAdapter1);
+
+        SelectBranch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                SELECTEDBRANCH = Branches[position];
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
 }

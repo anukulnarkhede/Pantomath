@@ -31,6 +31,7 @@ import com.cproz.pantomath.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -60,7 +61,7 @@ public class UploadImagePage extends AppCompatActivity {
     View root;
     ConstraintLayout constraintLayout;
     Toolbar toolbar;
-    ProgressBar progressBar;
+    Button progressBar;
 
     public String Name, Email, AnsPhotoUrl1 = "", AnsPhotoUrl2 = "", AnsText = "", AudioUrl = "", Chapter, FileUrl = "", Link = "",
             Photo1url = "", Photo2url = "", ProfileImageURL = "", Status,
@@ -69,7 +70,8 @@ public class UploadImagePage extends AppCompatActivity {
     public FirebaseStorage storage;
     public StorageReference storageReference;
 
-    private FirebaseFirestore fireDB;
+    public static String INSTITUTE = UploadImagePage.INSTITUTE;
+    private FirebaseFirestore fireDB, firebaseFirestore;
     ConstraintLayout constFullscreen;
     LinearLayout FullScreenBgButt;
     Button crossProf;
@@ -83,6 +85,11 @@ public class UploadImagePage extends AppCompatActivity {
         setContentView(R.layout.upload_image_page);
 
         Initialise();
+
+
+
+
+
 
 
         constFullscreen = findViewById(R.id.constFullscreen);
@@ -113,7 +120,6 @@ public class UploadImagePage extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.blue), PorterDuff.Mode.SRC_ATOP);
-
         SubjTag.setText(UploadFragment.SUBJECT);
 
         switch (UploadFragment.SUBJECT){
@@ -307,7 +313,7 @@ public class UploadImagePage extends AppCompatActivity {
         Image1 = findViewById(R.id.DoubtUploadImage1);
         Image2 = findViewById(R.id.DoubtUploadImage2);
         constraintLayout = findViewById(R.id.UploadImageCard);
-        progressBar = findViewById(R.id.progressBarUpload);
+       progressBar = findViewById(R.id.progressBarUpload);
         toolbar = findViewById(R.id.AddDoubtToolBar);
 
     }
@@ -534,7 +540,7 @@ public class UploadImagePage extends AppCompatActivity {
                                     constFullscreen.setVisibility(View.GONE);
                                     Toast.makeText(UploadImagePage.this, "Failed to Upload Image 1", Toast.LENGTH_SHORT).show();
                                     ConfirmDoubt.setEnabled(true);
-                                    progressBar.setVisibility(View.GONE);
+                                   progressBar.setVisibility(View.GONE);
                                 }
                             });
 
@@ -549,7 +555,7 @@ public class UploadImagePage extends AppCompatActivity {
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(UploadImagePage.this, "Failed to Upload Image 1", Toast.LENGTH_SHORT).show();
                     ConfirmDoubt.setEnabled(true);
-                    progressBar.setVisibility(View.GONE);
+                   progressBar.setVisibility(View.GONE);
                 }
             });
 
@@ -592,7 +598,7 @@ public class UploadImagePage extends AppCompatActivity {
                                 public void run() {
                                     startActivity(new Intent(UploadImagePage.this, Home.class ));
                                 }
-                            }, 2500);
+                            }, 2000);
                         }
                     });
 
@@ -603,7 +609,7 @@ public class UploadImagePage extends AppCompatActivity {
                 public void onFailure(@NonNull Exception e) {
                     constFullscreen.setVisibility(View.GONE);
                     ConfirmDoubt.setEnabled(true);
-                    progressBar.setVisibility(View.GONE);
+                   progressBar.setVisibility(View.GONE);
                     Toast.makeText(UploadImagePage.this, "Failed to Upload Image 1", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -620,14 +626,14 @@ public class UploadImagePage extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void validations(){
         String text = QuestionText.getText().toString();
-        progressBar.setVisibility(View.VISIBLE);
-        progressBar.setProgress(100, true);
+       progressBar.setVisibility(View.VISIBLE);
+//        progressBar.setProgress(100, true);
 
         if (text.isEmpty()){
             QuestionText.setError("Question is mandatory");
             QuestionText.requestFocus();
             ConfirmDoubt.setEnabled(true);
-            progressBar.setVisibility(View.GONE);
+           progressBar.setVisibility(View.GONE);
         }
         else{
             try {
@@ -652,6 +658,56 @@ public class UploadImagePage extends AppCompatActivity {
         Board = HomeFragment.BOARD;
         STD = HomeFragment.CLASS;
         ProfileImageURL = HomeFragment.PROFILEURL;
+        String Institute = UploadFragment.INSTITUTE;
+        String Branch = UploadFragment.BRANCH;
+        String Address = UploadFragment.ADDRESS;
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
+//        firebaseFirestore.collection("Users/Students/StudentsInfo/")
+//                .document(Email)
+//                .get()
+//                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                final int NoOfDoubtsAsked =  Objects.requireNonNull(documentSnapshot.getLong("NumberOfDoubtsAsked")).intValue();
+//                INSTITUTE = documentSnapshot.getString("Institute");
+//
+////                firebaseFirestore.collection("Users/Students/StudentsInfo/")
+////                        .document(Objects.requireNonNull(documentSnapshot.getString("Email")))
+////                        .update("NumberOfDoubtsAsked", NoOfDoubtsAsked+1)
+////                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+////                            @Override
+////                            public void onSuccess(Void aVoid) {
+////                                //Toast.makeText(UploadImagePage.this, String.valueOf(NoOfDoubtsAsked+1), Toast.LENGTH_SHORT).show();
+////                            }
+////                        });
+//
+//
+////                firebaseFirestore.collection("Count")
+////                        .document(Objects.requireNonNull(documentSnapshot.getString("Institute")))
+////                        .get()
+////                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+////                            @Override
+////                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+////                                final int TotalNoOfDoubts = Objects.requireNonNull(documentSnapshot.getLong("TotalNoOfDoubts")).intValue();
+////
+////                                firebaseFirestore.collection("Count")
+////                                        .document(INSTITUTE)
+////                                        .update("TotalNoOfDoubts",TotalNoOfDoubts+1 ).addOnSuccessListener(new OnSuccessListener<Void>() {
+////                                    @Override
+////                                    public void onSuccess(Void aVoid) {
+////                                        //Toast.makeText(UploadImagePage.this, String.valueOf(TotalNoOfDoubts+1), Toast.LENGTH_SHORT).show();
+////                                    }
+////                                });
+////
+////                            }
+////                        });
+//            }
+//        });
+
+
+
 
         Text = QuestionText.getText().toString().trim();
 
@@ -670,7 +726,7 @@ public class UploadImagePage extends AppCompatActivity {
 
                 Name, Email, AnsPhotoUrl1, AnsPhotoUrl2, AnsText, AudioUrl,Chapter, FileUrl,Link,
                 Photo1url, Photo2url, ProfileImageURL, "Unsolved", Text, Board, STD, Uid,Subject,Teacher, "True", date,
-                "",date,""
+                "",date,"",Address, Institute, Branch
 
 
 
@@ -687,7 +743,7 @@ public class UploadImagePage extends AppCompatActivity {
             public void onFailure(@NonNull Exception e) {
                 constFullscreen.setVisibility(View.GONE);
                 ConfirmDoubt.setEnabled(true);
-                progressBar.setVisibility(View.GONE);
+             progressBar.setVisibility(View.GONE);
                 Toast.makeText(UploadImagePage.this, "Failed", Toast.LENGTH_SHORT).show();
             }
         });

@@ -36,22 +36,23 @@
             android:text="Student Tag"
             android:textAllCaps="false"
             android:textColor="@color/blue"
-            android:textSize="14sp"
+            android:textSize="@dimen/TextSize14"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/NewDoubtTextNotification"
             tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/NewDoubtTextNotification"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif"
             android:text="Nachiket Nanoty\nhas asked a doubt."
             android:textAlignment="viewStart"
             android:textColor="#121212"
-            android:textSize="14sp"
+            android:textSize="@dimen/TextSize14"
 
             app:layout_constraintEnd_toStartOf="@+id/SubjectTag_Notification"
             app:layout_constraintHorizontal_bias="0.0"

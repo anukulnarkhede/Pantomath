@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-
+<LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,16 +12,13 @@
     android:overScrollMode="never"
     >
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:translationZ="2dp"
+        android:translationZ="0dp"
+        android:elevation="0dp"
+        app:elevation="0dp"
 
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +33,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:elevation="2dp"
-            android:background="#fff">
+            android:background="#fff"
+
+            >
 
             <ImageView
                 android:id="@+id/settingsProfile"
@@ -48,22 +47,33 @@
                 android:layout_marginEnd="12dp"
                 tools:ignore="RtlHardcoded" />
 
-            <TextView
-
-                android:id="@+id/toolbar_titleProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:fontFamily="sans-serif-medium"
-                android:text="Profile"
-                android:textColor="@color/blue"
-                android:textSize="20sp"
-                tools:ignore="HardcodedText" />
+            <!--            <TextView-->
+            <!--                android:autoSizeMaxTextSize="20dp"-->
+            <!--                android:id="@+id/toolbar_titleProfile"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_gravity="start"-->
+            <!--                android:fontFamily="sans-serif-medium"-->
+            <!--                android:text="Profile"-->
+            <!--                android:textColor="@color/blue"-->
+            <!--                android:textSize="20dp"-->
+            <!--                tools:ignore="HardcodedText" />-->
 
         </androidx.appcompat.widget.Toolbar>
 
 
+
+
     </com.google.android.material.appbar.AppBarLayout>
+
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
 
 
         <View
@@ -72,18 +82,17 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="#999999"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+            app:layout_constraintTop_toBottomOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ProfilePicture_profile"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
             android:src="@drawable/personal_info"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/editProfilePicture_profile"
@@ -94,69 +103,94 @@
         app:layout_constraintBottom_toBottomOf="@+id/ProfilePicture_profile"
         app:layout_constraintEnd_toEndOf="@+id/ProfilePicture_profile" />
 
-    <TextView
-        android:id="@+id/UserNameProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ProfilePicture_profile"
-        android:textColor="#000000"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="20sp"
-        android:layout_marginTop="16dp"
-         />
 
-    <TextView
-        android:id="@+id/ClassAndBoard_Profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:layout_marginTop="4dp"
-        android:textColor="#999999"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UserNameProfile"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/ProfilePicture_profile"
+            app:layout_constraintStart_toEndOf="@+id/ProfilePicture_profile"
+            app:layout_constraintTop_toTopOf="@+id/ProfilePicture_profile">
 
-        />
+            <TextView
+                android:id="@+id/UserNameProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="start"
+                android:text=""
+                android:textColor="#000000"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="166dp"
+                tools:layout_editor_absoluteY="84dp"
+                />
 
-    <TextView
-        android:id="@+id/noOfDoubts_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textColor="#121212"
-        android:textSize="16sp"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="55dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ClassAndBoard_Profile" />
 
-    <TextView
-        android:id="@+id/noOfSolvedDoubts_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textColor="#121212"
-        android:textSize="16sp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ClassAndBoard_Profile" />
+            <TextView
+                android:id="@+id/email_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text=""
+                android:textColor="#999999"
+                android:layout_marginTop="4dp"
+                tools:layout_editor_absoluteX="166dp"
+                tools:layout_editor_absoluteY="144dp"
+                android:textSize="@dimen/TextSize14"
+                />
 
-    <TextView
-        android:id="@+id/noOfUnSolvedDoubts_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="58dp"
-        android:text="0"
-        android:textColor="#121212"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ClassAndBoard_Profile" />
+
+            <TextView
+                android:id="@+id/ClassAndBoard_Profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:gravity="start"
+                android:layout_marginTop="4dp"
+                android:text=""
+                android:textColor="#999999"
+                android:textSize="@dimen/TextSize14"
+                />
+
+
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/noOfDoubts_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="55dp"
+            android:text="0"
+            android:textColor="#121212"
+            android:textSize="@dimen/TextSize16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/noOfSolvedDoubts_profile" />
+
+        <TextView
+            android:id="@+id/noOfSolvedDoubts_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="0"
+            android:textColor="#121212"
+            android:textSize="@dimen/TextSize16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ProfilePicture_profile" />
+
+        <TextView
+            android:id="@+id/noOfUnSolvedDoubts_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="58dp"
+            android:text="0"
+            android:textColor="#121212"
+            android:textSize="@dimen/TextSize16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/noOfSolvedDoubts_profile" />
 
     <TextView
         android:id="@+id/textView15"
@@ -164,7 +198,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:text="Doubts"
-        android:textSize="14sp"
+        android:textSize="@dimen/TextSize14"
         android:textColor="#999999"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noOfDoubts_profile" />
@@ -174,7 +208,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Solved"
-        android:textSize="14sp"
+        android:textSize="@dimen/TextSize14"
         android:textColor="#999999"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -186,237 +220,233 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="36dp"
         android:text="Unsolved"
-        android:textSize="14sp"
+        android:textSize="@dimen/TextSize14"
         android:textColor="#999999"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noOfUnSolvedDoubts_profile" />
 
-    <HorizontalScrollView
-        android:layout_marginTop="24dp"
-        android:id="@+id/horizontalScrollProfile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:overScrollMode="never"
-        android:scrollbars="none"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16"
-        
-        >
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView16"
 
-        <RadioGroup
-            android:id="@+id/scrollHorLayout"
-            android:layout_width="wrap_content"
+            >
+
+            <RadioGroup
+                android:id="@+id/scrollHorLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/AllProfile"
+
+                    android:layout_width="85dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/all_subject_bg_selector"
+                    android:button="@drawable/all_subject_bg_selector"
+                    android:checked="true"
+                    android:elevation="0dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingHorizontal="16dp"
+                    android:text="All"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="#121212"
+                    android:textSize="@dimen/TextSize14"
+
+
+                    />
+
+
+                <RadioButton
+
+                    android:id="@+id/AlgebraProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+
+                    android:background="@drawable/subject_button_bg_selector"
+                    android:button="@drawable/subject_button_bg_selector"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingHorizontal="16dp"
+                    android:text="Algebra"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/TextSize14"
+
+
+                    tools:ignore="ButtonStyle" />
+
+                <RadioButton
+                    android:id="@+id/GeometryProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/subject_button_bg_geom_selector"
+                    android:button="@drawable/subject_button_bg_geom_selector"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingHorizontal="16dp"
+                    android:text="Geometry"
+                    android:textAllCaps="false"
+                    android:textColor="#9A0D91"
+                    android:textSize="@dimen/TextSize14"
+                    android:textAlignment="center"
+
+                    />
+
+                <RadioButton
+                    android:id="@+id/PhysicsProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/subject_button_bg_phy_selector"
+                    android:button="@drawable/subject_button_bg_phy_selector"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingHorizontal="16dp"
+                    android:text="Physics"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="#0078FF"
+                    android:textSize="@dimen/TextSize14"
+
+
+                    />
+
+                <RadioButton
+                    android:id="@+id/ChemistryProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/subject_button_bg_chem_selector"
+                    android:button="@drawable/subject_button_bg_chem_selector"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingHorizontal="16dp"
+                    android:text="Chemistry"
+                    android:textAllCaps="false"
+                    android:textColor="#FF9B00"
+                    android:textSize="@dimen/TextSize14"
+                    android:textAlignment="center"
+
+
+                    />
+
+                <RadioButton
+                    android:id="@+id/BiologyProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/subject_button_bg_bio_selector"
+                    android:button="@drawable/subject_button_bg_bio_selector"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingHorizontal="16dp"
+                    android:text="Biology"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="#FF1ADD"
+                    android:textSize="@dimen/TextSize14"
+
+
+                    />
+
+                <RadioButton
+                    android:id="@+id/HistoryProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/subject_button_bg_his_selector"
+                    android:button="@drawable/subject_button_bg_his_selector"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingHorizontal="16dp"
+                    android:text="History"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="#813912"
+                    android:textSize="@dimen/TextSize14"
+
+
+                    />
+
+                <RadioButton
+                    android:id="@+id/GeographyProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/subject_button_bg_geog_selector"
+                    android:button="@drawable/subject_button_bg_geog_selector"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingHorizontal="16dp"
+                    android:text="Geography"
+                    android:textAllCaps="false"
+                    android:textColor="#009F37"
+                    android:textSize="@dimen/TextSize14"
+                    android:textAlignment="center"
+
+
+                    />
+
+                <RadioButton
+                    android:id="@+id/LanguagesProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/subject_button_bg_lang_selector"
+                    android:button="@drawable/subject_button_bg_lang_selector"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingHorizontal="16dp"
+                    android:text="Languages"
+                    android:textAllCaps="false"
+                    android:textColor="#5550B6"
+                    android:textSize="@dimen/TextSize14"
+                    android:textAlignment="center"
+
+
+                    />
+
+
+            </RadioGroup>
+
+        </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerViewProfile"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-            
-            <RadioButton
-                android:id="@+id/AllProfile"
 
-                android:layout_width="85dp"
-                android:textAlignment="center"
-                android:layout_height="44dp"
-                android:button="@drawable/all_subject_bg_selector"
-                android:text="All"
-                android:checked="true"
-                android:elevation="0dp"
-                android:layout_marginStart="16dp"
-                android:paddingHorizontal="16dp"
-                android:layout_marginEnd="8dp"
-                android:textAllCaps="false"
-                android:background="@drawable/all_subject_bg_selector"
-                android:textSize="14sp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="4dp"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="#121212"
-
-
-
-                />
-
-
-            <RadioButton
-
-                android:id="@+id/AlgebraProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="44dp"
-                android:button="@drawable/subject_button_bg_selector"
-                android:text="Algebra"
-                android:textAlignment="center"
-
-                android:layout_marginEnd="8dp"
-                android:paddingHorizontal="16dp"
-                android:textAllCaps="false"
-                android:background="@drawable/subject_button_bg_selector"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="@color/red"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="4dp"
-
-
-                tools:ignore="ButtonStyle" />
-
-            <RadioButton
-                android:id="@+id/GeometryProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="44dp"
-                android:text="Geometry"
-                android:paddingHorizontal="16dp"
-                android:textAllCaps="false"
-                android:layout_marginEnd="8dp"
-                android:button="@drawable/subject_button_bg_geom_selector"
-                android:background="@drawable/subject_button_bg_geom_selector"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="#9A0D91"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="4dp"
-
-
-
-                />
-
-            <RadioButton
-                android:id="@+id/PhysicsProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="44dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/subject_button_bg_phy_selector"
-                android:button="@drawable/subject_button_bg_phy_selector"
-                android:fontFamily="sans-serif-medium"
-                android:paddingHorizontal="16dp"
-                android:text="Physics"
-                android:textAllCaps="false"
-                android:textColor="#0078FF"
-                android:textSize="14sp"
-                android:textAlignment="center"
-
-
-                />
-
-            <RadioButton
-                android:id="@+id/ChemistryProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="44dp"
-                android:text="Chemistry"
-                android:paddingHorizontal="16dp"
-                android:textAllCaps="false"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/subject_button_bg_chem_selector"
-                android:button="@drawable/subject_button_bg_chem_selector"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="#FF9B00"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="4dp"
-
-
-
-                />
-
-            <RadioButton
-                android:id="@+id/BiologyProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="44dp"
-                android:text="Biology"
-                android:paddingHorizontal="16dp"
-                android:textAllCaps="false"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/subject_button_bg_bio_selector"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="#FF1ADD"
-                android:textAlignment="center"
-                android:button="@drawable/subject_button_bg_bio_selector"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="4dp"
-
-
-
-                />
-
-            <RadioButton
-                android:id="@+id/HistoryProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="44dp"
-                android:text="History"
-                android:paddingHorizontal="16dp"
-                android:textAllCaps="false"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/subject_button_bg_his_selector"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="#813912"
-                android:layout_marginTop="2dp"
-                android:textAlignment="center"
-                android:layout_marginBottom="4dp"
-                android:button="@drawable/subject_button_bg_his_selector"
-
-
-
-                />
-
-            <RadioButton
-                android:id="@+id/GeographyProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="44dp"
-                android:text="Geography"
-                android:paddingHorizontal="16dp"
-                android:textAllCaps="false"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/subject_button_bg_geog_selector"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="#009F37"
-                android:layout_marginTop="2dp"
-                android:button="@drawable/subject_button_bg_geog_selector"
-                android:layout_marginBottom="4dp"
-
-
-
-                />
-
-            <RadioButton
-                android:id="@+id/LanguagesProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="44dp"
-                android:text="Languages"
-                android:paddingHorizontal="16dp"
-                android:textAllCaps="false"
-                android:background="@drawable/subject_button_bg_lang_selector"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="#5550B6"
-                android:button="@drawable/subject_button_bg_lang_selector"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="2dp"
-
-
-
-                />
-
-
-
-
-
-        </RadioGroup>
-
-    </HorizontalScrollView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecyclerViewProfile"
-        android:layout_width="match_parent"
-        android:layout_marginTop="8dp"
-        android:layout_height="650dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollProfile" />
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollProfile"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ProgressBar
             android:id="@+id/progressBarProfile"
@@ -432,7 +462,7 @@
         <ImageView
             android:id="@+id/noResults"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="320dp"
             android:layout_marginHorizontal="84dp"
             android:layout_marginTop="44dp"
             android:layout_marginBottom="350dp"
@@ -442,6 +472,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/horizontalScrollProfile" />
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+
+</androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

@@ -21,21 +21,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/suspended_vector" />
+        app:srcCompat="@drawable/suspended_vector"
+        />
 
     <Button
         android:id="@+id/requestAgain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:text="Request Again"
-        android:textSize="14sp"
-        android:textColor="@color/blue"
-        android:textAllCaps="false"
-        android:paddingHorizontal="24dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/subject_button_bg_phy_selector"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingHorizontal="24dp"
+        android:text="Request Again"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/TextSize14"
+        app:layout_constraintBottom_toTopOf="@+id/VerificationText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/VerificationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:textSize="@dimen/TextSize14"
+        android:textColor="#121212"
+        android:text="Note : Verification may take around 24 hours"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText"
+        />
+
+    <TextView
+        android:id="@+id/UnpaidText"
+        android:layout_marginHorizontal="16dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="@dimen/TextSize16"
+        android:textColor="@color/red"
+        android:text="Solved'out is currently only available for Litmus Academy Students.
+        \nWe'll be launching it soon all over India"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

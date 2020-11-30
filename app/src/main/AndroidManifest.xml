@@ -9,8 +9,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission
         android:name="android.permission.MEDIA_CONTENT_CONTROL"
         tools:ignore="ProtectedPermissions" />
@@ -29,9 +29,41 @@
         android:windowSoftInputMode="adjustPan"
         tools:ignore="AllowBackup"
         tools:replace="android:allowBackup">
-        <activity android:name=".About.About"
-            android:parentActivityName=".StudentProfile.Settings"
+
+        <activity android:name=".Home.SearchActivity"
+            android:parentActivityName=".Home.Home"
+            android:windowSoftInputMode="adjustPan"
             />
+
+        <activity
+            android:name=".EditQuestion.EditQuestion"
+            android:windowSoftInputMode="adjustPan" />
+
+        <service android:name=".NotificationGenie">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/notific_icon" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/blue" />
+
+        <activity
+            android:name=".About.About"
+            android:parentActivityName=".StudentProfile.Settings" />
         <activity
             android:name=".AdditionalInfo.AdditionalInfo"
             android:parentActivityName=".Signup.PackageSelection" />

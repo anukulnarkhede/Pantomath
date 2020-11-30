@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -62,7 +63,7 @@ public class Feedback extends AppCompatActivity {
     EditText feedBackText;
     Button Addfeedback, FeedbackImageCancle;
     RoundedImage feedbackImage;
-    ProgressBar progressBar;
+    Button progressBar;
     TextView addPhoto;
 
     String feedback;
@@ -102,6 +103,7 @@ public class Feedback extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.blue), PorterDuff.Mode.SRC_ATOP);
 
 
 
@@ -164,8 +166,8 @@ public class Feedback extends AppCompatActivity {
                             feedBackText.requestFocus();
                             feedBackText.setError("At least screenshot or text is required to add your feedback");
                         }else if (uriImg1 != null){
-                            progressBar.setVisibility(View.VISIBLE);
-                            progressBar.setProgress(100, true);
+                           progressBar.setVisibility(View.VISIBLE);
+//                            progressBar.setProgress(100, true);
                             Addfeedback.setEnabled(false);
                             AddFeedback(name, email, feedback, profilePicture,  user);
                         }else {
@@ -334,6 +336,7 @@ public class Feedback extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        Addfeedback.setEnabled(true);
                         Toast.makeText(Feedback.this, "Failed to upload your feedback", Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
                     }

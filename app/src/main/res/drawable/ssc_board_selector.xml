@@ -11,6 +11,8 @@
     <item android:state_checked="true"
         android:drawable="@drawable/ssc_board_selected"/>
 
+    <item android:state_enabled="false"
+        android:drawable="@drawable/ssc_disabled"/>
 
     <item android:drawable="@drawable/ssc_board"/>
 

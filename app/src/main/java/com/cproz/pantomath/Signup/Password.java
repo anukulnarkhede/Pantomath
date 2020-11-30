@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cproz.pantomath.R;
 
@@ -34,6 +35,7 @@ public class Password extends AppCompatActivity {
         setContentView(R.layout.password_signup);
 
         initialization();
+
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);

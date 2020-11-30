@@ -23,7 +23,7 @@
         android:textAllCaps="false"
         android:textColor="@color/blue"
         android:fontFamily="sans-serif"
-        android:textSize="16sp"
+        android:textSize="@dimen/TextSize16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -60,7 +60,7 @@
                 android:layout_gravity="start"
                 android:fontFamily="sans-serif-medium"
                 android:text="Feedback"
-
+                android:autoSizeMaxTextSize="20dp"
                 android:textColor="@color/blue"
                 android:textSize="20sp"
                 tools:ignore="HardcodedText" />
@@ -72,6 +72,7 @@
 
     <ScrollView
 
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fff"
@@ -118,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginVertical="16dp"
-
+                    android:textSize="@dimen/TextSize16"
                     android:background="#00FFFFFF"
                     android:ems="10"
                     android:hint="Your message:"
@@ -148,6 +149,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Add a Photo"
+                    android:textSize="@dimen/TextSize14"
                     app:layout_constraintBottom_toBottomOf="@+id/FeedbackImage"
                     app:layout_constraintEnd_toEndOf="@+id/FeedbackImage"
                     app:layout_constraintStart_toStartOf="@+id/FeedbackImage"
@@ -157,16 +159,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ProgressBar
-                android:id="@+id/progressBarFeedback"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:elevation="4dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/UploadImageCard"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -175,8 +167,8 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:fontFamily="sans-serif"
-                android:textSize="16sp"
                 android:text="Feedback for our Solved'out Team"
+                android:textSize="@dimen/TextSize16"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
@@ -184,4 +176,15 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
+    <Button
+        android:id="@+id/progressBarFeedback"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#73000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,7 @@ public class LogoutPopUp extends AppCompatDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Logout")
-                .setMessage("Log out of Pantomath")
+                .setMessage("Log out of Solved'out")
                 .setPositiveButton("Logout", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

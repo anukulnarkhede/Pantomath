@@ -68,7 +68,7 @@ public class StudentProfile extends AppCompatActivity {
 
     Toolbar toolbar;
     CircleImageView profilePicture, editPhotoButt;
-    TextView  NoOfDoubts,NoOfSolved,NoOfUnsolved,UserName, BoardClass;
+    TextView  NoOfDoubts,NoOfSolved,NoOfUnsolved,UserName, BoardClass,email_profile;
     RecyclerView recyclerView;
     ImageView setting;
     RadioButton Algebra, Geometry, Physics, Chemistry, Biology, History, Geography, Languages, AllSubject;
@@ -76,20 +76,20 @@ public class StudentProfile extends AppCompatActivity {
     static  String SUBJECT = StudentProfile.SUBJECT;
     public String Board, Class;
     private FirebaseFirestore db;
-    private List<HomeDoubtData> DoubtList1;
+    private List<HomeDoubtData> AllDoubtList;
     private HomeDoubtData homeDoubtData;
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser user = firebaseAuth.getCurrentUser();
     String email = user != null ? user.getEmail() : null;
     private DocumentReference ref = firebaseFirestore.collection("Users/Students/StudentsInfo/" ).document(String.valueOf(email));
-    List <HomeDoubtData> DoubtList2, DoubtList3;
+    List <HomeDoubtData> AlgebraList, GeometryList, PhysicsList, ChemistryList, BiologyList, HistoryList, GeographyList, LanguagesList,nullList;
     String decision;
     Uri mCropImageUri;
     FirebaseStorage firebaseStorage;
     ProgressBar progressBar;
     ImageView noResult;
-
+    SmartSuggestionAdapter smartSuggestionAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,12 +101,30 @@ public class StudentProfile extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
-        DoubtList1 = new ArrayList<>();
-        DoubtList2 = new ArrayList<>();
-        DoubtList3 = new ArrayList<>();
-        DoubtList1.clear();
-        DoubtList2.clear();
-        DoubtList3.clear();
+        AllDoubtList = new ArrayList<>();
+        AlgebraList = new ArrayList<>();
+        GeometryList = new ArrayList<>();
+        PhysicsList = new ArrayList<>();
+        ChemistryList = new ArrayList<>();
+        BiologyList = new ArrayList<>();
+        HistoryList = new ArrayList<>();
+        GeographyList = new ArrayList<>();
+        LanguagesList = new ArrayList<>();
+        nullList = new ArrayList<>();
+
+
+        AllDoubtList.clear();
+        AlgebraList.clear();
+        GeometryList.clear();
+        PhysicsList.clear();
+        ChemistryList.clear();
+        BiologyList.clear();
+        HistoryList.clear();
+        GeographyList.clear();
+        LanguagesList.clear();
+
+
+
 
         firebaseStorage = FirebaseStorage.getInstance();
         setSupportActionBar(toolbar);
@@ -120,10 +138,14 @@ public class StudentProfile extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
 
 
-        DoubtList1.clear();
+//        AllDoubtList.clear();
 
         noResult.setVisibility(View.GONE);
 
+
+
+
+        email_profile.setText(email);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -131,49 +153,213 @@ public class StudentProfile extends AppCompatActivity {
 
                 switch (checkedId){
                     case R.id.AllProfile:
-                        DoubtList1.clear();
-                        LoadDataFromFirebase();
+
+                        nullList.clear();
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,nullList);
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+
+
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,AllDoubtList);
+
+
+                        NoOfDoubts.setText(String.valueOf(AllDoubtList.size()));
+                        recyclerView.setItemViewCacheSize(40);
+
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+
+
+
+                        if (AllDoubtList.isEmpty()){
+                            recyclerView.setVisibility(View.GONE);
+                            noResult.setVisibility(View.VISIBLE);
+
+                        }else{
+                            recyclerView.setVisibility(View.VISIBLE);
+                            noResult.setVisibility(View.GONE);
+                        }
 
                         break;
 
                     case R.id.AlgebraProfile:
-                        DoubtList1.clear();
-                        LoadDataFromFirebaseSubFilter("Algebra");
+
+                        nullList.clear();
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,nullList);
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,AlgebraList);
+
+
+                        recyclerView.setItemViewCacheSize(40);
+
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+
+                        if (AlgebraList.isEmpty()){
+                            recyclerView.setVisibility(View.GONE);
+                            noResult.setVisibility(View.VISIBLE);
+
+                        }else{
+                            recyclerView.setVisibility(View.VISIBLE);
+                            noResult.setVisibility(View.GONE);
+                        }
+                        //LoadDataFromFirebaseSubFilter("Algebra");
                         break;
 
                     case R.id.GeometryProfile:
-                        DoubtList1.clear();
-                        LoadDataFromFirebaseSubFilter("Geometry");
+                        nullList.clear();
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,nullList);
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,GeometryList);
+
+
+                        recyclerView.setItemViewCacheSize(40);
+
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+
+                        if (GeometryList.isEmpty()){
+                            recyclerView.setVisibility(View.GONE);
+                            noResult.setVisibility(View.VISIBLE);
+
+                        }else{
+                            recyclerView.setVisibility(View.VISIBLE);
+                            noResult.setVisibility(View.GONE);
+                        }
+
+                        //LoadDataFromFirebaseSubFilter("Geometry");
                         break;
 
                     case R.id.PhysicsProfile:
-                        DoubtList1.clear();
-                        LoadDataFromFirebaseSubFilter("Physics");
+
+
+                        nullList.clear();
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,nullList);
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,PhysicsList);
+
+
+                        recyclerView.setItemViewCacheSize(40);
+
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+
+                        if (PhysicsList.isEmpty()){
+                            recyclerView.setVisibility(View.GONE);
+                            noResult.setVisibility(View.VISIBLE);
+
+                        }else{
+                            recyclerView.setVisibility(View.VISIBLE);
+                            noResult.setVisibility(View.GONE);
+                        }
+                        //LoadDataFromFirebaseSubFilter("Physics");
                         break;
 
                     case R.id.ChemistryProfile:
-                        DoubtList1.clear();
-                        LoadDataFromFirebaseSubFilter("Chemistry");
+
+
+                        nullList.clear();
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,nullList);
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,ChemistryList);
+
+
+                        recyclerView.setItemViewCacheSize(40);
+
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+
+                        if (ChemistryList.isEmpty()){
+                            recyclerView.setVisibility(View.GONE);
+                            noResult.setVisibility(View.VISIBLE);
+
+                        }else{
+                            recyclerView.setVisibility(View.VISIBLE);
+                            noResult.setVisibility(View.GONE);
+                        }
+                        //LoadDataFromFirebaseSubFilter("Chemistry");
                         break;
 
                     case R.id.BiologyProfile:
-                        DoubtList1.clear();
-                        LoadDataFromFirebaseSubFilter("Biology");
+                        nullList.clear();
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,nullList);
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,BiologyList);
+
+
+                        recyclerView.setItemViewCacheSize(40);
+
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+
+                        if (BiologyList.isEmpty()){
+                            recyclerView.setVisibility(View.GONE);
+                            noResult.setVisibility(View.VISIBLE);
+
+                        }else{
+                            recyclerView.setVisibility(View.VISIBLE);
+                            noResult.setVisibility(View.GONE);
+                        }
+                        //LoadDataFromFirebaseSubFilter("Biology");
                         break;
 
                     case R.id.HistoryProfile:
-                        DoubtList1.clear();
-                        LoadDataFromFirebaseSubFilter("History");
+                        nullList.clear();
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,nullList);
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,HistoryList);
+
+
+                        recyclerView.setItemViewCacheSize(40);
+
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+
+                        if (HistoryList.isEmpty()){
+                            recyclerView.setVisibility(View.GONE);
+                            noResult.setVisibility(View.VISIBLE);
+
+                        }else{
+                            recyclerView.setVisibility(View.VISIBLE);
+                            noResult.setVisibility(View.GONE);
+                        }
+                       // LoadDataFromFirebaseSubFilter("History");
                         break;
 
                     case R.id.GeographyProfile:
-                        DoubtList1.clear();
-                        LoadDataFromFirebaseSubFilter("Geography");
+                        nullList.clear();
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,nullList);
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,GeographyList);
+
+
+                        recyclerView.setItemViewCacheSize(40);
+
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+
+                        if (GeographyList.isEmpty()){
+                            recyclerView.setVisibility(View.GONE);
+                            noResult.setVisibility(View.VISIBLE);
+
+                        }else{
+                            recyclerView.setVisibility(View.VISIBLE);
+                            noResult.setVisibility(View.GONE);
+                        }
+                       // LoadDataFromFirebaseSubFilter("Geography");
                         break;
 
                     case R.id.LanguagesProfile:
-                        DoubtList1.clear();
-                        LoadDataFromFirebaseSubFilter("Languages");
+                        nullList.clear();
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,nullList);
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+                        smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,LanguagesList);
+
+
+                        recyclerView.setItemViewCacheSize(40);
+
+                        recyclerView.setAdapter(smartSuggestionAdapter);
+
+                        if (LanguagesList.isEmpty()){
+                            recyclerView.setVisibility(View.GONE);
+                            noResult.setVisibility(View.VISIBLE);
+
+                        }else{
+                            recyclerView.setVisibility(View.VISIBLE);
+                            noResult.setVisibility(View.GONE);
+                        }
+                      //  LoadDataFromFirebaseSubFilter("Languages");
                         break;
                 }
 
@@ -202,16 +388,16 @@ public class StudentProfile extends AppCompatActivity {
                         Picasso.get().load(documentSnapshot.getString("profileURL")).into(profilePicture);
                     }
 
-                    DoubtList1.clear();
+                    AllDoubtList.clear();
 
 
                     LoadDataFromFirebase();
 
 
-                    LoadDataFromFirebaseNoOFUnsolved();
 
 
-                    LoadDataFromFirebaseNoSolved();
+
+
 
 
 
@@ -289,18 +475,22 @@ public class StudentProfile extends AppCompatActivity {
         AllSubject = findViewById(R.id.AllProfile);
         radioGroup = findViewById(R.id.scrollHorLayout);
         noResult = findViewById(R.id.noResults);
+        email_profile = findViewById(R.id.email_profile);
 
     }
 
 
 
+
     private void LoadDataFromFirebase(){
-        DoubtList1.clear();
+        AllDoubtList.clear();
         db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS)
                 .whereEqualTo("Email", email).orderBy("DateTime", Query.Direction.DESCENDING).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                int Count = 0;
+                int Countx = 0;
                 for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
 
 
@@ -339,32 +529,265 @@ public class StudentProfile extends AppCompatActivity {
                                 querySnapshot.getString("TeacherImageUrl"),
                                 querySnapshot.getDate("QuestionDate"));
 
-                        DoubtList1.add(homeDoubtData);
+                        AllDoubtList.add(homeDoubtData);
+
 
 
 
                     }
 
 
+                    if (Objects.equals(querySnapshot.getString("Subject"), "Algebra")&&!querySnapshot.getString("Status").equals("Reported")) {
+                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
+                                querySnapshot.getString("AnsPhotoUrl2"),
+                                querySnapshot.getString("AnsText"),
+                                querySnapshot.getString("AudioUrl"),
+                                querySnapshot.getString("Board"),
+                                querySnapshot.getString("Chapter"),
+                                querySnapshot.getString("Email"),
+                                querySnapshot.getString("FileUrl"),
+                                querySnapshot.getString("Link"),
+                                querySnapshot.getString("Name"),
+                                querySnapshot.getString("Photo1url"),
+                                querySnapshot.getString("Photo2url"),
+                                querySnapshot.getString("ProfileImageURL"),
+                                querySnapshot.getString("QText"),
+                                querySnapshot.getString("STD"),
+                                querySnapshot.getString("Status"),
+                                querySnapshot.getString("Subject"),
+                                querySnapshot.getString("Teacher"),
+                                querySnapshot.getString("Uid")
+                                , querySnapshot.getDate("DateTime"),
+                                querySnapshot.getString("TeacherImageUrl"),
+                                querySnapshot.getDate("QuestionDate"));
+
+                        AlgebraList.add(homeDoubtData);
+
+                    }
+
+
+                        if (Objects.equals(querySnapshot.getString("Subject"), "Geometry")&&!querySnapshot.getString("Status").equals("Reported")) {
+                            homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
+                                    querySnapshot.getString("AnsPhotoUrl2"),
+                                    querySnapshot.getString("AnsText"),
+                                    querySnapshot.getString("AudioUrl"),
+                                    querySnapshot.getString("Board"),
+                                    querySnapshot.getString("Chapter"),
+                                    querySnapshot.getString("Email"),
+                                    querySnapshot.getString("FileUrl"),
+                                    querySnapshot.getString("Link"),
+                                    querySnapshot.getString("Name"),
+                                    querySnapshot.getString("Photo1url"),
+                                    querySnapshot.getString("Photo2url"),
+                                    querySnapshot.getString("ProfileImageURL"),
+                                    querySnapshot.getString("QText"),
+                                    querySnapshot.getString("STD"),
+                                    querySnapshot.getString("Status"),
+                                    querySnapshot.getString("Subject"),
+                                    querySnapshot.getString("Teacher"),
+                                    querySnapshot.getString("Uid")
+                                    , querySnapshot.getDate("DateTime"),
+                                    querySnapshot.getString("TeacherImageUrl"),
+                                    querySnapshot.getDate("QuestionDate"));
+
+                            GeometryList.add(homeDoubtData);
+                        }
+
+
+                    if (Objects.equals(querySnapshot.getString("Subject"), "Physics")&&!querySnapshot.getString("Status").equals("Reported")) {
+                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
+                                querySnapshot.getString("AnsPhotoUrl2"),
+                                querySnapshot.getString("AnsText"),
+                                querySnapshot.getString("AudioUrl"),
+                                querySnapshot.getString("Board"),
+                                querySnapshot.getString("Chapter"),
+                                querySnapshot.getString("Email"),
+                                querySnapshot.getString("FileUrl"),
+                                querySnapshot.getString("Link"),
+                                querySnapshot.getString("Name"),
+                                querySnapshot.getString("Photo1url"),
+                                querySnapshot.getString("Photo2url"),
+                                querySnapshot.getString("ProfileImageURL"),
+                                querySnapshot.getString("QText"),
+                                querySnapshot.getString("STD"),
+                                querySnapshot.getString("Status"),
+                                querySnapshot.getString("Subject"),
+                                querySnapshot.getString("Teacher"),
+                                querySnapshot.getString("Uid")
+                                , querySnapshot.getDate("DateTime"),
+                                querySnapshot.getString("TeacherImageUrl"),
+                                querySnapshot.getDate("QuestionDate"));
+
+                        PhysicsList.add(homeDoubtData);
+                    }
+
+
+                    if (Objects.equals(querySnapshot.getString("Subject"), "Chemistry")&&!querySnapshot.getString("Status").equals("Reported")) {
+                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
+                                querySnapshot.getString("AnsPhotoUrl2"),
+                                querySnapshot.getString("AnsText"),
+                                querySnapshot.getString("AudioUrl"),
+                                querySnapshot.getString("Board"),
+                                querySnapshot.getString("Chapter"),
+                                querySnapshot.getString("Email"),
+                                querySnapshot.getString("FileUrl"),
+                                querySnapshot.getString("Link"),
+                                querySnapshot.getString("Name"),
+                                querySnapshot.getString("Photo1url"),
+                                querySnapshot.getString("Photo2url"),
+                                querySnapshot.getString("ProfileImageURL"),
+                                querySnapshot.getString("QText"),
+                                querySnapshot.getString("STD"),
+                                querySnapshot.getString("Status"),
+                                querySnapshot.getString("Subject"),
+                                querySnapshot.getString("Teacher"),
+                                querySnapshot.getString("Uid")
+                                , querySnapshot.getDate("DateTime"),
+                                querySnapshot.getString("TeacherImageUrl"),
+                                querySnapshot.getDate("QuestionDate"));
+
+                        ChemistryList.add(homeDoubtData);
+                    }
+
+
+                    if (Objects.equals(querySnapshot.getString("Subject"), "Biology")&&!querySnapshot.getString("Status").equals("Reported")) {
+                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
+                                querySnapshot.getString("AnsPhotoUrl2"),
+                                querySnapshot.getString("AnsText"),
+                                querySnapshot.getString("AudioUrl"),
+                                querySnapshot.getString("Board"),
+                                querySnapshot.getString("Chapter"),
+                                querySnapshot.getString("Email"),
+                                querySnapshot.getString("FileUrl"),
+                                querySnapshot.getString("Link"),
+                                querySnapshot.getString("Name"),
+                                querySnapshot.getString("Photo1url"),
+                                querySnapshot.getString("Photo2url"),
+                                querySnapshot.getString("ProfileImageURL"),
+                                querySnapshot.getString("QText"),
+                                querySnapshot.getString("STD"),
+                                querySnapshot.getString("Status"),
+                                querySnapshot.getString("Subject"),
+                                querySnapshot.getString("Teacher"),
+                                querySnapshot.getString("Uid")
+                                , querySnapshot.getDate("DateTime"),
+                                querySnapshot.getString("TeacherImageUrl"),
+                                querySnapshot.getDate("QuestionDate"));
+
+                        BiologyList.add(homeDoubtData);
+                    }
+
+                    if (Objects.equals(querySnapshot.getString("Subject"), "History")&&!querySnapshot.getString("Status").equals("Reported")) {
+                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
+                                querySnapshot.getString("AnsPhotoUrl2"),
+                                querySnapshot.getString("AnsText"),
+                                querySnapshot.getString("AudioUrl"),
+                                querySnapshot.getString("Board"),
+                                querySnapshot.getString("Chapter"),
+                                querySnapshot.getString("Email"),
+                                querySnapshot.getString("FileUrl"),
+                                querySnapshot.getString("Link"),
+                                querySnapshot.getString("Name"),
+                                querySnapshot.getString("Photo1url"),
+                                querySnapshot.getString("Photo2url"),
+                                querySnapshot.getString("ProfileImageURL"),
+                                querySnapshot.getString("QText"),
+                                querySnapshot.getString("STD"),
+                                querySnapshot.getString("Status"),
+                                querySnapshot.getString("Subject"),
+                                querySnapshot.getString("Teacher"),
+                                querySnapshot.getString("Uid")
+                                , querySnapshot.getDate("DateTime"),
+                                querySnapshot.getString("TeacherImageUrl"),
+                                querySnapshot.getDate("QuestionDate"));
+
+                        HistoryList.add(homeDoubtData);
+                    }
+
+                    if (Objects.equals(querySnapshot.getString("Subject"), "Geography")&&!querySnapshot.getString("Status").equals("Reported")) {
+                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
+                                querySnapshot.getString("AnsPhotoUrl2"),
+                                querySnapshot.getString("AnsText"),
+                                querySnapshot.getString("AudioUrl"),
+                                querySnapshot.getString("Board"),
+                                querySnapshot.getString("Chapter"),
+                                querySnapshot.getString("Email"),
+                                querySnapshot.getString("FileUrl"),
+                                querySnapshot.getString("Link"),
+                                querySnapshot.getString("Name"),
+                                querySnapshot.getString("Photo1url"),
+                                querySnapshot.getString("Photo2url"),
+                                querySnapshot.getString("ProfileImageURL"),
+                                querySnapshot.getString("QText"),
+                                querySnapshot.getString("STD"),
+                                querySnapshot.getString("Status"),
+                                querySnapshot.getString("Subject"),
+                                querySnapshot.getString("Teacher"),
+                                querySnapshot.getString("Uid")
+                                , querySnapshot.getDate("DateTime"),
+                                querySnapshot.getString("TeacherImageUrl"),
+                                querySnapshot.getDate("QuestionDate"));
+
+                        GeographyList.add(homeDoubtData);
+                    }
+
+
+                    if ((Objects.equals(querySnapshot.getString("Subject"), "English")
+                            ||Objects.equals(querySnapshot.getString("Subject"), "Hindi")||
+                            Objects.equals(querySnapshot.getString("Subject"), "Marathi")||
+                            Objects.equals(querySnapshot.getString("Subject"), "Sanskrit")||
+                            Objects.equals(querySnapshot.getString("Subject"), "French"))
+                            &&!Objects.equals(querySnapshot.getString("Status"), "Reported")) {
+                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
+                                querySnapshot.getString("AnsPhotoUrl2"),
+                                querySnapshot.getString("AnsText"),
+                                querySnapshot.getString("AudioUrl"),
+                                querySnapshot.getString("Board"),
+                                querySnapshot.getString("Chapter"),
+                                querySnapshot.getString("Email"),
+                                querySnapshot.getString("FileUrl"),
+                                querySnapshot.getString("Link"),
+                                querySnapshot.getString("Name"),
+                                querySnapshot.getString("Photo1url"),
+                                querySnapshot.getString("Photo2url"),
+                                querySnapshot.getString("ProfileImageURL"),
+                                querySnapshot.getString("QText"),
+                                querySnapshot.getString("STD"),
+                                querySnapshot.getString("Status"),
+                                querySnapshot.getString("Subject"),
+                                querySnapshot.getString("Teacher"),
+                                querySnapshot.getString("Uid")
+                                , querySnapshot.getDate("DateTime"),
+                                querySnapshot.getString("TeacherImageUrl"),
+                                querySnapshot.getDate("QuestionDate"));
+
+                        LanguagesList.add(homeDoubtData);
+                    }
+
+
+
+
+                    if (querySnapshot.getString("Status").equals("Solved")){
+                        Count++;
+                    }
+
+                    if (querySnapshot.getString("Status").equals("Unsolved")){
+                        Countx++;
+                    }
+
 
                     //HomeStuDoubtCardAdapter homeStuDoubtCardAdapter = new HomeStuDoubtCardAdapter(getContext(), DoubtList1);
 
 
-                    SmartSuggestionAdapter smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,DoubtList1);
+                    SmartSuggestionAdapter smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,AllDoubtList);
 
-                    NoOfDoubts.setText(String.valueOf(DoubtList1.size()));
-
-
-
-
-
-
+                    NoOfDoubts.setText(String.valueOf(AllDoubtList.size()));
                     recyclerView.setItemViewCacheSize(40);
 
                     recyclerView.setAdapter(smartSuggestionAdapter);
 
                 }
-                if (DoubtList1.isEmpty()){
+                if (AllDoubtList.isEmpty()){
                     recyclerView.setAlpha(0);
                     noResult.setVisibility(View.VISIBLE);
 
@@ -372,198 +795,200 @@ public class StudentProfile extends AppCompatActivity {
                     recyclerView.setAlpha(1);
                     noResult.setVisibility(View.GONE);
                 }
+                NoOfSolved.setText(String.valueOf(Count));
+                NoOfUnsolved.setText(String.valueOf(Countx));
 
             }
         });
     }
 
 
-    private void LoadDataFromFirebaseNoOFUnsolved(){
-        final List<String> Listx = new ArrayList<>();
-        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS)
-                .whereEqualTo("Email", email).whereEqualTo("Status", "Unsolved").orderBy("DateTime", Query.Direction.DESCENDING)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
-
-
-                    //Date date = new Date();
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    Listx.add(querySnapshot.getData().toString());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                }
-                NoOfUnsolved.setText(String.valueOf(Listx.size()));
-
-            }
-        });
-    }
-
-
-
-
-    private void LoadDataFromFirebaseNoSolved(){
-
-        final List<String> Listx = new ArrayList<>();
-        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD)
-                .whereEqualTo("STD",HomeFragment.CLASS).whereEqualTo("Email", email)
-                .whereEqualTo("Status", "Solved").orderBy("DateTime", Query.Direction.DESCENDING)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
-
-
-                    //Date date = new Date();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        Listx.add(querySnapshot.getData().toString());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                }
-
-                NoOfSolved.setText(String.valueOf(Listx.size()));
-            }
-        });
-    }
-
-
-    private void LoadDataFromFirebaseSubFilter(String Subjectx){
-        DoubtList1.clear();
-        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD", HomeFragment.CLASS)
-                .whereEqualTo("Email", email).whereEqualTo("Subject", Subjectx).orderBy("DateTime", Query.Direction.DESCENDING)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
-
-
-                    //Date date = new Date();
-
-
-
-
-
-
-
-
-
-                    if (!querySnapshot.getString("Status").equals("Reported")){
-                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
-                                querySnapshot.getString("AnsPhotoUrl2"),
-                                querySnapshot.getString("AnsText"),
-                                querySnapshot.getString("AudioUrl"),
-                                querySnapshot.getString("Board"),
-                                querySnapshot.getString("Chapter"),
-                                querySnapshot.getString("Email"),
-                                querySnapshot.getString("FileUrl"),
-                                querySnapshot.getString("Link"),
-                                querySnapshot.getString("Name"),
-                                querySnapshot.getString("Photo1url"),
-                                querySnapshot.getString("Photo2url"),
-                                querySnapshot.getString("ProfileImageURL"),
-                                querySnapshot.getString("QText"),
-                                querySnapshot.getString("STD"),
-                                querySnapshot.getString("Status"),
-                                querySnapshot.getString("Subject"),
-                                querySnapshot.getString("Teacher"),
-                                querySnapshot.getString("Uid")
-                                , querySnapshot.getDate("DateTime"),
-                                querySnapshot.getString("TeacherImageUrl"),
-                                querySnapshot.getDate("QuestionDate"));
-
-                        DoubtList1.add(homeDoubtData);
-                    }
-
-                    //HomeStuDoubtCardAdapter homeStuDoubtCardAdapter = new HomeStuDoubtCardAdapter(getContext(), DoubtList1);
-
-
-                    SmartSuggestionAdapter smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,DoubtList1);
-
-
-
-
-
-
-
-
-                    recyclerView.setItemViewCacheSize(25);
-
-                    recyclerView.setAdapter(smartSuggestionAdapter);
-
-                }
-                if (DoubtList1.isEmpty()){
-                    recyclerView.setAlpha(0);
-                    noResult.setVisibility(View.VISIBLE);
-
-                }else{
-                    recyclerView.setAlpha(1);
-                    noResult.setVisibility(View.GONE);
-                }
-            }
-        });
-    }
+//    private void LoadDataFromFirebaseNoOFUnsolved(){
+//        final List<String> Listx = new ArrayList<>();
+//        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD",HomeFragment.CLASS)
+//                .whereEqualTo("Email", email).whereEqualTo("Status", "Unsolved").orderBy("DateTime", Query.Direction.DESCENDING)
+//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
+//
+//
+//                    //Date date = new Date();
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//                    Listx.add(querySnapshot.getData().toString());
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//                }
+//                NoOfUnsolved.setText(String.valueOf(Listx.size()));
+//
+//            }
+//        });
+//    }
+
+
+
+
+//    private void LoadDataFromFirebaseNoSolved(){
+//
+//        final List<String> Listx = new ArrayList<>();
+//        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD)
+//                .whereEqualTo("STD",HomeFragment.CLASS).whereEqualTo("Email", email)
+//                .whereEqualTo("Status", "Solved").orderBy("DateTime", Query.Direction.DESCENDING)
+//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
+//
+//
+//                    //Date date = new Date();
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//                        Listx.add(querySnapshot.getData().toString());
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//                }
+//
+//                NoOfSolved.setText(String.valueOf(Listx.size()));
+//            }
+//        });
+//    }
+
+
+//    private void LoadDataFromFirebaseSubFilter(String Subjectx){
+//        DoubtList1.clear();
+//        db.collection("Doubts").whereEqualTo("Board", HomeFragment.BOARD).whereEqualTo("STD", HomeFragment.CLASS)
+//                .whereEqualTo("Email", email).whereEqualTo("Subject", Subjectx).orderBy("DateTime", Query.Direction.DESCENDING)
+//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
+//
+//
+//                    //Date date = new Date();
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//                    if (!Objects.equals(querySnapshot.getString("Status"), "Reported")){
+//                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
+//                                querySnapshot.getString("AnsPhotoUrl2"),
+//                                querySnapshot.getString("AnsText"),
+//                                querySnapshot.getString("AudioUrl"),
+//                                querySnapshot.getString("Board"),
+//                                querySnapshot.getString("Chapter"),
+//                                querySnapshot.getString("Email"),
+//                                querySnapshot.getString("FileUrl"),
+//                                querySnapshot.getString("Link"),
+//                                querySnapshot.getString("Name"),
+//                                querySnapshot.getString("Photo1url"),
+//                                querySnapshot.getString("Photo2url"),
+//                                querySnapshot.getString("ProfileImageURL"),
+//                                querySnapshot.getString("QText"),
+//                                querySnapshot.getString("STD"),
+//                                querySnapshot.getString("Status"),
+//                                querySnapshot.getString("Subject"),
+//                                querySnapshot.getString("Teacher"),
+//                                querySnapshot.getString("Uid")
+//                                , querySnapshot.getDate("DateTime"),
+//                                querySnapshot.getString("TeacherImageUrl"),
+//                                querySnapshot.getDate("QuestionDate"));
+//
+//                        DoubtList1.add(homeDoubtData);
+//                    }
+//
+//                    //HomeStuDoubtCardAdapter homeStuDoubtCardAdapter = new HomeStuDoubtCardAdapter(getContext(), DoubtList1);
+//
+//
+//                    SmartSuggestionAdapter smartSuggestionAdapter = new SmartSuggestionAdapter(StudentProfile.this,DoubtList1);
+//
+//
+//
+//
+//
+//
+//
+//
+//                    recyclerView.setItemViewCacheSize(25);
+//
+//                    recyclerView.setAdapter(smartSuggestionAdapter);
+//
+//                }
+//                if (DoubtList1.isEmpty()){
+//                    recyclerView.setAlpha(0);
+//                    noResult.setVisibility(View.VISIBLE);
+//
+//                }else{
+//                    recyclerView.setAlpha(1);
+//                    noResult.setVisibility(View.GONE);
+//                }
+//            }
+//        });
+//    }
 
 
 

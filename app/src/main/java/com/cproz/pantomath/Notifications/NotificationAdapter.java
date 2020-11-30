@@ -65,7 +65,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationViewHo
         holder.subjectTag.setText(DoubtList.get(position).getSubject());
 
 
-        String sourceString = "<b>" + toTitleCase(DoubtList.get(position).getTeacher())  + "</b> " + " has solved your<br>Doubt<br><b>" + datex + "</b>";
+        String sourceString = "<b>" + toTitleCase(DoubtList.get(position).getTeacher())  + "</b> " + " has solved your Doubt <b> <br>" + datex + "</b></br>";
 
        holder.NewQuestionTextNotifications.setText(Html.fromHtml(sourceString));
 
@@ -161,8 +161,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationViewHo
                 intent.putExtra("Teacher", DoubtList.get(holder.getAdapterPosition()).getTeacher());
                 intent.putExtra("TeacherImage", DoubtList.get(holder.getAdapterPosition()).getTeacherImageUrl());
                 intent.putExtra("QuestionDate", QuestionDate);
-
-
                 mContext.startActivity(intent);
             }
         });

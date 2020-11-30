@@ -11,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -24,7 +25,9 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.cproz.pantomath.EditQuestion.EditQuestion;
 import com.cproz.pantomath.R;
+import com.cproz.pantomath.Upload.UploadImagePage;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -41,7 +44,7 @@ public class DoubtDetails extends AppCompatActivity {
     TextView StudentUserName, TeacherUserName, TimeText1, TimeText2, QuestionText, AnswerText, Solved;
     ViewPager viewPager, viewPagerAns;
     ImageView SolvedIcon, upArrow;
-    Button SubjectTag,Play, Pause;
+    Button SubjectTag,Play, Pause, EditQuestion;
     SeekBar seekBar;
     Chronometer chronometer;
     LinearLayoutCompat linearLayout, AnslinearLayoutCompat,AudioPlayer;
@@ -88,7 +91,39 @@ public class DoubtDetails extends AppCompatActivity {
 
 
 
+        if (bundle.getString("Status").equals("Unsolved")){
+            EditQuestion.setVisibility(View.VISIBLE);
+        }
 
+        EditQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DoubtDetails.this, com.cproz.pantomath.EditQuestion.EditQuestion.class);
+                intent.putExtra("QuestionImage1Url", bundle.getString("QuestionImage1Url"));
+                intent.putExtra("QuestionImage2Url", bundle.getString("QuestionImage2Url"));
+                intent.putExtra("AnsImage1Url", bundle.getString("AnsImage1Url"));
+                intent.putExtra("AnsImage2Url", bundle.getString("AnsImage2Url"));
+                intent.putExtra("AnsText", bundle.getString("AnsText"));
+                intent.putExtra("AudioUrl", bundle.getString("AudioUrl"));
+                intent.putExtra("QuestionText", bundle.getString("QuestionText"));
+                intent.putExtra("Board", bundle.getString("Board"));
+                intent.putExtra("Chapter", bundle.getString("Chapter"));
+
+                intent.putExtra("Email", bundle.getString("Email"));
+                intent.putExtra("FileUrl", bundle.getString("FileUrl"));
+                intent.putExtra("Link", bundle.getString("Link"));
+                intent.putExtra("Name",bundle.getString("Name"));
+                intent.putExtra("ProfileImage", bundle.getString("ProfileImage"));
+                intent.putExtra("STD", bundle.getString("STD"));
+                intent.putExtra("Status", bundle.getString("Status"));
+                intent.putExtra("Subject", bundle.getString("Subject"));
+                intent.putExtra("Teacher", bundle.getString("Teacher"));
+                intent.putExtra("TeacherImage", bundle.getString("TeacherImage"));
+                intent.putExtra("QuestionDate", bundle.getString("QuestionDate"));
+                intent.putExtra("Uid", bundle.getString("Uid"));
+                startActivity(intent);
+            }
+        });
 
 
         if (Objects.equals(bundle.getString("ProfileImage"), "")){
@@ -369,7 +404,7 @@ public class DoubtDetails extends AppCompatActivity {
 
                 break;
 
-            case "Languages":
+            case "English":
 
                 SubjectTag.setBackgroundResource(R.drawable.subject_button_bg_lang);
                 constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_lang);
@@ -407,6 +442,164 @@ public class DoubtDetails extends AppCompatActivity {
 
                 break;
 
+
+            case "Marathi":
+
+                SubjectTag.setBackgroundResource(R.drawable.subject_button_bg_lang);
+                constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_lang);
+                SubjectTag.setTextColor(Color.parseColor("#5550B6"));
+                StudentUserName.setTextColor(Color.parseColor("#5550B6"));
+                TeacherUserName.setTextColor(Color.parseColor("#5550B6"));
+                SubjectTag.setText("Languages");
+
+
+                if (Objects.equals(bundle.getString("Status"), "Unsolved")){
+                    SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24_grey);
+                    Solved.setText("Unsolved");
+                    Solved.setTextColor(Color.parseColor("#999999"));
+                    SolvedIcon.setBackgroundResource(R.drawable.square_small_bg_grey);
+                    constraintLayout.setVisibility(View.GONE);
+                    upArrow.setVisibility(View.GONE);
+
+                    System.out.println("Lang");
+
+                }
+                else if (Objects.equals(bundle.getString("Status"), "Solved")){
+                    SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24_lang);
+                    SolvedIcon.setBackgroundResource(R.drawable.small_squar_bg_lang);
+                    Solved.setText("Solved");
+                    Solved.setTextColor(Color.parseColor("#5550B6"));
+                    if (Objects.equals(bundle.getString("AudioUrl"), "")){
+                        AudioPlayer.setVisibility(View.GONE);
+                    }
+
+                    constraintLayout.setVisibility(View.VISIBLE);
+                    upArrow.setVisibility(View.VISIBLE);
+                    Play.setBackgroundResource(R.drawable.play_lang);
+                    Pause.setBackgroundResource(R.drawable.pause_lang);
+                    AudioPlayer.setBackgroundResource(R.drawable.text_view_bg_lang);
+                    chronometer.setTextColor(Color.parseColor("#5550B6"));
+                }
+
+                break;
+
+            case "Hindi":
+
+                SubjectTag.setBackgroundResource(R.drawable.subject_button_bg_lang);
+                constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_lang);
+                SubjectTag.setTextColor(Color.parseColor("#5550B6"));
+                StudentUserName.setTextColor(Color.parseColor("#5550B6"));
+                TeacherUserName.setTextColor(Color.parseColor("#5550B6"));
+                SubjectTag.setText("Languages");
+                System.out.println("f");
+
+                if (Objects.equals(bundle.getString("Status"), "Unsolved")){
+                    SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24_grey);
+                    Solved.setText("Unsolved");
+                    Solved.setTextColor(Color.parseColor("#999999"));
+                    SolvedIcon.setBackgroundResource(R.drawable.square_small_bg_grey);
+                    constraintLayout.setVisibility(View.GONE);
+                    upArrow.setVisibility(View.GONE);
+
+                }
+                else if (Objects.equals(bundle.getString("Status"), "Solved")){
+                    SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24_lang);
+                    SolvedIcon.setBackgroundResource(R.drawable.small_squar_bg_lang);
+                    Solved.setText("Solved");
+                    Solved.setTextColor(Color.parseColor("#5550B6"));
+                    if (Objects.equals(bundle.getString("AudioUrl"), "")){
+                        AudioPlayer.setVisibility(View.GONE);
+                    }
+
+                    constraintLayout.setVisibility(View.VISIBLE);
+                    upArrow.setVisibility(View.VISIBLE);
+                    Play.setBackgroundResource(R.drawable.play_lang);
+                    Pause.setBackgroundResource(R.drawable.pause_lang);
+                    AudioPlayer.setBackgroundResource(R.drawable.text_view_bg_lang);
+                    chronometer.setTextColor(Color.parseColor("#5550B6"));
+                }
+
+                break;
+
+
+            case "Sanskrit":
+
+                SubjectTag.setBackgroundResource(R.drawable.subject_button_bg_lang);
+                constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_lang);
+                SubjectTag.setTextColor(Color.parseColor("#5550B6"));
+                StudentUserName.setTextColor(Color.parseColor("#5550B6"));
+                TeacherUserName.setTextColor(Color.parseColor("#5550B6"));
+                SubjectTag.setText("Languages");
+                System.out.println("g");
+
+                if (Objects.equals(bundle.getString("Status"), "Unsolved")){
+                    SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24_grey);
+                    Solved.setText("Unsolved");
+                    Solved.setTextColor(Color.parseColor("#999999"));
+                    SolvedIcon.setBackgroundResource(R.drawable.square_small_bg_grey);
+                    constraintLayout.setVisibility(View.GONE);
+                    upArrow.setVisibility(View.GONE);
+
+                }
+                else if (Objects.equals(bundle.getString("Status"), "Solved")){
+                    SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24_lang);
+                    SolvedIcon.setBackgroundResource(R.drawable.small_squar_bg_lang);
+                    Solved.setText("Solved");
+                    Solved.setTextColor(Color.parseColor("#5550B6"));
+                    if (Objects.equals(bundle.getString("AudioUrl"), "")){
+                        AudioPlayer.setVisibility(View.GONE);
+                    }
+
+                    constraintLayout.setVisibility(View.VISIBLE);
+                    upArrow.setVisibility(View.VISIBLE);
+                    Play.setBackgroundResource(R.drawable.play_lang);
+                    Pause.setBackgroundResource(R.drawable.pause_lang);
+                    AudioPlayer.setBackgroundResource(R.drawable.text_view_bg_lang);
+                    chronometer.setTextColor(Color.parseColor("#5550B6"));
+                }
+
+                break;
+
+
+
+            case "French":
+
+                SubjectTag.setBackgroundResource(R.drawable.subject_button_bg_lang);
+                constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_lang);
+                SubjectTag.setTextColor(Color.parseColor("#5550B6"));
+                StudentUserName.setTextColor(Color.parseColor("#5550B6"));
+                TeacherUserName.setTextColor(Color.parseColor("#5550B6"));
+                SubjectTag.setText("Languages");
+
+                System.out.println("Lang");
+
+                if (Objects.equals(bundle.getString("Status"), "Unsolved")){
+                    SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24_grey);
+                    Solved.setText("Unsolved");
+                    Solved.setTextColor(Color.parseColor("#999999"));
+                    SolvedIcon.setBackgroundResource(R.drawable.square_small_bg_grey);
+                    constraintLayout.setVisibility(View.GONE);
+                    upArrow.setVisibility(View.GONE);
+
+                }
+                else if (Objects.equals(bundle.getString("Status"), "Solved")){
+                    SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24_lang);
+                    SolvedIcon.setBackgroundResource(R.drawable.small_squar_bg_lang);
+                    Solved.setText("Solved");
+                    Solved.setTextColor(Color.parseColor("#5550B6"));
+                    if (Objects.equals(bundle.getString("AudioUrl"), "")){
+                        AudioPlayer.setVisibility(View.GONE);
+                    }
+
+                    constraintLayout.setVisibility(View.VISIBLE);
+                    upArrow.setVisibility(View.VISIBLE);
+                    Play.setBackgroundResource(R.drawable.play_lang);
+                    Pause.setBackgroundResource(R.drawable.pause_lang);
+                    AudioPlayer.setBackgroundResource(R.drawable.text_view_bg_lang);
+                    chronometer.setTextColor(Color.parseColor("#5550B6"));
+                }
+
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: ");
 
@@ -415,9 +608,9 @@ public class DoubtDetails extends AppCompatActivity {
 
 
 
-        if (bundle.getString("AudioUrl").equals("")){
+        if (Objects.equals(bundle.getString("AudioUrl"), "")){
             AudioPlayer.setVisibility(View.GONE);
-        }else if (!bundle.getString("AudioUrl").equals("")){
+        }else if (!Objects.equals(bundle.getString("AudioUrl"), "")){
             AudioPlayer.setVisibility(View.VISIBLE);
             Play.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -638,6 +831,7 @@ public class DoubtDetails extends AppCompatActivity {
         Play = findViewById(R.id.PlayPauseDD);
         Pause = findViewById(R.id.PauseDD);
         chronometer = findViewById(R.id.timerDD);
+        EditQuestion = findViewById(R.id.EditQuestion);
 
     }
 
@@ -676,8 +870,14 @@ public class DoubtDetails extends AppCompatActivity {
 
         AudioUrl = bundle.getString("AudioUrl");
         mediaPlayer = new MediaPlayer();
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
+        //mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.setAudioAttributes(
+                new AudioAttributes.Builder()
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .setUsage(AudioAttributes.USAGE_MEDIA)
+                        .setLegacyStreamType(AudioManager.STREAM_MUSIC)
+                        .build()
+        );
 
         try {
             mediaPlayer.setDataSource(AudioUrl);

@@ -11,6 +11,8 @@
     <item android:state_checked="true"
         android:drawable="@drawable/class9thselected"/>
 
+    <item android:state_enabled="false"
+        android:drawable="@drawable/class9thdisabled"/>
 
     <item android:drawable="@drawable/class9th"/>
 

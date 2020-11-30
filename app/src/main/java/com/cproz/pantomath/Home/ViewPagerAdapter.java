@@ -1,6 +1,7 @@
 package com.cproz.pantomath.Home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,10 +15,14 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     private Context mContext;
     private String[] imageUrls;
+    private Intent intent;
 
-    public ViewPagerAdapter(Context mContext, String[] imageUrls) {
+    public ViewPagerAdapter(Context mContext, String[] imageUrls, Intent intent) {
         this.mContext = mContext;
         this.imageUrls = imageUrls;
+        this.intent = intent;
+
+
 
     }
 
@@ -43,6 +48,13 @@ public class ViewPagerAdapter extends PagerAdapter {
                 .centerCrop()
                 .into(roundedImage);
         container.addView(roundedImage);
+
+        roundedImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mContext.startActivity(intent);
+            }
+        });
 
         return roundedImage;
     }

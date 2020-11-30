@@ -7,12 +7,15 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -35,9 +38,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -51,16 +58,25 @@ import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.content.ContentValues.TAG;
+
 public class HomeFragment extends Fragment {
 
-    public static String BOARD = HomeFragment.BOARD, CLASS = HomeFragment.CLASS, PROFILEURL = HomeFragment.PROFILEURL, NAME = HomeFragment.NAME, PROFILEURLX = HomeFragment.PROFILEURLX = "";
+    public static String BOARD = HomeFragment.BOARD, CLASS = HomeFragment.CLASS,
+            PROFILEURL = HomeFragment.PROFILEURL, NAME = HomeFragment.NAME,
+            PROFILEURLX = HomeFragment.PROFILEURLX = "";
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser user = firebaseAuth.getCurrentUser();
     String email = user != null ? user.getEmail() : null;
-    private DocumentReference ref = firebaseFirestore.collection("Users/Students/StudentsInfo/" ).document(String.valueOf(email));
-    ImageView searchIcon;
+    private DocumentReference ref = firebaseFirestore
+            .collection("Users/Students/StudentsInfo/" )
+            .document(String.valueOf(email));
 
+    ImageView searchIcon;
+    DocumentSnapshot lastVisible;
+    private boolean isScrolling, lastItemReached;
+    GridLayoutManager gridLayoutManager;
 
     ImageView noResults;
 
@@ -75,7 +91,7 @@ public class HomeFragment extends Fragment {
     private FirebaseFirestore db;
     CircleImageView ProfilePictureHome;
     ImageView Cross;
-    EditText SearchView;
+    TextView SearchView;
     HomeDoubtAdapter homeDoubtAdapter;
     SwipeRefreshLayout swipeRefreshLayout;
     CardView cardView;
@@ -88,10 +104,10 @@ public class HomeFragment extends Fragment {
          final View root = inflater.inflate(R.layout.home_fragment, container, false);
 
 
-
-
-
         db = FirebaseFirestore.getInstance();
+
+
+
 
         recyclerView = root.findViewById(R.id.RecyclerViewHome);
         ProfilePictureHome = root.findViewById(R.id.ProfilePictureHome);
@@ -107,6 +123,7 @@ public class HomeFragment extends Fragment {
         Cross.setVisibility(View.GONE);
         noResults.setVisibility(View.GONE);
 
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 //        SearchView.setText(BuildConfig.VERSION_CODE);
 
@@ -140,6 +157,7 @@ public class HomeFragment extends Fragment {
         });*/
 
 
+        //refreshLoad();
 
 
 
@@ -170,11 +188,18 @@ public class HomeFragment extends Fragment {
 
         swipeRefreshLayout.setColorSchemeResources(R.color.blue);
 
-         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
+        gridLayoutManager = new GridLayoutManager(getContext(), 1);
 
          recyclerView.setLayoutManager(gridLayoutManager);
         DoubtList2 = new ArrayList<>();
 
+        DoubtList2.clear();
+        homeDoubtAdapter = new HomeDoubtAdapter(getContext(), DoubtList2);
+
+
+        recyclerView.setItemViewCacheSize(40);
+
+        recyclerView.setAdapter(homeDoubtAdapter);
 
         ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -207,17 +232,75 @@ public class HomeFragment extends Fragment {
 
 
                     DoubtList2.clear();
+//                    RefreshedList.clear();
                     DataFromFirestore();
+                    homeDoubtAdapter = new HomeDoubtAdapter(getContext(), DoubtList2);
+
+
+                    recyclerView.setItemViewCacheSize(40);
+
+                    recyclerView.setAdapter(homeDoubtAdapter);
+                    //refreshLoad();
 
                     swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                         @Override
                         public void onRefresh() {
 
-                            swipeRefreshLayout.setEnabled(false);
+
+                            noResults.setVisibility(View.GONE);
+
+                            homeDoubtAdapter = new HomeDoubtAdapter(getContext(), DoubtList2);
+
+
+                            recyclerView.setItemViewCacheSize(40);
+
+                            recyclerView.setAdapter(homeDoubtAdapter);
+
+
+
                             DoubtList2.clear();
                             DataFromFirestore();
+                            homeDoubtAdapter = new HomeDoubtAdapter(getContext(), DoubtList2);
 
-                            swipeRefreshLayout.setRefreshing(false);
+
+                            recyclerView.setItemViewCacheSize(40);
+
+                            recyclerView.setAdapter(homeDoubtAdapter);
+
+
+
+                            //DoubtList2.clear();
+                            //swipeRefreshLayout.setEnabled(false);
+                            //DoubtList2.clear();
+                            //DataFromFirestore();
+
+
+//                            RefreshedList.clear();
+//                            refreshLoad();
+//
+//                            if (RefreshedList.isEmpty()){
+//                                homeDoubtAdapter = new HomeDoubtAdapter(getContext(), DoubtList2);
+//                                Toast.makeText(getContext(), "Exe1", Toast.LENGTH_SHORT).show();
+//                            }else{
+//                                homeDoubtAdapter = new HomeDoubtAdapter(getContext(), RefreshedList);
+//                                Toast.makeText(getContext(), "Exe2", Toast.LENGTH_SHORT).show();
+//                            }
+//
+//
+//
+//
+//
+//
+//
+//
+//                            recyclerView.setItemViewCacheSize(40);
+//
+//                            recyclerView.setAdapter(homeDoubtAdapter);
+//
+//
+//
+                             swipeRefreshLayout.setRefreshing(false);
+
                         }
                     });
 
@@ -229,72 +312,82 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
-        SearchView.setOnTouchListener(new View.OnTouchListener() {
-            @SuppressLint("ClickableViewAccessibility")
+        SearchView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                searchIcon.setImageResource(R.drawable.back_search);
-                ProfilePictureHome.setVisibility(View.GONE);
-                searchIcon.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-
-                        InputMethodManager imm = (InputMethodManager) Objects.requireNonNull(getContext()).getSystemService(Context.INPUT_METHOD_SERVICE);
-                        assert imm != null;
-                        imm.hideSoftInputFromWindow(root.getWindowToken(), 0);
-                        SearchView.clearFocus();
-                        SearchView.getText().clear();
-                        ProfilePictureHome.setImageResource(R.drawable.personal_info);
-                        ProfilePictureHome.setVisibility(View.VISIBLE);
-                        Cross.setVisibility(View.GONE);
-                        searchIcon.setImageResource(R.drawable.ic_round_search_24);
-                        swipeRefreshLayout.setEnabled(true);
-
-                    }
-                });
-
-
-
-                SearchView.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @SuppressLint("ClickableViewAccessibility")
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        ProfilePictureHome.setVisibility(View.GONE);
-                        //ProfilePictureHome.setImageResource(R.drawable.cross);
-                        Cross.setVisibility(View.VISIBLE);
-                        Cross.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                                SearchView.getText().clear();
-                                ProfilePictureHome.setVisibility(View.GONE);
-                                Cross.setVisibility(View.GONE);
-
-
-                            }
-                        });
-
-
-
-                    }
-                });
-
-
-                return false;
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), SearchActivity.class));
+                Objects.requireNonNull(getActivity()).overridePendingTransition(0, 0);
             }
         });
+
+//        SearchView.setOnTouchListener(new View.OnTouchListener() {
+//            @SuppressLint("ClickableViewAccessibility")
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//
+//
+//
+//                searchIcon.setImageResource(R.drawable.back_search);
+//                ProfilePictureHome.setVisibility(View.GONE);
+//                searchIcon.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//
+//                        InputMethodManager imm = (InputMethodManager) Objects.requireNonNull(getContext()).getSystemService(Context.INPUT_METHOD_SERVICE);
+//                        assert imm != null;
+//                        imm.hideSoftInputFromWindow(root.getWindowToken(), 0);
+//                        SearchView.clearFocus();
+//                        //SearchView.getText().clear();
+//                        ProfilePictureHome.setImageResource(R.drawable.personal_info);
+//                        ProfilePictureHome.setVisibility(View.VISIBLE);
+//                        Cross.setVisibility(View.GONE);
+//                        searchIcon.setImageResource(R.drawable.ic_round_search_24);
+//                        swipeRefreshLayout.setEnabled(true);
+//
+//                    }
+//                });
+//
+//
+//
+//                SearchView.addTextChangedListener(new TextWatcher() {
+//                    @Override
+//                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                    }
+//
+//                    @SuppressLint("ClickableViewAccessibility")
+//                    @Override
+//                    public void afterTextChanged(Editable s) {
+//                        ProfilePictureHome.setVisibility(View.GONE);
+//                        //ProfilePictureHome.setImageResource(R.drawable.cross);
+//                        Cross.setVisibility(View.VISIBLE);
+//                        Cross.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//
+//                               //SearchView.getText().clear();
+//                                ProfilePictureHome.setVisibility(View.GONE);
+//                                Cross.setVisibility(View.GONE);
+//
+//
+//                            }
+//                        });
+//
+//
+//
+//                    }
+//                });
+//
+//
+//                return false;
+//            }
+//        });
 
 
 
@@ -309,13 +402,22 @@ public class HomeFragment extends Fragment {
     public void DataFromFirestore(){
 
 
-        db.collection("Doubts").whereEqualTo("Board", BOARD).whereEqualTo("STD",CLASS).orderBy("DateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("Doubts")
+                .whereEqualTo("Board", BOARD)
+                .whereEqualTo("STD",CLASS)
+                .whereEqualTo("Status", "Solved")
+                .orderBy("DateTime", Query.Direction.DESCENDING)
+                .limit(10)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+
                 for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
 
 
-                    //Date date = new Date();
+
 
 
 
@@ -331,19 +433,33 @@ public class HomeFragment extends Fragment {
                     });*/
 
 
-                    if ((Objects.equals(querySnapshot.getString("Status"), "Solved"))
-                            || ((Objects.equals(querySnapshot.getString("Status"), "Unsolved"))&& Objects.equals(querySnapshot.getString("Email"), email))){
-                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
-                                querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
-                                querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
-                                querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
-                                querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
-                                querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                                , querySnapshot.getDate("DateTime"),querySnapshot.getString("TeacherImageUrl"),querySnapshot.getDate("QuestionDate"));
+
+                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
+                                querySnapshot.getString("AnsPhotoUrl2"),
+                                querySnapshot.getString("AnsText"),
+                                querySnapshot.getString("AudioUrl"),
+                                querySnapshot.getString("Board"),
+                                querySnapshot.getString("Chapter"),
+                                querySnapshot.getString("Email"),
+                                querySnapshot.getString("FileUrl"),
+                                querySnapshot.getString("Link"),
+                                querySnapshot.getString("Name"),
+                                querySnapshot.getString("Photo1url"),
+                                querySnapshot.getString("Photo2url"),
+                                querySnapshot.getString("ProfileImageURL"),
+                                querySnapshot.getString("QText"),
+                                querySnapshot.getString("STD"),
+                                querySnapshot.getString("Status"),
+                                querySnapshot.getString("Subject"),
+                                querySnapshot.getString("Teacher"),
+                                querySnapshot.getString("Uid"),
+                                querySnapshot.getDate("DateTime"),
+                                querySnapshot.getString("TeacherImageUrl"),
+                                querySnapshot.getDate("QuestionDate"));
 
                         DoubtList2.add(homeDoubtData);
 
-                    }
+
 
 
 
@@ -362,8 +478,142 @@ public class HomeFragment extends Fragment {
 
                 }
                 swipeRefreshLayout.setEnabled(true);
+                homeDoubtAdapter.shimmer = false;
+                homeDoubtAdapter.notifyDataSetChanged();
+
+                if (task.getResult().size() > 0){
+                    lastVisible = task.getResult().getDocuments().get(task.getResult().size() - 1);
+                }
+
+                RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                        super.onScrollStateChanged(recyclerView, newState);
+
+                        if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
+                            isScrolling = true;
+                        }
+                    }
+
+                    @Override
+                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+                        int firstVisibleItem = gridLayoutManager.findFirstVisibleItemPosition();
+                        int visibleItemCount = gridLayoutManager.getChildCount();
+                        int totalItemCount = gridLayoutManager.getItemCount();
+
+                        if (isScrolling && (firstVisibleItem+visibleItemCount == totalItemCount) && !lastItemReached) {
+                            isScrolling = false;
+
+                            Query queryNext = db.collection("Doubts")
+                                    .whereEqualTo("Board", BOARD)
+                                    .whereEqualTo("STD",CLASS)
+                                    .whereEqualTo("Status", "Solved")
+                                    .orderBy("DateTime", Query.Direction.DESCENDING)
+                                    .startAfter(lastVisible)
+                                    .limit(5);
+
+                            queryNext.get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())){
+
+
+
+
+
+
+
+
+                    /*firebaseFirestore.collection("Users/Students/StudentsInfo/" ).document(String.valueOf(querySnapshot.getString("Email"))).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            HomeFragment.PROFILEURLX = documentSnapshot.getString("profileURL");
+
+
+                        }
+                    });*/
+
+
+
+                                                    homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"),
+                                                            querySnapshot.getString("AnsPhotoUrl2"),
+                                                            querySnapshot.getString("AnsText"),
+                                                            querySnapshot.getString("AudioUrl"),
+                                                            querySnapshot.getString("Board"),
+                                                            querySnapshot.getString("Chapter"),
+                                                            querySnapshot.getString("Email"),
+                                                            querySnapshot.getString("FileUrl"),
+                                                            querySnapshot.getString("Link"),
+                                                            querySnapshot.getString("Name"),
+                                                            querySnapshot.getString("Photo1url"),
+                                                            querySnapshot.getString("Photo2url"),
+                                                            querySnapshot.getString("ProfileImageURL"),
+                                                            querySnapshot.getString("QText"),
+                                                            querySnapshot.getString("STD"),
+                                                            querySnapshot.getString("Status"),
+                                                            querySnapshot.getString("Subject"),
+                                                            querySnapshot.getString("Teacher"),
+                                                            querySnapshot.getString("Uid"),
+                                                            querySnapshot.getDate("DateTime"),
+                                                            querySnapshot.getString("TeacherImageUrl"),
+                                                            querySnapshot.getDate("QuestionDate"));
+
+                                                    DoubtList2.add(homeDoubtData);
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            }
+                                            homeDoubtAdapter.notifyDataSetChanged();
+
+                                            if (task.getResult().size() > 0){
+                                                lastVisible = task.getResult().getDocuments().get(task.getResult().size() - 1);
+                                            }
+
+
+                                            if (task.getResult().size() < 5){
+                                                lastItemReached = true;
+                                            }
+                                        }
+                                    });
+                        }
+
+                    }
+                };
+                recyclerView.addOnScrollListener(onScrollListener);
+                lastItemReached = false;
+                swipeRefreshLayout.setEnabled(true);
+
+                if (DoubtList2.isEmpty()){
+                    noResults.setVisibility(View.VISIBLE);
+
+                    homeDoubtAdapter = new HomeDoubtAdapter(getContext(), DoubtList2);
+
+
+                    recyclerView.setItemViewCacheSize(40);
+
+                    recyclerView.setAdapter(homeDoubtAdapter);
+                    homeDoubtAdapter.shimmer = false;
+
+                }else{
+                    noResults.setVisibility(View.GONE);
+                }
+                //homeDoubtAdapter.shimmer = false;
             }
+
         });
+
 
         SearchView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -395,7 +645,9 @@ public class HomeFragment extends Fragment {
         ArrayList<HomeDoubtData> filteredList = new ArrayList<>();
         for (HomeDoubtData item: DoubtList2){
 
-            if (/*item.getTeacher().toLowerCase().contains(text.toLowerCase())||*/item.getSubject().toLowerCase().contains(text.toLowerCase()) || item.getChapter().toLowerCase().contains(text.toLowerCase()) || item.getQText().toLowerCase().contains(text.toLowerCase())
+            if (item.getSubject().toLowerCase().contains(text.toLowerCase())
+                    || item.getChapter().toLowerCase().contains(text.toLowerCase())
+                    || item.getQText().toLowerCase().contains(text.toLowerCase())
             || item.getAnsText().toLowerCase().contains(text.toLowerCase())){
 
                 filteredList.add(item);
@@ -409,13 +661,8 @@ public class HomeFragment extends Fragment {
 
         }
         if (filteredList.isEmpty()){
-
             homeDoubtAdapter.filteredList(filteredList);
-            //recyclerView.setBackgroundColor(R.drawable.notfound);
             noResults.setVisibility(View.VISIBLE);
-
-
-            //Toast.makeText(getContext(), "No results found", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -424,6 +671,93 @@ public class HomeFragment extends Fragment {
 
 
     }
+
+
+//    public void refreshLoad(){
+//
+//        db.collection("Doubts")
+//                .whereEqualTo("Board", BOARD)
+//                .whereEqualTo("STD",CLASS)
+//                .orderBy("DateTime", Query.Direction.DESCENDING)
+//                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+//                        if (error != null) {
+//                            Log.e(TAG, "onEvent", error);
+//
+//
+//
+//                        }
+//                        if (value != null){
+//
+//                            List<DocumentChange> DoubtListUpdated = value.getDocumentChanges();
+//                            for (DocumentChange documentChange :  DoubtListUpdated){
+//
+//
+//                                if (documentChange.getType() == DocumentChange.Type.REMOVED){
+//                                    Log.d(TAG, "Removed Doubt: \n" + documentChange.getDocument().getData());
+//                                    break;
+//                                }else if (documentChange.getType() == DocumentChange.Type.ADDED){
+//                                    Log.d(TAG, "Added Doubt: \n" + documentChange.getDocument().getData());
+//                                    break;
+//                                }else if (documentChange.getType() == DocumentChange.Type.MODIFIED){
+//                                    Log.d(TAG, "Modified Doubt: \n" + documentChange.getDocument().getData());
+//                                    break;
+//                                }
+////                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+////                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+////                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+////                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+////                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+////                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+////                                        , querySnapshot.getDate("DateTime"),querySnapshot.getString("TeacherImageUrl"),querySnapshot.getDate("QuestionDate"));
+//
+//                                if ((Objects.equals(documentChange.getDocument().getString("Status"), "Solved"))
+//                                        || ((Objects.equals(documentChange.getDocument().getString("Status"), "Unsolved"))
+//                                        && Objects.equals(documentChange.getDocument().getString("Email"), email))) {
+//
+//
+//                                    homeDoubtData = new HomeDoubtData(
+//                                            documentChange.getDocument().getString("AnsPhotoUrl1"),
+//                                            documentChange.getDocument().getString("AnsPhotoUrl2"),
+//                                            documentChange.getDocument().getString("AnsText"),
+//                                            documentChange.getDocument().getString("AudioUrl"),
+//                                            documentChange.getDocument().getString("Board"),
+//                                            documentChange.getDocument().getString("Chapter"),
+//                                            documentChange.getDocument().getString("Email"),
+//                                            documentChange.getDocument().getString("FileUrl"),
+//                                            documentChange.getDocument().getString("Link"),
+//                                            documentChange.getDocument().getString("Name"),
+//                                            documentChange.getDocument().getString("Photo1url"),
+//                                            documentChange.getDocument().getString("Photo2url"),
+//                                            documentChange.getDocument().getString("ProfileImageURL"),
+//                                            documentChange.getDocument().getString("QText"),
+//                                            documentChange.getDocument().getString("STD"),
+//                                            documentChange.getDocument().getString("Status"),
+//                                            documentChange.getDocument().getString("Subject"),
+//                                            documentChange.getDocument().getString("Teacher"),
+//                                            documentChange.getDocument().getString("Uid"),
+//                                            documentChange.getDocument().getDate("DateTime"),
+//                                            documentChange.getDocument().getString("TeacherImageUrl"),
+//                                            documentChange.getDocument().getDate("QuestionDate"));
+//
+//                                    RefreshedList.add(homeDoubtData);
+//
+//                                }
+//
+//                            }
+//
+//                            swipeRefreshLayout.setEnabled(true);
+//                        }else {
+//                            RefreshedList.clear();
+//                        }
+//
+//
+//
+//                    }
+//                });
+//    }
+
 
 
 
