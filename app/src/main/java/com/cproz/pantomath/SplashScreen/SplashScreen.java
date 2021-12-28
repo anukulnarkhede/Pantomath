@@ -42,12 +42,9 @@ public class SplashScreen extends AppCompatActivity {
 
         if (firebaseUser != null){
 
-                if (user.isEmailVerified()){
-                    startActivity(new Intent(this, Home.class));
-                }else{
-                    startActivity(new Intent(this, Login.class));
 
-                }
+                    startActivity(new Intent(this, Home.class));
+
 
 
 

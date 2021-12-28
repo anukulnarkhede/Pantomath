@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item android:id="@+id/home"
-        android:icon="@drawable/home_icon"
+        android:icon="@drawable/home_icon_selector"
         android:title="Home"
-
+        
         tools:ignore="HardcodedText">
 
     </item>
@@ -13,7 +13,7 @@
     <item android:id="@+id/upload"
 
         android:title="Add Doubt"
-        android:icon="@drawable/upload"
+        android:icon="@drawable/upload_selector"
 
         tools:ignore="HardcodedText">
 
@@ -22,7 +22,7 @@
 
 
     <item android:id="@+id/saved"
-        android:icon="@drawable/notification"
+        android:icon="@drawable/notification_selector"
         android:title="Notifications"
         tools:ignore="HardcodedText">
 

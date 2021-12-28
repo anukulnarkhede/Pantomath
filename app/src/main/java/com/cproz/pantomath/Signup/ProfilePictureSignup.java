@@ -50,12 +50,13 @@ public class ProfilePictureSignup extends AppCompatActivity {
     TextView IWillDoItLater;
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
+    FirebaseStorage firebaseStorage;
     Button progressBar;
     public String decision;
     private Uri mCropImageUri = null;
     TextView SelectPhotoText;
     ImageView CamIcon;
-    FirebaseStorage firebaseStorage;
+
 
 
     @Override
@@ -89,61 +90,6 @@ public class ProfilePictureSignup extends AppCompatActivity {
         });
 
 
-
-//        IWillDoItLater.setOnClickListener(new View.OnClickListener() {
-//            @RequiresApi(api = Build.VERSION_CODES.N)
-//            @Override
-//            public void onClick(View v) {
-//                progressBar.setVisibility(View.VISIBLE);
-////                progressBar.setProgress(100, true);
-//                IWillDoItLater.setEnabled(false);
-//                ContinueButt.setEnabled(false);
-//                firebaseAuth.createUserWithEmailAndPassword(NewAccount.EMAIL, Password.PASSWORD)
-//                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-//                    @Override
-//                    public void onSuccess(AuthResult authResult) {
-//
-//
-//                        final Date SignupTime = new Date();
-//
-//
-//
-//                        final String userId = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getEmail();
-//                        SignupInfoCarrier signupInfoCarrier = new SignupInfoCarrier(
-//                                toTitleCase(NewAccount.NAME), NewAccount.EMAIL, "","","","","", userId, ""
-//                                ,SignupTime,0, "",""
-//                        );
-//
-//                        firebaseFirestore.document("Users/Students/StudentsInfo/" + userId ).set(signupInfoCarrier).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<Void> task) {
-//                                FirebaseUser user = firebaseAuth.getCurrentUser();
-//                                verification(user);
-//                                //startActivity(new Intent(ProfilePictureSignup.this, Home.class));
-//                            }
-//                        })
-//
-//                                .addOnFailureListener(new OnFailureListener() {
-//                                    @Override
-//                                    public void onFailure(@NonNull Exception e) {
-//                                        progressBar.setVisibility(View.GONE);
-//                                        Toast.makeText(ProfilePictureSignup.this, "Signup Failed", Toast.LENGTH_SHORT).show();
-//                                        System.out.println("Document upload failed");
-//                                        IWillDoItLater.setEnabled(true);
-//                                        ContinueButt.setEnabled(true);
-//                                    }
-//                                });
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        progressBar.setVisibility(View.GONE);
-//                        IWillDoItLater.setEnabled(true);
-//                        ContinueButt.setEnabled(true);
-//                    }
-//                });
-//            }
-//        });
 
 
 
@@ -227,7 +173,7 @@ public class ProfilePictureSignup extends AppCompatActivity {
                                     String ProfileURL = uri.toString();
                                     SignupInfoCarrier signupInfoCarrier = new SignupInfoCarrier(
                                             toTitleCase(NewAccount.NAME), NewAccount.EMAIL.toLowerCase().trim(), "","","","","", userId, ProfileURL
-                                    , SignupTime,0, "",""
+                                    , SignupTime,0, "","","",""
                                     );
                                     firebaseFirestore.document("Users/Students/StudentsInfo/" + userId )
                                             .set(signupInfoCarrier)

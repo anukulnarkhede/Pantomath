@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
@@ -103,7 +104,7 @@ public class Feedback extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.blue), PorterDuff.Mode.SRC_ATOP);
+        Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(Color.parseColor("#5f6368"), PorterDuff.Mode.SRC_ATOP);
 
 
 
@@ -171,6 +172,7 @@ public class Feedback extends AppCompatActivity {
                             Addfeedback.setEnabled(false);
                             AddFeedback(name, email, feedback, profilePicture,  user);
                         }else {
+                            Addfeedback.setEnabled(false);
                             Date date = new Date();
                             Feefbackfirestore(name,email, feedback, profilePicture, "",user,date);
                         }
@@ -348,7 +350,6 @@ public class Feedback extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(Feedback.this, Home.class));
         super.onBackPressed();
     }
 

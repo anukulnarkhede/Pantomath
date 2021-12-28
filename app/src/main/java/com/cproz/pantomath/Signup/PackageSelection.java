@@ -33,11 +33,11 @@ public class PackageSelection extends AppCompatActivity {
     public static  String SELECTEDBOARD = PackageSelection.SELECTEDBOARD = "", SELECTEDCLASS = PackageSelection.SELECTEDCLASS = "";
 
 
-    private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private final FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser user = firebaseAuth.getCurrentUser();
     String email = user != null ? user.getEmail() : null;
-    private DocumentReference ref = firebaseFirestore.collection("Users/Students/StudentsInfo/" ).document(String.valueOf(email));
+    private final DocumentReference ref = firebaseFirestore.collection("Users/Students/StudentsInfo/" ).document(String.valueOf(email));
 
 
     @Override
@@ -94,7 +94,7 @@ public class PackageSelection extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                if (SELECTEDBOARD == "" || SelectedClass == ""){
+                if (SELECTEDBOARD.equals("") || SelectedClass.equals("")){
                     Toast.makeText(PackageSelection.this, "Select class and board", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -144,8 +144,5 @@ public class PackageSelection extends AppCompatActivity {
 //    }
 
 
-    @Override
-    public void onBackPressed() {
 
-    }
 }

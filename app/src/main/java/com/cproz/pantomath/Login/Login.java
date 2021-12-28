@@ -265,50 +265,73 @@ public class Login extends AppCompatActivity {
 
     public void isEmailVerifiedx(){
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        assert user != null;
-        if (user.isEmailVerified()){
+
+        String email = user.getEmail();
+        DocumentReference ref = firebaseFirestore.collection("Users/Students/StudentsInfo/" ).document(String.valueOf(email));
+
+        ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Class = documentSnapshot.getString("Class");
+                Board = documentSnapshot.getString("Board");
 
 
-            String email = user.getEmail();
-            DocumentReference ref = firebaseFirestore.collection("Users/Students/StudentsInfo/" ).document(String.valueOf(email));
-
-            ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    Class = documentSnapshot.getString("Class");
-                    Board = documentSnapshot.getString("Board");
-
-
-                    if (Class.equals("") || Objects.equals(Board, "")){
-                        startActivity(new Intent(Login.this, PackageSelection.class));
-                    }
-                    else {
-                        startActivity(new Intent(Login.this, Home.class));
-                    }
-
+                if (Class.equals("") || Objects.equals(Board, "")){
+                    startActivity(new Intent(Login.this, PackageSelection.class));
                 }
-            });
-            //startActivity(new Intent(Login.this, Home.class));//new intent for change activity
-        }
-        else{
-            user = FirebaseAuth.getInstance().getCurrentUser();
-            assert user != null;
-            user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    EmailVerificationPopUp emailVerificationPopUp = new EmailVerificationPopUp();
-                    emailVerificationPopUp.show(getSupportFragmentManager(), "asa");
+                else {
+                    startActivity(new Intent(Login.this, Home.class));
                 }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Login.setEnabled(true);
-                    progressBar.setEnabled(false);
-                    Toast.makeText(Login.this, "Please try again", Toast.LENGTH_SHORT).show();
-                }
-            });
 
-        }
+            }
+        });
+
+
+
+//        assert user != null;
+//        if (user.isEmailVerified()){
+//
+//
+//            String email = user.getEmail();
+//            DocumentReference ref = firebaseFirestore.collection("Users/Students/StudentsInfo/" ).document(String.valueOf(email));
+//
+//            ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                @Override
+//                public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                    Class = documentSnapshot.getString("Class");
+//                    Board = documentSnapshot.getString("Board");
+//
+//
+//                    if (Class.equals("") || Objects.equals(Board, "")){
+//                        startActivity(new Intent(Login.this, PackageSelection.class));
+//                    }
+//                    else {
+//                        startActivity(new Intent(Login.this, Home.class));
+//                    }
+//
+//                }
+//            });
+//            //startActivity(new Intent(Login.this, Home.class));//new intent for change activity
+//        }
+//        else{
+//            user = FirebaseAuth.getInstance().getCurrentUser();
+//            assert user != null;
+//            user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+//                @Override
+//                public void onSuccess(Void aVoid) {
+//                    EmailVerificationPopUp emailVerificationPopUp = new EmailVerificationPopUp();
+//                    emailVerificationPopUp.show(getSupportFragmentManager(), "asa");
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception e) {
+//                    Login.setEnabled(true);
+//                    progressBar.setEnabled(false);
+//                    Toast.makeText(Login.this, "Please try again", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//
+//        }
     }
 
 }

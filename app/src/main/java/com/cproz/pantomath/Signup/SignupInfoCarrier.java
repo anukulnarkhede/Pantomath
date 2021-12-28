@@ -16,7 +16,9 @@ public class SignupInfoCarrier {
             uid,
             profileURL,
             AcademicYear,
-            Token;
+            Token,
+            Institute,
+            Branch;
 
     public int NumberOfDoubtsAsked;
     public Date SignupTime;
@@ -33,7 +35,7 @@ public class SignupInfoCarrier {
                              Date SignupTime,
                              int NumberOfDoubtsAsked,
                              String AcademicYear,
-                             String Token) {
+                             String Token, String Institute, String Branch) {
         this.Name = name;
         this.Email = email;
         this.Number = number;
@@ -47,6 +49,8 @@ public class SignupInfoCarrier {
         this.NumberOfDoubtsAsked = NumberOfDoubtsAsked;
         this.AcademicYear = AcademicYear;
         this.Token = Token;
+        this.Institute = Institute;
+        this.Branch = Branch;
 
     }
 

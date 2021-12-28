@@ -119,7 +119,7 @@ public class UploadImagePage extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.blue), PorterDuff.Mode.SRC_ATOP);
+        Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(Color.parseColor("#5f6368"), PorterDuff.Mode.SRC_ATOP);
         SubjTag.setText(UploadFragment.SUBJECT);
 
         switch (UploadFragment.SUBJECT){

@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
@@ -132,7 +133,7 @@ public class StudentProfile extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.blue), PorterDuff.Mode.SRC_ATOP);
+        Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(Color.parseColor("#5f6368"), PorterDuff.Mode.SRC_ATOP);
 
         progressBar = findViewById(R.id.progressBarProfile);
         progressBar.setVisibility(View.GONE);
@@ -146,6 +147,11 @@ public class StudentProfile extends AppCompatActivity {
 
 
         email_profile.setText(email);
+
+
+        String boardAndclass = HomeFragment.CLASS + " " + HomeFragment.BOARD;
+        BoardClass.setText(boardAndclass);
+        UserName.setText(toTitleCase(HomeFragment.NAME));
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -377,9 +383,7 @@ public class StudentProfile extends AppCompatActivity {
                     Board = documentSnapshot.getString("Board");
                     Class = documentSnapshot.getString("STD");
 
-                    String boardAndclass = documentSnapshot.getString("Class") + " " + Objects.requireNonNull(documentSnapshot.getString("Board")).toUpperCase();
-                    BoardClass.setText(boardAndclass);
-                    UserName.setText(toTitleCase(Objects.requireNonNull(documentSnapshot.getString("Name"))));
+
 
                     if (Objects.equals(documentSnapshot.getString("profileURL"), "")){
                         profilePicture.setImageResource(R.drawable.personal_info);

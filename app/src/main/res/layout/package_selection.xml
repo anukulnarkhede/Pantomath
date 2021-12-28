@@ -135,19 +135,4 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />
 
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Note : This app is currently available for only students of Litmus Academy."
-        android:textColor="@color/red"
-        android:textSize="@dimen/TextSize14"
-        app:layout_constraintBottom_toTopOf="@+id/createAcc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="HardcodedText" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

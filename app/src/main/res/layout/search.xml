@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,11 +15,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:elevation="2dp"
-        android:translationZ="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:elevation="1dp"
+        android:translationZ="1dp"
+        app:liftOnScroll="true"
+        style="@style/Widget.MaterialComponents.AppBarLayout.Surface"
+        >
 
 
         <androidx.appcompat.widget.Toolbar
@@ -26,12 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#fff"
-            android:elevation="0dp"
-            android:translationZ="0dp"
-            app:contentInsetLeft="0dp"
-            app:contentInsetStart="0dp"
             app:contentInsetStartWithNavigation="0dp"
-            app:navigationIcon="@drawable/back_search">
+            >
 
             <EditText
                 android:id="@+id/SearchEditText"
@@ -57,14 +54,14 @@
 
             <ImageView
                 android:id="@+id/Cross"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
                 android:scaleType="centerCrop"
                 android:padding="10dp"
 
                 android:layout_gravity="center_vertical|end"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="6dp"
                 android:src="@drawable/cross"
 
                 />
@@ -106,6 +103,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -141,13 +139,14 @@
     <ImageView
         android:id="@+id/noResultsSearch"
 
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="70dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:srcCompat="@drawable/notfound" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

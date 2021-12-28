@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.cproz.pantomath.AdditionalInfo.AdditionalInfo;
 import com.cproz.pantomath.Login.Login;
 import com.cproz.pantomath.Signup.ProfilePictureSignup;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,9 +26,9 @@ public class RetryPopup extends AppCompatDialogFragment {
                 .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ProfilePictureSignup profilePictureSignup = new ProfilePictureSignup();
+                        AdditionalInfo additionalInfo = new AdditionalInfo();
                         FirebaseUser user = firebaseAuth.getCurrentUser();
-                        profilePictureSignup.verification(user);
+                        additionalInfo.verification(user);
 
                         //startActivity(new Intent(getContext(), Login.class));
 

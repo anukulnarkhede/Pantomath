@@ -8,143 +8,157 @@
     android:background="#FFFFFF"
     >
 
-    <RelativeLayout
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        style="@style/Widget.MaterialComponents.AppBarLayout.Surface"
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        app:liftOnScroll="true"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-       >
+        app:layout_constraintTop_toTopOf="parent">
 
 
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/searchBarHome"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="3dp"
-                android:background="@drawable/search_bar_bg"
-                android:elevation="8dp"
-                app:cardCornerRadius="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:cardElevation="4dp"
-
-
-                >
-
-
-                <ImageView
-                    android:id="@+id/searchIcon"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:padding="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="2dp"
-                    app:srcCompat="@drawable/ic_round_search_24"
-
-
-                    />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/ProfilePictureHome"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:scaleType="centerCrop"
-
-                    android:layout_gravity="center_vertical|end"
-                    android:layout_marginEnd="12dp"
-                    android:src="@drawable/personal_info"
-
-                    />
-
-                <ImageView
-                    android:id="@+id/Cross"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:scaleType="centerCrop"
-                    android:padding="10dp"
-
-                    android:layout_gravity="center_vertical|end"
-                    android:layout_marginEnd="2dp"
-                    android:src="@drawable/cross"
-
-                    />
-
-                <TextView
-
-                    android:id="@+id/SearchEditText"
-                    android:layout_width="match_parent"
-                    android:layout_gravity="center_vertical|center"
-                    android:layout_marginStart="48dp"
-                    android:layout_marginEnd="52dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:gravity="center_vertical"
-                    android:singleLine="true"
-                    android:textColor="#121212"
-                    android:textColorHint="#999"
-                    android:hint="Search in doubts"
-                    android:textSize="@dimen/TextSize16"
-                    android:clickable="true"
-                    android:backgroundTint="#fff"
-
-                    tools:ignore="HardcodedText"
-                    android:focusable="true" />
-            </androidx.cardview.widget.CardView>
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/refreshLayout"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/NewAccToolBar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/searchBarHome"
-            android:layout_marginTop="-25dp">
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:elevation="0dp"
+            app:elevation="0dp"
+            app:layout_scrollFlags="scroll|enterAlways"
+
+            >
+
+            <ImageView
+                android:id="@+id/toolbar_titleNewAcc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-medium"
+                android:src="@drawable/ic_solvedout_app_name"
+                android:text="New Account"
+                android:textColor="@color/blue"
+
+                tools:ignore="HardcodedText" />
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/RecyclerViewHome"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/searchBarHome"
-                android:layout_marginTop="-24dp"
-                android:background="#fff"
-                android:clipToPadding="false"
-                android:elevation="0dp"
-                android:paddingBottom="16dp"
-                android:overScrollMode="never"
-                android:paddingTop="40dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="0.0"
+            <ImageView
+                android:id="@+id/searchIcon"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_gravity="start"
+                android:paddingEnd="16dp"
+                android:paddingVertical="10dp"
+                app:srcCompat="@drawable/search_icon"
+                tools:ignore="RtlSymmetry" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ProfilePictureHome"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_gravity="end"
+                android:padding="6dp"
+                android:layout_marginEnd="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/personal_info"
+
                 />
 
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
 
 
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appBarLayout"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
 
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/homeFeedbackCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/feedback_card"
+                android:elevation="1dp">
+
+                <TextView
+                    android:id="@+id/homeFeedbackCardText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="TextView"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/homeFeedbackCardText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/homeFeedbackCardText"
+                    app:srcCompat="@drawable/arrow_feedback" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/homeFeedbackCard"
+            android:id="@+id/RecyclerViewHome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:clipToPadding="false"
+            android:elevation="0dp"
+            android:paddingBottom="16dp"
+
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
+
+        </RelativeLayout>
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+
 
     <ImageView
         android:id="@+id/noResultsImg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:srcCompat="@drawable/notfound"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="100dp"
-        android:layout_marginHorizontal="64dp"
-        android:layout_marginBottom="300dp"
+        android:layout_margin="80dp"
         />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

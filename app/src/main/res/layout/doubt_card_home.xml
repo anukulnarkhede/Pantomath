@@ -55,7 +55,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/personal_info"
+        android:src="@drawable/profile_defult"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -143,11 +143,14 @@
             android:id="@+id/NameHolderDCHome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="16dp"
             android:fontFamily="sans-serif-medium"
             android:text="User"
+            android:ellipsize="end"
+            android:textAllCaps="false"
+            android:maxLines="1"
             android:textColor="@color/red"
             android:textSize="@dimen/TextSize16"
             app:layout_constraintEnd_toStartOf="@+id/subjectTagDChome"
@@ -157,17 +160,17 @@
             tools:ignore="HardcodedText" />
 
         <TextView
-        android:id="@+id/timeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
-        android:text="2 hours ago"
-        android:textColor="#999999"
-        android:textSize="@dimen/TextSize12"
-        app:layout_constraintStart_toEndOf="@+id/ProfilePictureDCHome"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText,SmallSp" />
+            android:id="@+id/timeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="36dp"
+            android:text="2 hours ago"
+            android:textColor="#999999"
+            android:textSize="@dimen/TextSize12"
+            app:layout_constraintStart_toEndOf="@+id/ProfilePictureDCHome"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText,SmallSp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

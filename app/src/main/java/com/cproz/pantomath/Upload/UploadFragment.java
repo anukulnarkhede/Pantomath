@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.format.DateUtils;
 import android.text.style.UpdateLayout;
 import android.view.LayoutInflater;
@@ -32,10 +33,12 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cproz.pantomath.Home.Home;
 import com.cproz.pantomath.Home.HomeDoubtData;
 import com.cproz.pantomath.Home.HomeFragment;
 import com.cproz.pantomath.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.errorprone.annotations.SuppressPackageLocation;
@@ -65,15 +68,17 @@ public class UploadFragment extends Fragment {
 
     RelativeLayout relativeLayout;
 
-    private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     FirebaseUser user = firebaseAuth.getCurrentUser();
 
     String email = user != null ? user.getEmail() : null;
 
-    private DocumentReference ref = firebaseFirestore.collection("Users/Students/StudentsInfo/" ).document(String.valueOf(email));
+    private final DocumentReference ref = firebaseFirestore.collection("Users/Students/StudentsInfo/" ).document(String.valueOf(email));
+
+    ConstraintLayout SubExpCard;
 
     String StudentClass = null, StudentBoard = null;
 
@@ -100,7 +105,9 @@ public class UploadFragment extends Fragment {
 
     private FirebaseFirestore db;
 
-    private TextView text;
+    private TextView SubscriptionExpNote, subExp;
+
+    private Button SubExpBut;
 
 
 
@@ -110,11 +117,16 @@ public class UploadFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-        View root = inflater.inflate(R.layout.upload_fragment, container, false);
+        final View root = inflater.inflate(R.layout.upload_fragment, container, false);
 
 
         relativeLayout = root.findViewById(R.id.buttonPlaceHolder);
         selectSubject = root.findViewById(R.id.selectSubject);
+
+        SubscriptionExpNote = root.findViewById(R.id.SubscriptionExpNote);
+        subExp = root.findViewById(R.id.subExp);
+        SubExpBut = root.findViewById(R.id.SubExpBut);
+        SubExpCard = root.findViewById(R.id.SubExpCard);
 
         db = FirebaseFirestore.getInstance();
         recyclerView = root.findViewById(R.id.smartSuggestionRecyclerView);
@@ -126,6 +138,9 @@ public class UploadFragment extends Fragment {
 
 
         //Timer timer = new Timer();
+
+
+
 
         ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -142,6 +157,34 @@ public class UploadFragment extends Fragment {
                     UploadFragment.INSTITUTE = documentSnapshot.getString("Institute");
 
 
+                    final DocumentReference ref2 = firebaseFirestore.collection("Count/" ).document(UploadFragment.INSTITUTE);
+
+                    ref2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()){
+                                if (!documentSnapshot.getBoolean("Subscription")){
+                                    SubExpCard.setVisibility(View.VISIBLE);
+                                    String text = "<b><font color=#ED5858>Note: </font> <font color=#000000>Your Institute has unsubscribed<br>to our premium plans.</font></b>";
+                                    SubscriptionExpNote.setText(Html.fromHtml(text));
+
+                                }
+                                else{
+                                    subjectFilter(root);
+                                }
+                            }else{
+                                System.out.println("does not exist");
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+
+
+
 
                 }
                 else{
@@ -152,6 +195,15 @@ public class UploadFragment extends Fragment {
 
 
 
+        SubExpBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Objects.requireNonNull(getActivity()).finish();
+                startActivity(new Intent(getContext(), Home.class));
+            }
+        });
+
+
 
 
 
@@ -160,7 +212,7 @@ public class UploadFragment extends Fragment {
         //loadDataFromFirebase();
 
 
-        subjectFilter(root);
+
 
 
         //loadDataFromFirebase();

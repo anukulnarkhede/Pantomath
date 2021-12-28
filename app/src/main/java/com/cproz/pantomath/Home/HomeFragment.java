@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -24,18 +26,23 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.cproz.pantomath.BuildConfig;
+import com.cproz.pantomath.Feedback.Feedback;
 import com.cproz.pantomath.R;
 import com.cproz.pantomath.StudentProfile.StudentProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
@@ -65,11 +72,11 @@ public class HomeFragment extends Fragment {
     public static String BOARD = HomeFragment.BOARD, CLASS = HomeFragment.CLASS,
             PROFILEURL = HomeFragment.PROFILEURL, NAME = HomeFragment.NAME,
             PROFILEURLX = HomeFragment.PROFILEURLX = "";
-    private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private final FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser user = firebaseAuth.getCurrentUser();
     String email = user != null ? user.getEmail() : null;
-    private DocumentReference ref = firebaseFirestore
+    private final DocumentReference ref = firebaseFirestore
             .collection("Users/Students/StudentsInfo/" )
             .document(String.valueOf(email));
 
@@ -77,26 +84,31 @@ public class HomeFragment extends Fragment {
     DocumentSnapshot lastVisible;
     private boolean isScrolling, lastItemReached;
     GridLayoutManager gridLayoutManager;
-
+    TextView feedbackCardText;
     ImageView noResults;
 
     String ProfileImageURL = "";
+    private static final int SCROLL_DIRECTION_UP = -1;
 
 
+    ConstraintLayout feedbackCard;
 
 
+    AppBarLayout appBarLayout;
+    Toolbar toolbar;
     RecyclerView recyclerView;
     private List<HomeDoubtData> DoubtList2;
     private HomeDoubtData homeDoubtData;
     private FirebaseFirestore db;
     CircleImageView ProfilePictureHome;
-    ImageView Cross;
-    TextView SearchView;
+
+
     HomeDoubtAdapter homeDoubtAdapter;
     SwipeRefreshLayout swipeRefreshLayout;
     CardView cardView;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint({"ResourceAsColor", "ClickableViewAccessibility", "SetTextI18n"})
     @Nullable
     @Override
@@ -105,25 +117,44 @@ public class HomeFragment extends Fragment {
 
 
         db = FirebaseFirestore.getInstance();
+        feedbackCard = root.findViewById(R.id.homeFeedbackCard);
 
 
 
+        feedbackCardText = root.findViewById(R.id.homeFeedbackCardText);
+
+        String text = "<b><font color=#0476D9>Feedback & Suggestions: </font> <font color=#5f6368>Share your<br>valuable feedback & suggestions.</font></b>";
+
+
+        feedbackCardText.setText(Html.fromHtml(text));
+
+
+
+        feedbackCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), Feedback.class));
+            }
+        });
 
         recyclerView = root.findViewById(R.id.RecyclerViewHome);
         ProfilePictureHome = root.findViewById(R.id.ProfilePictureHome);
         swipeRefreshLayout = root.findViewById(R.id.refreshLayout);
-        SearchView = root.findViewById(R.id.SearchEditText);
+
+        toolbar = root.findViewById(R.id.NewAccToolBar);
 
         searchIcon = root.findViewById(R.id.searchIcon);
-        cardView = root.findViewById(R.id.searchBarHome);
-        Cross = root.findViewById(R.id.Cross);
+
+
         noResults = root.findViewById(R.id.noResultsImg);
 
+        appBarLayout = root.findViewById(R.id.appBarLayout);
 
-        Cross.setVisibility(View.GONE);
+
         noResults.setVisibility(View.GONE);
 
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 
 //        SearchView.setText(BuildConfig.VERSION_CODE);
 
@@ -162,23 +193,19 @@ public class HomeFragment extends Fragment {
 
 
 
+// ...
+// Put this into your RecyclerView.OnScrollListener > onScrolled() method
+        if (recyclerView.canScrollVertically(SCROLL_DIRECTION_UP)) {
+            // Remove elevation
+            appBarLayout.setElevation(0f);
+        } else {
+            // Show elevation
+            appBarLayout.setElevation(0f);
+        }
 
 
 
 
-        SearchView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                InputMethodManager imm = (InputMethodManager) Objects.requireNonNull(getActivity()).getSystemService(Context.INPUT_METHOD_SERVICE);
-                Objects.requireNonNull(imm).hideSoftInputFromWindow(SearchView.getWindowToken(), 0);
-
-
-
-
-                return false;
-
-            }
-        });
 
 
 
@@ -312,11 +339,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        SearchView.setOnClickListener(new View.OnClickListener() {
+        searchIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), SearchActivity.class));
-                Objects.requireNonNull(getActivity()).overridePendingTransition(0, 0);
+
             }
         });
 
@@ -406,6 +433,7 @@ public class HomeFragment extends Fragment {
                 .whereEqualTo("Board", BOARD)
                 .whereEqualTo("STD",CLASS)
                 .whereEqualTo("Status", "Solved")
+                .whereEqualTo("AcademicYear", "2021-22")
                 .orderBy("DateTime", Query.Direction.DESCENDING)
                 .limit(10)
                 .get()
@@ -509,6 +537,7 @@ public class HomeFragment extends Fragment {
                                     .whereEqualTo("Board", BOARD)
                                     .whereEqualTo("STD",CLASS)
                                     .whereEqualTo("Status", "Solved")
+                                    .whereEqualTo("AcademicYear", "2021-22")
                                     .orderBy("DateTime", Query.Direction.DESCENDING)
                                     .startAfter(lastVisible)
                                     .limit(5);
@@ -615,62 +644,43 @@ public class HomeFragment extends Fragment {
         });
 
 
-        SearchView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-                filter(s.toString());
-
-
-
-            }
-        });
-    }
-
-    @SuppressLint("ResourceAsColor")
-    private void filter(String text) {
-
-        recyclerView.setBackgroundColor(Color.parseColor("#ffffff"));
-
-        ArrayList<HomeDoubtData> filteredList = new ArrayList<>();
-        for (HomeDoubtData item: DoubtList2){
-
-            if (item.getSubject().toLowerCase().contains(text.toLowerCase())
-                    || item.getChapter().toLowerCase().contains(text.toLowerCase())
-                    || item.getQText().toLowerCase().contains(text.toLowerCase())
-            || item.getAnsText().toLowerCase().contains(text.toLowerCase())){
-
-                filteredList.add(item);
-                homeDoubtAdapter.filteredList(filteredList);
-                swipeRefreshLayout.setEnabled(false);
-                noResults.setVisibility(View.GONE);
-
-            }
-
-
-
-        }
-        if (filteredList.isEmpty()){
-            homeDoubtAdapter.filteredList(filteredList);
-            noResults.setVisibility(View.VISIBLE);
-        }
-
-
-
-
-
 
     }
+
+//    @SuppressLint("ResourceAsColor")
+//    private void filter(String text) {
+//
+//        recyclerView.setBackgroundColor(Color.parseColor("#ffffff"));
+//
+//        ArrayList<HomeDoubtData> filteredList = new ArrayList<>();
+//        for (HomeDoubtData item: DoubtList2){
+//
+//            if (item.getSubject().toLowerCase().contains(text.toLowerCase())
+//                    || item.getChapter().toLowerCase().contains(text.toLowerCase())
+//                    || item.getQText().toLowerCase().contains(text.toLowerCase())
+//            || item.getAnsText().toLowerCase().contains(text.toLowerCase())){
+//
+//                filteredList.add(item);
+//                homeDoubtAdapter.filteredList(filteredList);
+//                swipeRefreshLayout.setEnabled(false);
+//                noResults.setVisibility(View.GONE);
+//
+//            }
+//
+//
+//
+//        }
+//        if (filteredList.isEmpty()){
+//            homeDoubtAdapter.filteredList(filteredList);
+//            noResults.setVisibility(View.VISIBLE);
+//        }
+//
+//
+//
+//
+//
+//
+//    }
 
 
 //    public void refreshLoad(){

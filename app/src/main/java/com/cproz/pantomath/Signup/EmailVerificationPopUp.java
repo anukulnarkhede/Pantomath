@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.cproz.pantomath.Home.Home;
 import com.cproz.pantomath.Login.Login;
 
 import java.util.Objects;
@@ -27,7 +28,7 @@ public class EmailVerificationPopUp extends AppCompatDialogFragment {
                         /*startActivity(new Intent(getContext(), Login.class));
                         Intent intent = Objects.requireNonNull(getActivity()).getPackageManager().getLaunchIntentForPackage("com.google.android.gm");
                         startActivity(intent);*/
-                        startActivity(new Intent(getContext(), Login.class));
+                        startActivity(new Intent(getContext(), Home.class));
 
                         //startActivity(new Intent(getContext(), Login.class));
 

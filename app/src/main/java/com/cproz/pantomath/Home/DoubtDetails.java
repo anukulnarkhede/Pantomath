@@ -28,6 +28,8 @@ import android.widget.TextView;
 import com.cproz.pantomath.EditQuestion.EditQuestion;
 import com.cproz.pantomath.R;
 import com.cproz.pantomath.Upload.UploadImagePage;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -68,7 +70,7 @@ public class DoubtDetails extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.blue), PorterDuff.Mode.SRC_ATOP);
+        Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(Color.parseColor("#5f6368"), PorterDuff.Mode.SRC_ATOP);
 
 
         final Bundle bundle = getIntent().getExtras();
@@ -90,8 +92,9 @@ public class DoubtDetails extends AppCompatActivity {
         }
 
 
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
-        if (bundle.getString("Status").equals("Unsolved")){
+        if (bundle.getString("Status").equals("Unsolved") && Objects.equals(bundle.getString("Email"), Objects.requireNonNull(firebaseAuth.getCurrentUser()).getEmail())){
             EditQuestion.setVisibility(View.VISIBLE);
         }
 
@@ -108,7 +111,6 @@ public class DoubtDetails extends AppCompatActivity {
                 intent.putExtra("QuestionText", bundle.getString("QuestionText"));
                 intent.putExtra("Board", bundle.getString("Board"));
                 intent.putExtra("Chapter", bundle.getString("Chapter"));
-
                 intent.putExtra("Email", bundle.getString("Email"));
                 intent.putExtra("FileUrl", bundle.getString("FileUrl"));
                 intent.putExtra("Link", bundle.getString("Link"));
@@ -127,14 +129,14 @@ public class DoubtDetails extends AppCompatActivity {
 
 
         if (Objects.equals(bundle.getString("ProfileImage"), "")){
-            StudentProfilePic.setImageResource(R.drawable.personal_info);
+            StudentProfilePic.setImageResource(R.drawable.profile_defult);
         }
         else if (!Objects.equals(bundle.getString("ProfileImage"), "")){
             Picasso.get().load(bundle.getString("ProfileImage")).into(StudentProfilePic);
         }
 
         if (Objects.equals(bundle.getString("TeacherImage"), "")){
-            TeacherProfilePic.setImageResource(R.drawable.personal_info);
+            TeacherProfilePic.setImageResource(R.drawable.profile_defult);
         }
         else
         if (!Objects.equals(bundle.getString("TeacherImage"), "")){

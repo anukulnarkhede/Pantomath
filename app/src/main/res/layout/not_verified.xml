@@ -21,10 +21,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/suspended_vector"
-        />
+        app:srcCompat="@drawable/suspended_vector" />
 
     <Button
+        android:visibility="gone"
         android:id="@+id/requestAgain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,32 +42,52 @@
 
     <TextView
         android:id="@+id/VerificationText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textSize="@dimen/TextSize14"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:text="Note : Your account is under institute level verification. It may take around 24 hours. Contact your institute in case of delay"
         android:textColor="#121212"
-        android:text="Note : Verification may take around 24 hours"
+        android:textSize="@dimen/TextSize14"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="HardcodedText"
-        />
+        tools:ignore="HardcodedText" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/UnpaidText"
-        android:layout_marginHorizontal="16dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
         android:fontFamily="sans-serif-medium"
-        android:textSize="@dimen/TextSize16"
-        android:textColor="@color/red"
         android:text="Solved'out is currently only available for Litmus Academy Students.
         \nWe'll be launching it soon all over India"
+        android:textColor="@color/red"
+        android:textSize="@dimen/TextSize16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UnderVerification"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textSize="12sp"
+        android:textColor="#999999"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UnderVerification"
         tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

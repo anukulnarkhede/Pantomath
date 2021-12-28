@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -107,42 +108,45 @@ public class Home extends AppCompatActivity {
                 assert User != null;
                 switch (User) {
 
-                    case "Active":
+                    case "Active": {
 
                         startActivity(new Intent(Home.this, Home.class));
                         assert firebaseUser != null;
-                        if(firebaseUser.isEmailVerified()){
-
-                            String Board = documentSnapshot.getString("Board");
-                            String Class = documentSnapshot.getString("Class");
-
-                            if (Objects.equals(Class, "") || Objects.equals(Board, "")){
-                                startActivity(new Intent(Home.this, PackageSelection.class));
-                            }
-                            else{
-                                startActivity(new Intent(Home.this, Home.class));
-                            }
-
-//                            ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//                                @Override
-//                                public void onSuccess(DocumentSnapshot documentSnapshot) {
-//
-//                                    String Board = documentSnapshot.getString("Board");
-//                                    String Class = documentSnapshot.getString("Class");
-//
-//                                    if (Objects.equals(Class, "") || Objects.equals(Board, "")){
-//                                        startActivity(new Intent(Home.this, PackageSelection.class));
-//                                    }
-//                                    else {
-//                                        startActivity(new Intent(Home.this, Home.class));
-//                                    }
-//                                }
-//                            });
-
-
-
-                        }
                         break;
+
+                    }
+//                        if(firebaseUser.isEmailVerified()){
+//
+//                            String Board = documentSnapshot.getString("Board");
+//                            String Class = documentSnapshot.getString("Class");
+//
+////                            if (Objects.equals(Class, "") || Objects.equals(Board, "")){
+////                                startActivity(new Intent(Home.this, PackageSelection.class));
+////                            }
+////                            else{
+////                                startActivity(new Intent(Home.this, Home.class));
+////                            }
+//
+////                            ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+////                                @Override
+////                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+////
+////                                    String Board = documentSnapshot.getString("Board");
+////                                    String Class = documentSnapshot.getString("Class");
+////
+////                                    if (Objects.equals(Class, "") || Objects.equals(Board, "")){
+////                                        startActivity(new Intent(Home.this, PackageSelection.class));
+////                                    }
+////                                    else {
+////                                        startActivity(new Intent(Home.this, Home.class));
+////                                    }
+////                                }
+////                            });
+//
+//
+//
+//                        }
+//                        break;
                     case "Not Verified": {
                         Intent intent = new Intent(Home.this, NotVerified.class);
                         intent.putExtra("UserStatus", User);
@@ -169,7 +173,7 @@ public class Home extends AppCompatActivity {
                     }
 
                     case "":{
-                        Intent intent = new Intent(Home.this, PackageSelection.class);
+                        Intent intent = new Intent(Home.this, NotVerified.class);
                         intent.putExtra("UserStatus", User);
                         startActivity(intent);
                         break;
@@ -235,6 +239,7 @@ public class Home extends AppCompatActivity {
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @SuppressLint("NonConstantResourceId")
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 

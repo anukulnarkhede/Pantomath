@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,454 +10,517 @@
     android:background="#ffffff"
     >
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="2dp"
-        android:translationZ="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="match_parent">
 
-        >
-
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/SettingsToolBar"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#fff"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="1dp"
+            android:translationZ="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:liftOnScroll="true"
 
             >
 
-            <TextView
-                android:autoSizeMaxTextSize="20dp"
-                android:id="@+id/toolbar_titleSettings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:fontFamily="sans-serif-medium"
-                android:text="Settings"
-                android:textColor="@color/blue"
-                android:textSize="20dp"
-                tools:ignore="HardcodedText" />
-
-        </androidx.appcompat.widget.Toolbar>
-
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="0.7dp"
-        android:background="#000"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"/>
-
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="21dp"
-        android:src="@drawable/setting_profile"
-        app:layout_constraintBottom_toBottomOf="@+id/textView13"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView11" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Personal Information"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="21dp"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="@dimen/TextSize16"
-        android:textColor="#000"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Phone no., Address, etc."
-        android:layout_marginStart="21dp"
-        android:textSize="@dimen/TextSize14"
-        android:layout_marginTop="2dp"
-        android:textColor="#999999"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13"
-        android:layout_marginTop="16dp"
-        android:background="#40999999"
-
-        />
-
-    <Button
-        android:id="@+id/PersonalInfo"
-        android:layout_width="match_parent"
-        android:layout_height="69dp"
-        android:layout_marginTop="10dp"
-        android:background="#00000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-
-        />
-
-
-    <ImageView
-        android:visibility="gone"
-        android:id="@+id/imageView3"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="21dp"
-        android:src="@drawable/invite_friends"
-        app:layout_constraintBottom_toBottomOf="@+id/textView130"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView100"
-        />
-
-    <TextView
-        android:visibility="gone"
-        android:id="@+id/textView100"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Invite Friends"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="21dp"
-        android:textSize="@dimen/TextSize16"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="#000"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
-
-    <TextView
-        android:visibility="gone"
-        android:id="@+id/textView130"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Invite your friends to use Pantomath"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="21dp"
-        android:textSize="@dimen/TextSize14"
-        android:layout_marginTop="2dp"
-        android:textColor="#999999"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView100" />
-
-
-    <View
-        android:visibility="gone"
-        android:id="@+id/view3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView130"
-
-        android:layout_marginTop="16dp"
-        android:background="#40999999"
-
-        />
-
-    <Button
-        android:visibility="gone"
-        android:id="@+id/InviteFriends"
-        android:layout_width="match_parent"
-        android:layout_height="69dp"
-        android:layout_marginTop="8dp"
-        android:background="#00000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2"
-
-        />
-
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="21dp"
-        android:src="@drawable/feedback"
-        app:layout_constraintBottom_toBottomOf="@+id/textView1300"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView1000" />
-
-    <TextView
-        android:id="@+id/textView1000"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Feedback"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="24dp"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="@dimen/TextSize16"
-        android:textColor="#000"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
-
-    <TextView
-        android:id="@+id/textView1300"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Share your feedback about our service"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="24dp"
-        android:textSize="@dimen/TextSize14"
-        android:layout_marginTop="2dp"
-        android:textColor="#999999"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView1000" />
-
-
-    <View
-        android:id="@+id/view4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1300"
-        android:layout_marginTop="16dp"
-        android:background="#40999999"
-
-        />
-
-    <Button
-        android:id="@+id/feedback"
-        android:layout_width="match_parent"
-        android:layout_height="69dp"
-        android:layout_marginTop="5dp"
-        android:background="#00000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3"
-
-        />
-
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="21dp"
-        android:src="@drawable/help"
-        app:layout_constraintBottom_toBottomOf="@+id/textView13000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView10000" />
-
-    <TextView
-        android:id="@+id/textView10000"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Help"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="21dp"
-        android:textSize="@dimen/TextSize16"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="#000"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/view4" />
-
-    <TextView
-        android:id="@+id/textView13000"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get help about using Solved'out"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="21dp"
-        android:textSize="@dimen/TextSize14"
-        android:layout_marginTop="2dp"
-        android:textColor="#999999"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView10000" />
-
-
-    <View
-        android:id="@+id/view5"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13000"
-        android:layout_marginTop="16dp"
-        android:background="#40999999"
-
-        />
-
-    <Button
-        android:id="@+id/Help"
-        android:layout_width="match_parent"
-        android:layout_height="69dp"
-        android:layout_marginTop="5dp"
-        android:background="#00000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view4"
-
-        />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="About"
-        android:textSize="@dimen/TextSize14"
-
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:textColor="#999999"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view5" />
-
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="21dp"
-        android:src="@drawable/about"
-        app:layout_constraintBottom_toBottomOf="@+id/textView100000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView100000" />
-
-
-    <TextView
-        android:id="@+id/textView100000"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="About Solved'out"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="21dp"
-        android:textSize="@dimen/TextSize16"
-        android:textColor="#000"
-        android:fontFamily="sans-serif-medium"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-
-
-
-    <View
-        android:id="@+id/view6"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView100000"
-
-        android:layout_marginTop="16dp"
-        android:background="#40999999"
-
-        />
-
-    <Button
-        android:id="@+id/about"
-        android:layout_width="match_parent"
-        android:layout_height="69dp"
-        android:layout_marginTop="28dp"
-        android:background="#00000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view5"
-
-        />
-
-
-    <TextView
-        android:id="@+id/textView140"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:textSize="@dimen/TextSize14"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:textColor="#999999"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view6" />
-
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="21dp"
-        android:src="@drawable/logout"
-        app:layout_constraintBottom_toBottomOf="@+id/textView1000000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView1000000" />
-
-
-    <TextView
-        android:id="@+id/textView1000000"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Log Out of Solved'out"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="21dp"
-        android:textSize="@dimen/TextSize16"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="#FF0000"
-        app:layout_constraintStart_toEndOf="@+id/imageView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView140" />
-
-
-
-
-
-
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="match_parent"
-        android:layout_height="69dp"
-        android:layout_marginTop="30dp"
-        android:background="#00000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view6"
-
-        />
-
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:text="Concept and Created By"
-        android:textSize="@dimen/TextSize14"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="96dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="24dp"
-        android:fontFamily="@font/noto_sans_bold"
-        android:background="@drawable/cproz_icon"
-        android:textColor="#0476D9"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/SettingsToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#fff"
+
+                >
+
+                <ImageView
+                    android:id="@+id/toolbar_titleNewAcc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-medium"
+                    android:src="@drawable/ic_settings_text"
+                    android:text="New Account"
+                    android:textColor="@color/blue"
+
+                    tools:ignore="HardcodedText" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!--<View
+            android:id="@+id/view"
+
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="#000"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />-->
+
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/setting_profile"
+            app:layout_constraintBottom_toBottomOf="@+id/textView13"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Personal Information"
+            android:textColor="#000"
+            android:textSize="@dimen/TextSize16"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="2dp"
+            android:text="Phone no., Address, etc."
+            android:textColor="#999999"
+            android:textSize="@dimen/TextSize14"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+        <View
+            android:id="@+id/view2"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="#0D000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView13"
+
+            />
+
+        <Button
+            android:id="@+id/PersonalInfo"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:layout_marginTop="10dp"
+            android:background="#00000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            tools:ignore="UnknownIdInLayout"
+            />
+
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:src="@drawable/invite_friends"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/textView130"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView100" />
+
+        <TextView
+            android:id="@+id/textView100"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Invite Friends"
+            android:textColor="#000"
+            android:textSize="@dimen/TextSize16"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+        <TextView
+            android:id="@+id/textView130"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="16dp"
+            android:text="Invite your friends to use Pantomath"
+            android:textColor="#999999"
+            android:textSize="@dimen/TextSize14"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView100" />
+
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+
+            android:background="#0D000000"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView130"
+
+            />
+
+        <Button
+            android:id="@+id/InviteFriends"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:layout_marginTop="8dp"
+            android:background="#00000000"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2"
+
+            />
+
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/feedback"
+            app:layout_constraintBottom_toBottomOf="@+id/textView1300"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView1000" />
+
+        <TextView
+            android:id="@+id/textView1000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Feedback &amp; Suggestions"
+            android:textColor="#000"
+            android:textSize="@dimen/TextSize16"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+        <TextView
+            android:id="@+id/textView1300"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="16dp"
+            android:text="Share your feedback about our service"
+            android:textColor="#999999"
+            android:textSize="@dimen/TextSize14"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toBottomOf="@+id/textView1000" />
+
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="#0D000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView1300"
+
+            />
+
+        <Button
+            android:id="@+id/feedback"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:layout_marginTop="5dp"
+            android:background="#00000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view3"
+
+            />
+
+
+        <!--feedback Button-->
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/help"
+            app:layout_constraintBottom_toBottomOf="@+id/textView13000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView10000" />
+
+        <TextView
+            android:id="@+id/textView10000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Help"
+            android:textColor="#000"
+            android:textSize="@dimen/TextSize16"
+            app:layout_constraintStart_toEndOf="@+id/imageView5"
+            app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+        <TextView
+            android:id="@+id/textView13000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="16dp"
+            android:text="Get help about using Solved'out"
+            android:textColor="#999999"
+            android:textSize="@dimen/TextSize14"
+            app:layout_constraintStart_toEndOf="@+id/imageView5"
+            app:layout_constraintTop_toBottomOf="@+id/textView10000" />
+
+
+        <View
+            android:id="@+id/view5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+
+            android:layout_marginTop="16dp"
+            android:background="#0D000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView13000"
+
+            />
+
+        <Button
+            android:id="@+id/Help"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:layout_marginTop="5dp"
+            android:background="#00000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view4"
+
+            />
+
+
+        <!--Help Button-->
+
+
+        <ImageView
+            android:id="@+id/imageView500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/lock_"
+            app:layout_constraintBottom_toBottomOf="@+id/textView130000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView10000000" />
+
+        <TextView
+            android:id="@+id/textView10000000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Reset Password"
+            android:textColor="#000"
+            android:textSize="@dimen/TextSize16"
+            app:layout_constraintStart_toEndOf="@+id/imageView500"
+            app:layout_constraintTop_toBottomOf="@+id/view5" />
+
+        <TextView
+            android:id="@+id/textView130000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="16dp"
+            android:text="Reset your password"
+            android:textColor="#999999"
+            android:textSize="@dimen/TextSize14"
+            app:layout_constraintStart_toEndOf="@+id/imageView500"
+            app:layout_constraintTop_toBottomOf="@+id/textView10000000" />
+
+
+        <View
+            android:id="@+id/view200"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+
+            android:layout_marginTop="16dp"
+            android:background="#0D000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView130000"
+
+            />
+
+        <Button
+            android:id="@+id/ResetPassword"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:layout_marginTop="5dp"
+            android:background="#00000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view5"
+
+            />
+
+        <!--Reset Password-->
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+
+            android:text="About"
+            android:textColor="#999999"
+            android:textSize="@dimen/TextSize14"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view200" />
+
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/about"
+            app:layout_constraintBottom_toBottomOf="@+id/textView100000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView100000" />
+
+
+        <TextView
+            android:id="@+id/textView100000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="About Solved'out"
+            android:textColor="#000"
+            android:textSize="@dimen/TextSize16"
+            app:layout_constraintStart_toEndOf="@+id/imageView6"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+
+            android:layout_marginTop="16dp"
+            android:background="#0D000000"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView100000"
+
+            />
+
+        <Button
+            android:id="@+id/about"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:layout_marginTop="5dp"
+            android:background="#00000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view200"
+
+            />
+
+
+        <TextView
+            android:id="@+id/textView140"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:text="Logout"
+            android:textColor="#999999"
+            android:textSize="@dimen/TextSize14"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view6" />
+
+
+        <TextView
+            android:id="@+id/textView1000000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Log Out of Solved'out"
+            android:textColor="#FF0000"
+            android:textSize="@dimen/TextSize16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView140" />
+
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:layout_marginTop="30dp"
+            android:background="#00000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view6"
+
+            />
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="sans-serif"
+            android:text="From"
+            android:textSize="@dimen/TextSize14"
+            app:layout_constraintBottom_toTopOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/textView4"
+            android:layout_width="56dp"
+            android:layout_height="21dp"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/cproz_icon"
+            android:fontFamily="@font/noto_sans_bold"
+            android:textColor="#0476D9"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

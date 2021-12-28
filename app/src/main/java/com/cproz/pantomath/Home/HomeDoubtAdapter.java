@@ -157,7 +157,7 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
                 }
                 else if (DoubtList.get(position).getProfileImageURL().equals(""))
                 {
-                    holder.profilePictureDC.setImageResource(R.drawable.personal_info);
+                    holder.profilePictureDC.setImageResource(R.drawable.profile_defult);
 
                 }
 

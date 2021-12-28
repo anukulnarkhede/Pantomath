@@ -14,9 +14,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import com.cproz.pantomath.AdditionalInfo.AdditionalInfo;
 import com.cproz.pantomath.R;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class NewAccount extends AppCompatActivity {
 
@@ -24,11 +26,14 @@ public class NewAccount extends AppCompatActivity {
 
     Toolbar toolbar;
     Button nextButt;
-    EditText Name, Email, LastName;
+    EditText Name, Email, LastName, Password;
     TextView errorText;
 
 
     public static String NAME = NewAccount.NAME, EMAIL = NewAccount.EMAIL, LASTNAME = NewAccount.LASTNAME;
+    public static String PASSWORD = NewAccount.PASSWORD;
+
+    final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
 
 
     @Override
@@ -92,6 +97,7 @@ public class NewAccount extends AppCompatActivity {
         Email = findViewById(R.id.NewAccEmail);
         Name = findViewById(R.id.NewAccName);
         LastName = findViewById(R.id.NewAccLastName);
+        Password = findViewById(R.id.Password);
 
 
     }
@@ -99,9 +105,10 @@ public class NewAccount extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     public void Validation(){
 
-        NewAccount.NAME = Name.getText().toString() + " " + LastName.getText().toString();
+        NewAccount.NAME = toTitleCase(Name.getText().toString()) + " " + toTitleCase(LastName.getText().toString());
         NewAccount.LASTNAME = LastName.getText().toString();
-        NewAccount.EMAIL = toTitleCase(Email.getText().toString().toLowerCase().trim());
+        NewAccount.EMAIL = Email.getText().toString().toLowerCase().trim();
+        NewAccount.PASSWORD = Password.getText().toString();
 
         if (NAME.isEmpty()&&EMAIL.isEmpty()&&LASTNAME.isEmpty()){
 
@@ -137,6 +144,14 @@ public class NewAccount extends AppCompatActivity {
             Name.setBackgroundResource(R.drawable.text_view_bg);
         }
 
+        else if (PASSWORD.isEmpty()){
+            errorText.setVisibility(View.VISIBLE);
+            errorText.setText("Password must not be empty");
+            Email.setBackgroundResource(R.drawable.error_text_field_bg);
+            Email.requestFocus();
+            Name.setBackgroundResource(R.drawable.text_view_bg);
+        }
+
         else if (!Patterns.EMAIL_ADDRESS.matcher(EMAIL).matches()){
             errorText.setVisibility(View.VISIBLE);
             Name.setBackgroundResource(R.drawable.text_view_bg);
@@ -145,9 +160,15 @@ public class NewAccount extends AppCompatActivity {
             Email.requestFocus();
 
         }
+        else if (!PASSWORD_PATTERN.matcher(PASSWORD).matches()) {
+            errorText.setVisibility(View.VISIBLE);
+            errorText.setText("Password must contain at least 8 characters one capital letter and a special character");
+            Password.setBackgroundResource(R.drawable.error_text_field_bg);
+            Password.requestFocus();
+        }
         else
         {
-            startActivity(new Intent(NewAccount.this, Password.class));
+            startActivity(new Intent(NewAccount.this, PackageSelection.class));
             overridePendingTransition(10,10);
         }
 

@@ -1,15 +1,20 @@
 package com.cproz.pantomath.AdditionalInfo;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.telephony.mbms.MbmsErrors;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,17 +28,30 @@ import android.widget.Toast;
 
 import com.cproz.pantomath.Home.Home;
 import com.cproz.pantomath.R;
+import com.cproz.pantomath.Signup.EmailVerificationPopUp;
+import com.cproz.pantomath.Signup.NewAccount;
 import com.cproz.pantomath.Signup.PackageSelection;
+import com.cproz.pantomath.Signup.Password;
+import com.cproz.pantomath.Signup.ProfilePictureSignup;
+import com.cproz.pantomath.Signup.RetryPopup;
+import com.cproz.pantomath.Signup.SignupInfoCarrier;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Objects;
 
 public class AdditionalInfo extends AppCompatActivity {
@@ -43,12 +61,18 @@ public class AdditionalInfo extends AppCompatActivity {
     Spinner CitySpinner, InstituteSeletor, SelectBranch;
     Toolbar toolbar;
     String SelectedCity = "", SelectedInstitute = "";
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    FirebaseUser user = firebaseAuth.getCurrentUser();
-    String email = Objects.requireNonNull(user).getEmail();
-    public static String SELECTEDCITY = AdditionalInfo.SELECTEDCITY = "",SELECTEDINSTITUTE =  AdditionalInfo.SELECTEDINSTITUTE = "", SELECTEDBRANCH = AdditionalInfo.SELECTEDBRANCH;
-    Button UpdateInfo;
+//    FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+//    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+//    FirebaseUser user = firebaseAuth.getCurrentUser();
+//    String email = Objects.requireNonNull(user).getEmail();
+    public static String SELECTEDCITY = AdditionalInfo.SELECTEDCITY = "",
+        SELECTEDINSTITUTE =  AdditionalInfo.SELECTEDINSTITUTE = "",
+        SELECTEDBRANCH = AdditionalInfo.SELECTEDBRANCH = "";
+
+    FirebaseAuth firebaseAuth;
+    FirebaseFirestore firebaseFirestore;
+
+    Button UpdateInfo, progressBar;
     CheckBox OtherStudents;
     TextView ErrorText;
 
@@ -62,17 +86,19 @@ public class AdditionalInfo extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.blue), PorterDuff.Mode.SRC_ATOP);
+        Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(Color.parseColor("#5f6368"), PorterDuff.Mode.SRC_ATOP);
 
 
-        Bundle bundle = getIntent().getExtras();
-        assert bundle != null;
-        if (Objects.equals(bundle.getString("Settings"), "Settings")){
-           OtherStudents.setVisibility(View.GONE);
-           UpdateInfo.setText("Save Changes");
-        }else{
-            OtherStudents.setVisibility(View.VISIBLE);
-        }
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+//        Bundle bundle = getIntent().getExtras();
+//        assert bundle != null;
+//        if (Objects.equals(bundle.getString("Settings"), "Settings")){
+//           OtherStudents.setVisibility(View.GONE);
+//           UpdateInfo.setText("Save Changes");
+//        }else{
+//            OtherStudents.setVisibility(View.VISIBLE);
+//        }
 
 
 
@@ -230,9 +256,9 @@ public class AdditionalInfo extends AppCompatActivity {
                     Bundle bundle = getIntent().getExtras();
                     assert bundle != null;
                     if (Objects.equals(bundle.getString("Settings"), "Settings")){
-                        UpdateSettings(number, city, Institute, Branch);
+                        //UpdateSettings(number, city, Institute, Branch);
                     }else{
-                        UpdateCity(number,city,Institute,Board,STD, Branch,"Unpaid");
+                        //UpdateCity(number,city,Institute,Board,STD, Branch,"Unpaid");
                     }
                 }
                 else if (Institute.equals("Select Institute")){
@@ -246,15 +272,20 @@ public class AdditionalInfo extends AppCompatActivity {
                 }
                 else{
 
-                    ErrorText.setTextColor(Color.parseColor("#999999"));
+                    UpdateInfo.setEnabled(false);
+                    progressBar.setVisibility(View.VISIBLE);
 
-                    Bundle bundle = getIntent().getExtras();
-                    assert bundle != null;
-                    if (Objects.equals(bundle.getString("Settings"), "Settings")){
-                        UpdateSettings(number, city, Institute, Branch);
-                    }else{
-                        UpdateCity(number,city,Institute,Board,STD, Branch,"Not Verified");
-                    }
+                    signup(number,city,Board, STD, Institute, Branch );
+
+//                    ErrorText.setTextColor(Color.parseColor("#999999"));
+//
+//                    Bundle bundle = getIntent().getExtras();
+//                    assert bundle != null;
+//                    if (Objects.equals(bundle.getString("Settings"), "Settings")){
+//                        //UpdateSettings(number, city, Institute, Branch);
+//                    }else{
+//                        //UpdateCity(number,city,Institute,Board,STD, Branch,"Not Verified");
+//                    }
                 }
 
 
@@ -277,40 +308,41 @@ public class AdditionalInfo extends AppCompatActivity {
         ErrorText = findViewById(R.id.errorText);
         SelectBranch = findViewById(R.id.SelectBranch);
         OtherStudents = findViewById(R.id.OtherStudents);
+        progressBar = findViewById(R.id.progressBar);
 
 
     }
 
-    public void UpdateCity(String number, String city, String Institute, String Board, String STD, String Branch,String UserStatus){
-        firebaseFirestore.collection("Users/Students/StudentsInfo/").document(email).
-                update("Number", number, "Address", city, "Institute", Institute, "Board", Board, "Class", STD, "User", UserStatus, "Branch", Branch).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                startActivity(new Intent(AdditionalInfo.this, Home.class));
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
-    }
-
-
-    public void UpdateSettings(String number, String city, String Institute, String Branch){
-        firebaseFirestore.collection("Users/Students/StudentsInfo/").document(email).
-                update("Number", number, "Address", city, "Institute", Institute, "Branch", Branch).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                startActivity(new Intent(AdditionalInfo.this, Home.class));
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
-    }
+//    public void UpdateCity(String number, String city, String Institute, String Board, String STD, String Branch,String UserStatus){
+//        firebaseFirestore.collection("Users/Students/StudentsInfo/").document(email).
+//                update("Number", number, "Address", city, "Institute", Institute, "Board", Board, "Class", STD, "User", UserStatus, "Branch", Branch).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                startActivity(new Intent(AdditionalInfo.this, Home.class));
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//
+//            }
+//        });
+//    }
+//
+//
+//    public void UpdateSettings(String number, String city, String Institute, String Branch){
+//        firebaseFirestore.collection("Users/Students/StudentsInfo/").document(email).
+//                update("Number", number, "Address", city, "Institute", Institute, "Branch", Branch).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                startActivity(new Intent(AdditionalInfo.this, Home.class));
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//
+//            }
+//        });
+//    }
 
     public void Institute(final String[] Institute){
         final ArrayList<String> arrayList1 = new ArrayList<>(Arrays.asList(Institute));
@@ -376,4 +408,109 @@ public class AdditionalInfo extends AppCompatActivity {
         });
     }
 
+
+    private void signup(final String Number, final String addressCity, final String Board, final String Class, final String Institute, final String Branch) {
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        firebaseAuth.createUserWithEmailAndPassword(NewAccount.EMAIL, NewAccount.PASSWORD)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()){
+
+
+
+
+
+
+
+                            final Date SignupTime = new Date();
+                            String Email = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getEmail();
+
+                            SignupInfoCarrier signupInfoCarrier = new SignupInfoCarrier(
+                                    toTitleCase(NewAccount.NAME), NewAccount.EMAIL.toLowerCase().trim(), Number,addressCity,"Not Verified",Board,Class, Email , ""
+                                    , SignupTime,0, "","",Institute, Branch
+
+                            );
+                            firebaseFirestore.document("Users/Students/StudentsInfo/" + Email )
+                                    .set(signupInfoCarrier)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                                            verification(user);
+                                            //startActivity(new Intent(ProfilePictureSignup.this, Home.class));
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(AdditionalInfo.this, "Signup Failed", Toast.LENGTH_SHORT).show();
+                                            System.out.println("Document upload failed");
+                                            UpdateInfo.setEnabled(true);
+                                        }
+                                    });
+
+
+
+                        }
+                        else {
+                            Toast.makeText(AdditionalInfo.this, "Signup Failed", Toast.LENGTH_SHORT).show();
+                            System.out.println("password login failed");
+                            UpdateInfo.setEnabled(true);
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }
+                });
+
+    }
+
+
+    public static String toTitleCase(String input) {
+        StringBuilder titleCase = new StringBuilder(input.length());
+        boolean nextTitleCase = true;
+
+        for (char c : input.toCharArray()) {
+            if (Character.isSpaceChar(c)) {
+                nextTitleCase = true;
+            } else if (nextTitleCase) {
+                c = Character.toTitleCase(c);
+                nextTitleCase = false;
+            }
+
+            titleCase.append(c);
+        }
+
+        return titleCase.toString();
+    }
+
+
+
+    public void verification(FirebaseUser user){
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
+        user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                EmailVerificationPopUp emailVerificationPopUp = new EmailVerificationPopUp();
+                emailVerificationPopUp.show(getSupportFragmentManager(), "asa");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                RetryPopup retryPopup = new RetryPopup();
+                retryPopup.show(getSupportFragmentManager(), "axa");
+            }
+        });
+    }
+
+
 }
+
+
+
+

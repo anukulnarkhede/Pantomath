@@ -29,12 +29,12 @@
         android:windowSoftInputMode="adjustPan"
         tools:ignore="AllowBackup"
         tools:replace="android:allowBackup">
-
-        <activity android:name=".Home.SearchActivity"
+        <activity android:name=".StudentProfile.ResetPasswordProfile"
+            android:parentActivityName=".StudentProfile.Settings"/>
+        <activity
+            android:name=".Home.SearchActivity"
             android:parentActivityName=".Home.Home"
-            android:windowSoftInputMode="adjustPan"
-            />
-
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".EditQuestion.EditQuestion"
             android:windowSoftInputMode="adjustPan" />

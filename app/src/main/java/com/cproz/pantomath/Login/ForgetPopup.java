@@ -8,7 +8,13 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class ForgetPopup extends AppCompatDialogFragment {
+
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = firebaseAuth.getCurrentUser();
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -22,6 +28,7 @@ public class ForgetPopup extends AppCompatDialogFragment {
                         /*startActivity(new Intent(getContext(), Login.class));
                         Intent intent = Objects.requireNonNull(getActivity()).getPackageManager().getLaunchIntentForPackage("com.google.android.gm");
                         startActivity(intent);*/
+                        firebaseAuth.signOut();
                         startActivity(new Intent(getContext(), Login.class));
 
                         //startActivity(new Intent(getContext(), Login.class));

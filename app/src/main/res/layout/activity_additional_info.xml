@@ -16,7 +16,7 @@
         android:background="@drawable/login_butt_selector"
         android:fontFamily="sans-serif-medium"
         android:paddingHorizontal="16dp"
-        android:text="Done"
+        android:text="Create Account"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/blue"
@@ -52,10 +52,10 @@
                 android:id="@+id/toolbar_titleProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
+                android:layout_gravity="center"
                 android:fontFamily="sans-serif-medium"
                 android:text="Additional information"
-                android:textColor="@color/blue"
+                android:textColor="#121212"
                 android:textSize="20dp"
                 tools:ignore="HardcodedText,UnusedAttribute" />
 
@@ -159,6 +159,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/OtherStudents"
         tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#73000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
