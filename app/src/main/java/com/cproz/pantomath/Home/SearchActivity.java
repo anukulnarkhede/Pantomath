@@ -132,7 +132,8 @@ public class SearchActivity extends AppCompatActivity {
                                 Date dateTime = new Date();
 
                                 if (jsonObject.getString("STD").equals(HomeFragment.CLASS)
-                                        && jsonObject.getString("Board").equals(HomeFragment.BOARD)){
+                                        && jsonObject.getString("Board").equals(HomeFragment.BOARD) &&
+                                        jsonObject.getString("Status").equals("Solved")){
 
                                     homeDoubtData =
                                             new HomeDoubtData(

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginAndRegistrationNew.AccountSetup"
+    android:background="#ffffff">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/AccPassAppbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="0dp"
+        app:elevation="0dp"
+        android:paddingEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:paddingStart="24dp"
+            android:id="@+id/AccSetUpToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:elevation="0dp"
+            app:elevation="0dp"
+            >
+
+            <TextView
+
+                android:id="@+id/toolbar_titleNewAcc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:fontFamily="@font/eudoxus_sans_medium"
+                android:text="Step 1/2"
+                android:textColor="#7A869A"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="Let’s set up your account"
+        android:textSize="20sp"
+        android:fontFamily="@font/eudoxus_sans_bold"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AccPassAppbar"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/eudoxus_sans_medium"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineHeight="24sp"
+        android:text="A couple more steps,\nand you are ready to go."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView27"
+        tools:ignore="HardcodedText,UnusedAttribute" />
+
+    <EditText
+        android:id="@+id/FirstName"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="First Name"
+        android:background="@drawable/google_but_bg"
+        android:padding="16dp"
+        android:textColor="#7A869A"
+        android:textSize="16sp"
+        android:fontFamily="@font/eudoxus_sans_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView28"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/LastName"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:background="@drawable/google_but_bg"
+        android:padding="16dp"
+        android:textColor="#7A869A"
+        android:textSize="16sp"
+        android:fontFamily="@font/eudoxus_sans_medium"
+        android:inputType="textPersonName"
+        android:hint="Last Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FirstName"
+        tools:ignore="HardcodedText" />
+
+    <View
+        android:id="@+id/view8"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginTop="24dp"
+        android:background="#F1F5F6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LastName" />
+
+
+    <EditText
+        android:id="@+id/PhoneNumber"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:background="@drawable/google_but_bg"
+        android:padding="16dp"
+        android:textColor="#7A869A"
+        android:textSize="16sp"
+        android:fontFamily="@font/eudoxus_sans_medium"
+        android:inputType="phone"
+        android:hint="Phone Number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view8"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/NextAccSetUp"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:fontFamily="@font/eudoxus_sans_bold"
+        android:textColor="#ffffff"
+        android:background="@drawable/blue_continue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PhoneNumber"
+        tools:ignore="HardcodedText"
+        style="?android:attr/borderlessButtonStyle"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

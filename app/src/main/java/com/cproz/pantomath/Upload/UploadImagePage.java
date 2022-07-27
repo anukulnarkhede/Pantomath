@@ -42,7 +42,9 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -62,6 +64,8 @@ public class UploadImagePage extends AppCompatActivity {
     ConstraintLayout constraintLayout;
     Toolbar toolbar;
     Button progressBar;
+    List<String> DoubtImages = new ArrayList<>();
+    List<String> AnswerImages = new ArrayList<>();
 
     public String Name, Email, AnsPhotoUrl1 = "", AnsPhotoUrl2 = "", AnsText = "", AudioUrl = "", Chapter, FileUrl = "", Link = "",
             Photo1url = "", Photo2url = "", ProfileImageURL = "", Status,
@@ -486,6 +490,7 @@ public class UploadImagePage extends AppCompatActivity {
 
             final StorageReference reference1 = storageReference.child("Doubts/" + Uid + "/DoubtImg1.jpg");
             final StorageReference reference2 = storageReference.child("Doubts/" + Uid + "/DoubtImg2.jpg");
+            DoubtImages.clear();
 
 
 
@@ -510,7 +515,7 @@ public class UploadImagePage extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             Photo1url = uri.toString();
-
+                            DoubtImages.add(Photo1url);
 
                             reference2.putBytes(data2).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
@@ -519,6 +524,7 @@ public class UploadImagePage extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(Uri urix) {
                                             Photo2url = urix.toString();
+                                            DoubtImages.add(Photo2url);
                                             UploadToFirestore(Uid);
                                             Timer timer;
                                             timer = new Timer();
@@ -570,12 +576,13 @@ public class UploadImagePage extends AppCompatActivity {
 
             final StorageReference reference1 = storageReference.child("Doubts/" + Uid + "/DoubtImg1.jpg");
 
-
+            DoubtImages.clear();
 
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uriImg1);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 75, baos);
             byte[] data = baos.toByteArray();
+
 
 
 
@@ -589,6 +596,7 @@ public class UploadImagePage extends AppCompatActivity {
                         public void onSuccess(Uri uri) {
                             Photo2url = "";
                             Photo1url = uri.toString();
+                            DoubtImages.add(Photo1url);
                             UploadToFirestore(Uid);
                             Timer timer;
                             timer = new Timer();
@@ -726,7 +734,7 @@ public class UploadImagePage extends AppCompatActivity {
 
                 Name, Email, AnsPhotoUrl1, AnsPhotoUrl2, AnsText, AudioUrl,Chapter, FileUrl,Link,
                 Photo1url, Photo2url, ProfileImageURL, "Unsolved", Text, Board, STD, Uid,Subject,Teacher, "True", date,
-                "",date,"",Address, Institute, Branch
+                "",date,"",Address, Institute, Branch, DoubtImages, AnswerImages
 
 
 

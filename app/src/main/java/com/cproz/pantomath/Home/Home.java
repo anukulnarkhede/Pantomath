@@ -52,14 +52,14 @@ public class Home extends AppCompatActivity {
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragment1;
     public static String BOARD = HomeFragment.BOARD, CLASS = HomeFragment.CLASS;
-    private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private final FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser user = firebaseAuth.getCurrentUser();
     String email = user != null ? user.getEmail() : null;
-    private DocumentReference ref = firebaseFirestore.collection("Users/Students/StudentsInfo/" ).document(String.valueOf(email));
+    private final DocumentReference ref = firebaseFirestore.collection("Users/Students/StudentsInfo/" ).document(String.valueOf(email));
     String User;
 
-    private int REQUEST_CODE = 11;
+    private final int REQUEST_CODE = 11;
 
 
 
@@ -98,93 +98,93 @@ public class Home extends AppCompatActivity {
         // TODO : Add city, Branch, Academic Year
 
 
-        ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-
-            User = documentSnapshot.getString("User");
-
-
-                assert User != null;
-                switch (User) {
-
-                    case "Active": {
-
-                        startActivity(new Intent(Home.this, Home.class));
-                        assert firebaseUser != null;
-                        break;
-
-                    }
-//                        if(firebaseUser.isEmailVerified()){
+//        ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
 //
-//                            String Board = documentSnapshot.getString("Board");
-//                            String Class = documentSnapshot.getString("Class");
+//            User = documentSnapshot.getString("User");
 //
-////                            if (Objects.equals(Class, "") || Objects.equals(Board, "")){
-////                                startActivity(new Intent(Home.this, PackageSelection.class));
-////                            }
-////                            else{
-////                                startActivity(new Intent(Home.this, Home.class));
-////                            }
 //
-////                            ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-////                                @Override
-////                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                assert User != null;
+////                switch (User) {
 ////
-////                                    String Board = documentSnapshot.getString("Board");
-////                                    String Class = documentSnapshot.getString("Class");
+////                    case "Active": {
 ////
-////                                    if (Objects.equals(Class, "") || Objects.equals(Board, "")){
-////                                        startActivity(new Intent(Home.this, PackageSelection.class));
-////                                    }
-////                                    else {
-////                                        startActivity(new Intent(Home.this, Home.class));
-////                                    }
-////                                }
-////                            });
+////                        startActivity(new Intent(Home.this, Home.class));
+////                        assert firebaseUser != null;
+////                        break;
+////
+////                    }
+//////                        if(firebaseUser.isEmailVerified()){
+//////
+//////                            String Board = documentSnapshot.getString("Board");
+//////                            String Class = documentSnapshot.getString("Class");
+//////
+////////                            if (Objects.equals(Class, "") || Objects.equals(Board, "")){
+////////                                startActivity(new Intent(Home.this, PackageSelection.class));
+////////                            }
+////////                            else{
+////////                                startActivity(new Intent(Home.this, Home.class));
+////////                            }
+//////
+////////                            ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+////////                                @Override
+////////                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+////////
+////////                                    String Board = documentSnapshot.getString("Board");
+////////                                    String Class = documentSnapshot.getString("Class");
+////////
+////////                                    if (Objects.equals(Class, "") || Objects.equals(Board, "")){
+////////                                        startActivity(new Intent(Home.this, PackageSelection.class));
+////////                                    }
+////////                                    else {
+////////                                        startActivity(new Intent(Home.this, Home.class));
+////////                                    }
+////////                                }
+////////                            });
+//////
+//////
+//////
+//////                        }
+//////                        break;
+////                    case "Not Verified": {
+////                        Intent intent = new Intent(Home.this, NotVerified.class);
+////                        intent.putExtra("UserStatus", User);
+////                        startActivity(intent);
+////                        break;
+////                    }
+////                    case "Suspended": {
+////                        Intent intent = new Intent(Home.this, NotVerified.class);
+////                        intent.putExtra("UserStatus", User);
+////                        startActivity(intent);
+////                        break;
+////                    }
+////                    case "Deleted": {
+////                        Intent intent = new Intent(Home.this, NotVerified.class);
+////                        intent.putExtra("UserStatus", User);
+////                        startActivity(intent);
+////                        break;
+////                    }
+////                    case "Unpaid": {
+////                        Intent intent = new Intent(Home.this, NotVerified.class);
+////                        intent.putExtra("UserStatus", User);
+////                        startActivity(intent);
+////                        break;
+////                    }
+////
+////                    case "":{
+////                        Intent intent = new Intent(Home.this, NotVerified.class);
+////                        intent.putExtra("UserStatus", User);
+////                        startActivity(intent);
+////                        break;
+////                    }
+////
+////
+////                }
 //
 //
-//
-//                        }
-//                        break;
-                    case "Not Verified": {
-                        Intent intent = new Intent(Home.this, NotVerified.class);
-                        intent.putExtra("UserStatus", User);
-                        startActivity(intent);
-                        break;
-                    }
-                    case "Suspended": {
-                        Intent intent = new Intent(Home.this, NotVerified.class);
-                        intent.putExtra("UserStatus", User);
-                        startActivity(intent);
-                        break;
-                    }
-                    case "Deleted": {
-                        Intent intent = new Intent(Home.this, NotVerified.class);
-                        intent.putExtra("UserStatus", User);
-                        startActivity(intent);
-                        break;
-                    }
-                    case "Unpaid": {
-                        Intent intent = new Intent(Home.this, NotVerified.class);
-                        intent.putExtra("UserStatus", User);
-                        startActivity(intent);
-                        break;
-                    }
-
-                    case "":{
-                        Intent intent = new Intent(Home.this, NotVerified.class);
-                        intent.putExtra("UserStatus", User);
-                        startActivity(intent);
-                        break;
-                    }
-
-
-                }
-
-
-            }
-        });
+//            }
+//        });
 
 
         //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();

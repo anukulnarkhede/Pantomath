@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.cproz.pantomath">
     <!-- Permissions used -->
+
+
+
     <uses-permission
         android:name="android.permission.INTERNET"
         tools:ignore="ManifestOrder" />
@@ -29,14 +32,43 @@
         android:windowSoftInputMode="adjustPan"
         tools:ignore="AllowBackup"
         tools:replace="android:allowBackup">
-        <activity android:name=".StudentProfile.ResetPasswordProfile"
-            android:parentActivityName=".StudentProfile.Settings"/>
+        <activity
+            android:name=".LoginAndRegistrationNew.AcademicInformation"
+            android:exported="false"
+            android:parentActivityName=".LoginAndRegistrationNew.AccountSetup"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".LoginAndRegistrationNew.AccountSetup"
+            android:exported="false"
+            android:parentActivityName=".LoginAndRegistrationNew.Login_new"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginAndRegistrationNew.PasswordForLogin_new"
+            android:exported="false"
+            android:parentActivityName=".LoginAndRegistrationNew.Login_new"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginAndRegistrationNew.CreateAccPassword"
+            android:exported="false"
+            android:parentActivityName=".LoginAndRegistrationNew.Login_new"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginAndRegistrationNew.Login_new"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".StudentProfile.ResetPasswordProfile"
+            android:parentActivityName=".StudentProfile.Settings"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Home.SearchActivity"
             android:parentActivityName=".Home.Home"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".EditQuestion.EditQuestion"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
 
         <service android:name=".NotificationGenie">
@@ -63,48 +95,59 @@
 
         <activity
             android:name=".About.About"
-            android:parentActivityName=".StudentProfile.Settings" />
+            android:parentActivityName=".StudentProfile.Settings"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AdditionalInfo.AdditionalInfo"
-            android:parentActivityName=".Signup.PackageSelection" />
+            android:parentActivityName=".Signup.PackageSelection"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".NotVerified"
-            android:hardwareAccelerated="true" />
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Feedback.Feedback"
             android:hardwareAccelerated="true"
             android:parentActivityName=".StudentProfile.Settings"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Home.Image"
             android:hardwareAccelerated="true"
             android:parentActivityName=".Home.DoubtDetails"
+            android:screenOrientation="portrait"
             android:theme="@style/imageView" />
         <activity
             android:name=".Signup.PackageSelection"
-            android:hardwareAccelerated="true" />
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Login.ResetPassword"
             android:hardwareAccelerated="true"
-            android:parentActivityName=".Login.Login" />
+            android:parentActivityName=".LoginAndRegistrationNew.PasswordForLogin_new"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Home.DoubtDetails"
             android:hardwareAccelerated="true"
-            android:parentActivityName=".Home.Home" />
+            android:parentActivityName=".Home.Home"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".StudentProfile.Settings"
             android:hardwareAccelerated="true"
             android:parentActivityName=".StudentProfile.StudentProfile"
+            android:screenOrientation="portrait"
             android:theme="@style/uploadFragment" />
         <activity
             android:name=".StudentProfile.StudentProfile"
             android:hardwareAccelerated="true"
             android:parentActivityName=".Home.Home"
+            android:screenOrientation="portrait"
             android:theme="@style/uploadFragment" />
         <activity
             android:name=".Upload.UploadImagePage"
             android:hardwareAccelerated="true"
             android:parentActivityName=".Home.Home"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Home.Home"
@@ -138,7 +181,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".SplashScreen.SplashScreen"
-            android:screenOrientation="portrait"
+            android:exported="true"
+            android:screenOrientation="fullSensor"
             android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

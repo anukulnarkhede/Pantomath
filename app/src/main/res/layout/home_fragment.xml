@@ -106,6 +106,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:text="TextView"
+                    android:fontFamily="@font/eudoxus_sans_medium"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -122,23 +123,22 @@
                     app:srcCompat="@drawable/arrow_feedback" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_below="@+id/homeFeedbackCard"
-            android:id="@+id/RecyclerViewHome"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#fff"
-            android:clipToPadding="false"
-            android:elevation="0dp"
-            android:paddingBottom="16dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecyclerViewHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/homeFeedbackCard"
+                android:background="#fff"
+                android:clipToPadding="false"
+                android:elevation="0dp"
+                android:overScrollMode="never"
 
-            android:overScrollMode="never"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            />
+                android:paddingBottom="16dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
         </RelativeLayout>
 

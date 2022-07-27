@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.cproz.pantomath.Login.Login;
+import com.cproz.pantomath.LoginAndRegistrationNew.Login_new;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -27,7 +28,7 @@ public class LogoutPopUp extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         firebaseAuth.signOut();
 
-                        startActivity(new Intent(getContext(), Login.class));
+                        startActivity(new Intent(getContext(), Login_new.class));
 
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

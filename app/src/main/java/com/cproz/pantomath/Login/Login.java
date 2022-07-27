@@ -46,9 +46,9 @@ public class Login extends AppCompatActivity {
     TextView CreateAccount, ForgetPassword, ErrorText;
     String EmailString, PasswordString;
     Button Login, LoginWithGoogle;
-    private FirebaseAuth firebaseAuth;
-    Button progressBar;
 
+    Button progressBar;
+    private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
 
@@ -126,7 +126,7 @@ public class Login extends AppCompatActivity {
             ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
             assert connectivityManager != null;
-            Network networkInfo = connectivityManager.getActiveNetwork();
+            @SuppressLint("MissingPermission") Network networkInfo = connectivityManager.getActiveNetwork();
             if (networkInfo == null){
                 Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
             }
@@ -248,7 +248,7 @@ public class Login extends AppCompatActivity {
                     ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
                     assert connectivityManager != null;
-                    Network networkInfo = connectivityManager.getActiveNetwork();
+                    @SuppressLint("MissingPermission") Network networkInfo = connectivityManager.getActiveNetwork();
                     if (networkInfo == null){
                         Toast.makeText(Login.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
                     }else{

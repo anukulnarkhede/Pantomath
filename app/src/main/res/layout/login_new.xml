@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:elevation="0dp"
+    tools:context=".LoginAndRegistrationNew.Login_new"
+    android:isScrollContainer="true"
+    >
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/solvedout_logo" />
+
+    <Button
+        android:id="@+id/google_signup"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/google_but_bg"
+        android:drawableStart="@drawable/google_logo"
+        android:elevation="0dp"
+        android:translationZ="0dp"
+        android:padding="16dp"
+        android:maxLines="1"
+        android:text="Continue with Google"
+        android:textAllCaps="false"
+        android:textColor="#7A869A"
+        android:textSize="16sp"
+        android:fontFamily="@font/eudoxus_sans_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText"
+        style="?android:attr/borderlessButtonStyle"
+        />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="OR"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:fontFamily="@font/eudoxus_sans_bold"
+        app:layout_constraintBottom_toTopOf="@+id/google_signup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/continue_home"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/blue_continue"
+        android:text="Continue"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:fontFamily="@font/eudoxus_sans_bold"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText"
+        style="?android:attr/borderlessButtonStyle"
+        />
+
+    <EditText
+        android:id="@+id/NewLoginEmail"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/google_but_bg"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:fontFamily="@font/eudoxus_sans_medium"
+        android:hint="Enter your email ID"
+        android:inputType="textEmailAddress"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColorHint="#7A869A"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/continue_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="16dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/eudoxus_sans_bold"
+        android:text="Let’s get started"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/NewLoginEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/eudoxus_sans_bold"
+        android:textColor="#000000"
+        android:text="Solvedout"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10"
+        android:textSize="32sp" />
+
+    <Button
+        android:id="@+id/progressBarLogin"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#73000000"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

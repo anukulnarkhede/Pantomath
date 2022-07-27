@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.cproz.pantomath.AdditionalInfo.AdditionalInfo;
 import com.cproz.pantomath.Login.Login;
+import com.cproz.pantomath.LoginAndRegistrationNew.Login_new;
 import com.cproz.pantomath.Signup.ProfilePictureSignup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,7 +37,7 @@ public class RetryPopup extends AppCompatDialogFragment {
                 }).setNegativeButton("Login", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(getContext(), Login.class));
+                startActivity(new Intent(getContext(), Login_new.class));
             }
         });
 

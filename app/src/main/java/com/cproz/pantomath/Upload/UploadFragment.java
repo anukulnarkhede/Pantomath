@@ -1,67 +1,42 @@
 package com.cproz.pantomath.Upload;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.format.DateUtils;
-import android.text.style.UpdateLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.cproz.pantomath.Home.Home;
 import com.cproz.pantomath.Home.HomeDoubtData;
-import com.cproz.pantomath.Home.HomeFragment;
+import com.cproz.pantomath.NotVerified;
 import com.cproz.pantomath.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.errorprone.annotations.SuppressPackageLocation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.UploadTask;
-
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class UploadFragment extends Fragment {
 
@@ -143,6 +118,7 @@ public class UploadFragment extends Fragment {
 
 
         ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()){
@@ -157,31 +133,145 @@ public class UploadFragment extends Fragment {
                     UploadFragment.INSTITUTE = documentSnapshot.getString("Institute");
 
 
+
+
+
+
+
                     final DocumentReference ref2 = firebaseFirestore.collection("Count/" ).document(UploadFragment.INSTITUTE);
 
-                    ref2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.exists()){
-                                if (!documentSnapshot.getBoolean("Subscription")){
-                                    SubExpCard.setVisibility(View.VISIBLE);
-                                    String text = "<b><font color=#ED5858>Note: </font> <font color=#000000>Your Institute has unsubscribed<br>to our premium plans.</font></b>";
-                                    SubscriptionExpNote.setText(Html.fromHtml(text));
+                    if (Objects.equals(documentSnapshot.getString("User"), "Active")){
+                        ref2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if (documentSnapshot.exists()){
+                                    if (!documentSnapshot.getBoolean("Subscription")){
+                                        SubExpCard.setVisibility(View.VISIBLE);
+                                        String text = "<b><font color=#ED5858>Note: " +
+                                                "</font> <font color=#000000>Your Institute" +
+                                                " has unsubscribed<br>to our premium plans.</font></b>";
+                                        SubscriptionExpNote.setText(Html.fromHtml(text));
+                                        SubExpBut.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                Objects.requireNonNull(getActivity()).finish();
+                                                startActivity(new Intent(getContext(), Home.class));
+                                            }
+                                        });
 
+                                    }
+                                    else{
+                                        subjectFilter(root);
+                                    }
+                                }else{
+                                    System.out.println("does not exist");
                                 }
-                                else{
-                                    subjectFilter(root);
-                                }
-                            }else{
-                                System.out.println("does not exist");
                             }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
 
-                        }
-                    });
+                            }
+                        });
+                    }else if (Objects.equals(documentSnapshot.getString("User"), "Not Verified")){
+                        subExp.setText("Note : Verification may take around 24 hours,\nContact your institute in case of delay." +
+                                "\nYou can still browse and search for previously asked doubts.");
+                        SubExpCard.setVisibility(View.VISIBLE);
+                        String text = "<b><font color=#ED5858>" +
+                                "</font> <font color=#000000>Your Account" +
+                                " is under institute level verification.</font></b>";
+                        SubscriptionExpNote.setText(Html.fromHtml(text));
+                        SubExpBut.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Objects.requireNonNull(getActivity()).finish();
+                                startActivity(new Intent(getContext(), Home.class));
+                            }
+                        });
+
+                    }else if (Objects.equals(documentSnapshot.getString("User"), "Suspended")){
+                        subExp.setText("Note : You can still browse and search for previously asked doubts.");
+                        SubExpCard.setVisibility(View.VISIBLE);
+                        String text = "<b><font color=#ED5858>" +
+                                "</font> <font color=#000000>Your Account is suspended, for more details contact your institute.</font></b>";
+                        SubscriptionExpNote.setText(Html.fromHtml(text));
+                        SubExpBut.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Objects.requireNonNull(getActivity()).finish();
+                                startActivity(new Intent(getContext(), Home.class));
+                            }
+                        });
+                    }else if (Objects.equals(documentSnapshot.getString("User"), "Deleted")){
+                        subExp.setText("Note : You can still browse and search for previously asked doubts.");
+                        SubExpCard.setVisibility(View.VISIBLE);
+                        String text = "<b><font color=#ED5858>" +
+                                "</font> <font color=#000000>Your request has been denied, for more details contact your institute.</font></b>";
+                        SubscriptionExpNote.setText(Html.fromHtml(text));
+                        SubExpBut.setText("Request Again");
+                        SubExpBut.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                SubExpBut.setEnabled(false);
+                                Date date = new Date();
+                                firebaseFirestore.collection("Users/Students/StudentsInfo/" )
+                                        .document(String.valueOf(email))
+                                        .update("User", "Not Verified", "SignupTime", date)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Objects.requireNonNull(getActivity()).finish();
+                                                startActivity(new Intent(getContext(), Home.class));
+                                                SubExpBut.setEnabled(true);
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        //requestAgain.setEnabled(true);
+                                        SubExpBut.setEnabled(true);
+                                        Toast.makeText(getContext(), "Request was unsuccessful!", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        });
+
+                    }else if (Objects.equals(documentSnapshot.getString("User"), "")){
+                        ref2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if (documentSnapshot.exists()){
+                                    if (!documentSnapshot.getBoolean("Subscription")){
+                                        SubExpCard.setVisibility(View.VISIBLE);
+                                        String text = "<b><font color=#ED5858>Note: " +
+                                                "</font> <font color=#000000>Your Institute" +
+                                                " has unsubscribed<br>to our premium plans.</font></b>";
+                                        SubscriptionExpNote.setText(Html.fromHtml(text));
+                                        SubExpBut.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                Objects.requireNonNull(getActivity()).finish();
+                                                startActivity(new Intent(getContext(), Home.class));
+                                            }
+                                        });
+
+                                    }
+                                    else{
+                                        subjectFilter(root);
+                                    }
+                                }else{
+                                    System.out.println("does not exist");
+                                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                            }
+                        });
+                    }
+
+
 
 
 
@@ -195,13 +285,7 @@ public class UploadFragment extends Fragment {
 
 
 
-        SubExpBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Objects.requireNonNull(getActivity()).finish();
-                startActivity(new Intent(getContext(), Home.class));
-            }
-        });
+
 
 
 

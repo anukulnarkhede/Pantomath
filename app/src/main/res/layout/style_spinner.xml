@@ -3,9 +3,9 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:padding="16dp"
     android:layout_marginBottom="8dp"
-    android:textSize="@dimen/TextSize16"
-    android:textColor="@color/blue"
-    android:fontFamily="sans-serif"
+    android:textSize="16sp"
+    android:textColor="#7A869A"
+    android:fontFamily="@font/eudoxus_sans_medium"
     >
 
 

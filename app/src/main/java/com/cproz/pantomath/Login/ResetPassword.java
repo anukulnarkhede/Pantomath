@@ -22,7 +22,7 @@ public class ResetPassword extends AppCompatActivity {
 
     EditText resetEmail;
     Button submit;
-    String email;
+    String email, Email;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     Toolbar toolbar;
 
@@ -42,8 +42,15 @@ public class ResetPassword extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_arrow_rounded);
 
-        Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.blue), PorterDuff.Mode.SRC_ATOP);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            Email = bundle.getString("Email");
+            resetEmail.setText(Email);
+        }
+
+
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

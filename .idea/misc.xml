@@ -3,10 +3,42 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/arrow_feedback.xml" value="0.270995670995671" />
+        <entry key="app/src/main/res/drawable/back_arrow_rounded.xml" value="0.270995670995671" />
+        <entry key="app/src/main/res/drawable/back_search.xml" value="0.270995670995671" />
+        <entry key="app/src/main/res/drawable/blue_continue.xml" value="0.2641350210970464" />
+        <entry key="app/src/main/res/drawable/google_but_bg.xml" value="0.27685185185185185" />
+        <entry key="app/src/main/res/drawable/grey_butt_bg.xml" value="0.27685185185185185" />
+        <entry key="app/src/main/res/drawable/request_denied.xml" value="0.27456140350877195" />
+        <entry key="app/src/main/res/drawable/under.xml" value="0.27456140350877195" />
+        <entry key="app/src/main/res/font/quicksand_medium.xml" value="0.24074074074074073" />
+        <entry key="app/src/main/res/font/roboto_bold.xml" value="0.24074074074074073" />
+        <entry key="app/src/main/res/layout-land/login_new.xml" value="0.2623456790123457" />
         <entry key="app/src/main/res/layout-v26/about.xml" value="0.24954710144927536" />
+        <entry key="app/src/main/res/layout-v28/create_acc_password.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/about.xml" value="0.24954710144927536" />
+        <entry key="app/src/main/res/layout/account_setup.xml" value="0.17753623188405798" />
+        <entry key="app/src/main/res/layout/activity_academic_information.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_additional_info.xml" value="0.24954710144927536" />
+        <entry key="app/src/main/res/layout/chapter_buttons.xml" value="0.2078804347826087" />
+        <entry key="app/src/main/res/layout/create_acc_password.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/doubt_card_home.xml" value="0.26096491228070173" />
+        <entry key="app/src/main/res/layout/doubt_details.xml" value="0.21557971014492755" />
+        <entry key="app/src/main/res/layout/enter_password_to_login_new.xml" value="0.21557971014492755" />
+        <entry key="app/src/main/res/layout/home.xml" value="0.21195652173913043" />
+        <entry key="app/src/main/res/layout/home_fragment.xml" value="0.21195652173913043" />
+        <entry key="app/src/main/res/layout/login.xml" value="0.27546296296296297" />
+        <entry key="app/src/main/res/layout/login_new.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/new_account.xml" value="0.27546296296296297" />
+        <entry key="app/src/main/res/layout/not_verified.xml" value="0.26096491228070173" />
         <entry key="app/src/main/res/layout/package_selection.xml" value="0.24954710144927536" />
+        <entry key="app/src/main/res/layout/password_for_login_new.xml" value="0.26096491228070173" />
+        <entry key="app/src/main/res/layout/password_signup.xml" value="0.26096491228070173" />
+        <entry key="app/src/main/res/layout/reset_password.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/reset_password_profile.xml" value="0.5163807500959942" />
+        <entry key="app/src/main/res/layout/student_profile.xml" value="0.21557971014492755" />
+        <entry key="app/src/main/res/layout/style_spinner.xml" value="0.21557971014492755" />
+        <entry key="app/src/main/res/layout/upload_fragment.xml" value="0.26096491228070173" />
       </map>
     </option>
   </component>
